@@ -1,4 +1,4 @@
 # Trabajo-Ajedrez
-Trabajo final de la asignatura de informática industrial y comunicaciones.
+Trabajo de la asignatura de informática industrial y comunicaciones.
 
 
