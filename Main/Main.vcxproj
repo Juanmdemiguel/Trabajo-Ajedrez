@@ -71,20 +71,20 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\Users\juans\OneDrive\Escritorio\Trabajo-Ajedrez\Include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\juans\OneDrive\Escritorio\Trabajo-Ajedrez\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)Include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>C:\Users\juans\OneDrive\Escritorio\Trabajo-Ajedrez\Include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\juans\OneDrive\Escritorio\Trabajo-Ajedrez\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)Include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\Users\juans\OneDrive\Escritorio\Trabajo-Ajedrez\Include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\juans\OneDrive\Escritorio\Trabajo-Ajedrez\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)Include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>C:\Users\juans\OneDrive\Escritorio\Trabajo-Ajedrez\Include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\juans\OneDrive\Escritorio\Trabajo-Ajedrez\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)Include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
