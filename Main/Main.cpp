@@ -51,7 +51,19 @@ void OnDraw(void)
 		0.0, 1.0, 0.0);      // definimos hacia arriba (eje Y)    
 
 	//aqui es donde hay que poner el código de dibujo
-
+	//Plano de colores de lado 10
+	glDisable(GL_LIGHTING);
+	glBegin(GL_POLYGON);
+	glColor3ub(255, 0, 0);
+	glVertex3f(-5.0f, 0, -5.0f);
+	glColor3ub(150, 100, 0);
+	glVertex3f(-5.0f, 0, 5.0f);
+	glColor3ub(200, 0, 150);
+	glVertex3f(5.0f, 0, 5.0f);
+	glColor3ub(255, 200, 100);
+	glVertex3f(5.0f, 0, -5.0f);
+	glEnd();
+	glEnable(GL_LIGHTING);
 
 	//no borrar esta linea ni poner nada despues
 	glutSwapBuffers();
