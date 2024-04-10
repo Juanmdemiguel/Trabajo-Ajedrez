@@ -1,4 +1,5 @@
 #include "freeglut.h"
+#include "assimp/aabb.h"		//Comprobacion correcta instalacion assimp
 
 
 
