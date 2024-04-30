@@ -149,13 +149,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="ETSIDI.h" />
-    <ClInclude Include="freeglut.h" />
-    <ClInclude Include="Model.h" />
+    <ClInclude Include="include\ETSIDI.h" />
+    <ClInclude Include="include\freeglut.h" />
+    <ClInclude Include="src\Menu.h" />
     <ClInclude Include="src\Model.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\Menu.cpp" />
     <ClCompile Include="src\Model.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
