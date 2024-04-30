@@ -1,11 +1,12 @@
-#include "Menu.h"
+#include "Game.h"
 #include "Model.h"
+#include "Board.h"
 #include "ETSIDI.h"
 #include <iostream>
 
 
 Model Pawn("model/Pawn.obj");
-
+Board board;
 
 void OnDraw(void);		 //esta funcion sera llamada para dibujar
 void OnTimer(int value); //esta funcion sera llamada cuando transcurra una temporizacion
@@ -47,8 +48,8 @@ int main(int argc,char* argv[])
 	// Registrar funciones de callback para eventos del ratón
 	glutMouseFunc(mouseClick); // Clic del ratón
 
+	board.inicializa();
 	(sonido == true) ? ETSIDI::playMusica("sounds/marcha.mp3", true) : ETSIDI::stopMusica();
-
 	//glutMotionFunc(mouseMove); // Movimiento del ratón
 	//glutPassiveMotionFunc(mouseMove); // Movimiento pasivo del ratón (sin botón presionado)
 	
@@ -63,7 +64,8 @@ void OnDraw(void)
 	//Borrado de la pantalla	
    	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	
+	board.dibuja();
+
 		//Para definir el punto de vista
 	glMatrixMode(GL_MODELVIEW); 
 	glLoadIdentity();
@@ -72,12 +74,14 @@ void OnDraw(void)
 			0.0, 7.5, 0.0,      // hacia que punto mira  (0,0,0) 
 			0.0, 1.0, 0.0);      // definimos hacia arriba (eje Y)    
 
+		
 	if (menu_ == false)
 	{
-		gluLookAt(0.0, 7.5, 20,  // posicion del ojo
-			0.0, 0.0, 0.0,      // hacia que punto mira  (0,0,0) 
+		gluLookAt(-20, 20, 15.0,  // posicion del ojo
+			12.0, 0.0, 15.0,      // hacia que punto mira  (0,0,0) 
 			0.0, 1.0, 0.0);      // definimos hacia arriba (eje Y)    
 		glPushMatrix();
+
 		glTranslatef((5.0 - 5) * 1.0f + 0.5f, (5.0 - 5) * 1.0f + 0.5f, 1.0);
 		glScalef(0.05f, 0.05f, 0.05f);
 		glRotatef(-90, 90.0f, 0.0f, 1.0f);
@@ -121,8 +125,6 @@ void OnTimer(int value)
 
 	glutTimerFunc(25, OnTimer, 0);
 	glutPostRedisplay();
-
-	std::cout << sonido;
 	
 }
 
