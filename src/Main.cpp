@@ -48,7 +48,6 @@ int main(int argc,char* argv[])
 	// Registrar funciones de callback para eventos del ratón
 	glutMouseFunc(mouseClick); // Clic del ratón
 
-	board.inicializa();
 	(principal.getSonido() == true) ? ETSIDI::playMusica("sounds/marcha.mp3", true) : ETSIDI::stopMusica();
 
 	//glutMotionFunc(mouseMove); // Movimiento del ratón

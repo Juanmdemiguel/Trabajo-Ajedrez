@@ -1,16 +1,20 @@
 #include "Board.h"
 
-void Board::inicializa()
+//Constructor de Board;
+Board::Board()
 {
-    for (int i = 0; i < fil; i++) {
-        for (int j = 0; j < col; j++)
-            (j + i) % 2 == 0 ? board[i][j] = true : board[i][j] = false;
-    }
+	for (int i = 0; i < fil; i++) {
+		for (int j = 0; j < col; j++) {
+			board[i][j].setPos(i, j);
+			(j + i) % 2 == 0 ? board[i][j].color = true : board[i][j].color = false; //Recorre la matriz del tablero. Establece su color según la suma de sus coordenadas
+		}
+	}
 }
+
 
 void Board::dibuja()
 {
-	
+	//Dibujo de la base del tablero
 	glDisable(GL_LIGHTING);
 	glColor3ub(128, 64, 0);
 
@@ -23,20 +27,9 @@ void Board::dibuja()
 
 	glEnable(GL_LIGHTING);
 
+	//Dibujo superpuesto de las casillas
     for (int i = 0; i < fil; i++) {
-		for (int j = 0; j < col; j++) {
-
-			glDisable(GL_LIGHTING);
-			board[i][j] ? glColor3ub(255, 255, 255) : glColor3ub(0, 0, 0);
-
-			glBegin(GL_POLYGON);
-			glVertex3d(i*square, 0.01, j*square); //Inferior izquierda
-			glVertex3d(i*square, 0.01, square * (j + 1)); //Superior izquierda 
-			glVertex3d(square * (i + 1), 0.01, square * (j + 1)); //Superior derecha 
-			glVertex3d(square*(i+1), 0.01, j * square); //Inferior derecha
-			glEnd();
-
-			glEnable(GL_LIGHTING);
-		}	
+		for (int j = 0; j < col; j++) 
+			board[i][j].Dibuja(i,j);
     }
 }

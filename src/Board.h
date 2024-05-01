@@ -1,16 +1,19 @@
 #pragma once
-#include "freeglut.h"
+
+#include "Tile.h"
+
 #define col 10
 #define fil 8
 #define square 3
 
 class Board
 {
+	Tile board[fil][col];
+
 public:
-	bool board[fil][col];
-
-
-	void inicializa();
+//Constructor de Board
+	Board();
+//Métodos de Board
 	void dibuja();
 };
 
