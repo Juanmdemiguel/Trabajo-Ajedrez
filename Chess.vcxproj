@@ -156,6 +156,7 @@
     <ClInclude Include="src\Game.h" />
     <ClInclude Include="src\Menu.h" />
     <ClInclude Include="src\Model.h" />
+    <ClInclude Include="src\Piece.h" />
     <ClInclude Include="src\Punto2D.h" />
     <ClInclude Include="src\Tile.h" />
   </ItemGroup>
@@ -166,6 +167,7 @@
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\Menu.cpp" />
     <ClCompile Include="src\Model.cpp" />
+    <ClCompile Include="src\Piece.cpp" />
     <ClCompile Include="src\Punto2D.cpp" />
     <ClCompile Include="src\Tile.cpp" />
   </ItemGroup>
