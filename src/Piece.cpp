@@ -3,7 +3,7 @@
 
 void piece::elige(piezas p, Punto2D posicion)
 {
-	int i;
+	int i{};
 	switch(p)
 	{
 	case piezas::pawn:

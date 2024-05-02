@@ -4,7 +4,7 @@
 
 #define col 10
 #define fil 8
-#define square 3
+
 
 class Board
 {
@@ -15,5 +15,6 @@ public:
 	Board();
 //Métodos de Board
 	void dibuja();
+	Tile getTile(Punto2D pos);
 };
 

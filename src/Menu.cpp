@@ -13,7 +13,10 @@ void Menu::iniciaMenu(bool menu, bool sonido)
 	glTexCoord2d(1, 1);    glVertex3f(10, 0, -0.1);
 	glTexCoord2d(1, 0);    glVertex3f(10, 15, -0.1);
 	glTexCoord2d(0, 0);    glVertex3f(-10, 15, -0.1);
+	glEnd();
 
+	glEnable(GL_LIGHTING);
+	glDisable(GL_TEXTURE_2D);
 }
 
 void Menu::clickBotonesMenu(double x, double y) // Función primitiva, futuras iteraciones mirar creación de cuadros de texto

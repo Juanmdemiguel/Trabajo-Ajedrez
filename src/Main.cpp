@@ -1,7 +1,6 @@
 #include "Game.h"
 #include "Model.h"
 #include "Board.h"
-#include "Menu.h"
 #include <iostream>
 
 
@@ -16,7 +15,6 @@ void mouseMove(int _x, int _y);
 void mouseDrag(int _x, int _y);
 
 double x, y;
-Board board;
 Menu principal;
 Game juego;
 
@@ -63,7 +61,7 @@ void OnDraw(void)
 	//Borrado de la pantalla	
    	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	board.dibuja();
+	
 
 	//Para definir el punto de vista
 	glMatrixMode(GL_MODELVIEW);
