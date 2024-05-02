@@ -2,7 +2,7 @@
 #include "Model.h"
 #include "Board.h"
 #include <iostream>
-
+#include "camara.h"
 
 Model Pawn("model/Pawn.obj");
 
@@ -17,6 +17,7 @@ void mouseDrag(int _x, int _y);
 double x, y;
 Menu principal;
 Game juego;
+Camara camara;
 
 int main(int argc,char* argv[])
 {
@@ -67,9 +68,7 @@ void OnDraw(void)
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
-	gluLookAt(0.0, 7.5, 20,  // posicion del ojo
-		0.0, 7.5, 0.0,      // hacia que punto mira  (0,0,0) 
-		0.0, 1.0, 0.0);      // definimos hacia arriba (eje Y)    
+	camara.dibuja(principal);
 
 	principal.getMenu() ? principal.iniciaMenu(principal.getMenu(), principal.getSonido()) : juego.dibujaJuego(Pawn);
 	//El operador ternario llama a iniciaMenu si el booleano menu es true, si no, dibuja el juego
@@ -87,11 +86,15 @@ void OnDraw(void)
 }
 void OnKeyboardDown(unsigned char key, int x_t, int y_t)
 {
+	camara.zoom(principal, key);
+	camara.actuador(principal, key);
+	camara.vertical(principal, key);
 	glutPostRedisplay();  //Poner siempre al final y no se pone nada más debajo. Dibuja otro frame
 }
 
 void OnTimer(int value)
 {
+	camara.rota(principal);
 	glutTimerFunc(25, OnTimer, 0);
 	glutPostRedisplay();
 }

@@ -152,6 +152,7 @@
     <ClInclude Include="include\ETSIDI.h" />
     <ClInclude Include="include\freeglut.h" />
     <ClInclude Include="src\Board.h" />
+    <ClInclude Include="src\camara.h" />
     <ClInclude Include="src\Color.h" />
     <ClInclude Include="src\Game.h" />
     <ClInclude Include="src\Menu.h" />
@@ -162,6 +163,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Board.cpp" />
+    <ClCompile Include="src\camara.cpp" />
     <ClCompile Include="src\Color.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\Main.cpp" />

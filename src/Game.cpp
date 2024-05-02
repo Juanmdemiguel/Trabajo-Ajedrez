@@ -3,10 +3,6 @@
 
 void Game::dibujaJuego(Model Pawn) {	//Funcion dibujaJuego provisional, se añade a clase Juego/Game cuando se desarrolle
 
-	gluLookAt(-20, 40.0, 15.0,  // posicion del ojo
-		12.0, 0.0, 15.0,      // hacia que punto mira  (0,0,0) 
-		0.0, 1.0, 0.0);      // definimos hacia arriba (eje Y)    
-
 	glPushMatrix();
 	glTranslatef(board.getTile({ 7,6 }).getCenter().x, 1.0, board.getTile({ 7,6 }).getCenter().z); 
 	glScalef(0.05f, 0.05f, 0.05f);
