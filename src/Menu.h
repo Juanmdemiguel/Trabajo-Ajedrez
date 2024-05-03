@@ -17,5 +17,5 @@ public:
 	void setBoton(bool valor) { boton = valor; }
 	void iniciaMenu(bool menu, bool sonido);
 	void clickBotonesMenu(double x, double y);
-
+	void musica(bool sonido);
 };

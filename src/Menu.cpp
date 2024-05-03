@@ -31,3 +31,8 @@ void Menu::clickBotonesMenu(double x, double y) // Función primitiva, futuras it
 	if ((x > 579) && (x < 788) && (y > 483) && (y < 553))
 		setMenu(false);
 }
+
+void Menu::musica(bool sonido)
+{
+	(sonido == true) ? ETSIDI::playMusica("sounds/menu.mp3", true) : ETSIDI::stopMusica();
+}

@@ -40,6 +40,8 @@ int main(int argc,char* argv[])
 	glEnable(GL_COLOR_MATERIAL);	
 	glMatrixMode(GL_PROJECTION);
 	gluPerspective( 40.0, width/height, 0.1, 150);
+	
+	ETSIDI::playMusica("sounds/menu.mp3", true);
 
 	//Registrar los callbacks
 	glutDisplayFunc(OnDraw);
@@ -49,7 +51,6 @@ int main(int argc,char* argv[])
 	// Registrar funciones de callback para eventos del ratón
 	glutMouseFunc(mouseClick); // Clic del ratón
 
-	(principal.getSonido() == true) ? ETSIDI::playMusica("sounds/marcha.mp3", true) : ETSIDI::stopMusica();
 
 	//glutMotionFunc(mouseMove); // Movimiento del ratón
 	//glutPassiveMotionFunc(mouseMove); // Movimiento pasivo del ratón (sin botón presionado)
@@ -108,6 +109,20 @@ void mouseClick(int _button, int state, int _x, int _y) {
 		y = _y;
 		principal.setBoton(false);
 	}
+	
+	if (_button == GLUT_LEFT_BUTTON) //Solo si se pulsa el botón izquierdo del ratón
+	{
+		if ((x > 33) && (x < 151) && (y > 488) && (y < 557)) //Y se tienen las coordenadas del botón de sonido
+			if (principal.getMenu())
+				principal.musica(principal.getSonido());
+
+		if ((x > 579) && (x < 788) && (y > 483) && (y < 553))
+			if(principal.getMenu())
+				juego.musica(principal.getSonido(),0); //De momento se le pasa un 0 para que funcione	
+													   // marchav2, cuando haya desarrollo de botones se implementa el int
+
+	}
+	
 }
 
 void mouseMove(int x, int y) {

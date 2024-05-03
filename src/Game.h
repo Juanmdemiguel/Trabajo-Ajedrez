@@ -10,5 +10,6 @@ class Game
 	Board board;
 public:
 	void dibujaJuego(piece piezas);
+	void musica(bool sonido, int tema);
 };
 
