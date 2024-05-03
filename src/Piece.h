@@ -4,12 +4,19 @@
 #include "Board.h"
 class piece
 {
-//Se empiezan definiendo las piezas en una enumeración. Más tarde se cambiará
-	enum class piezas {pawn,king,queen,bishop,rook,knight,cancellor,archbishop};
+//Se empiezan definiendo las piezas en una enumeración. Más tarde se cambiará.
+	enum class TipoPieza {pawn,king,queen,bishop,rook,knight,cancellor,archbishop};
 	Punto2D posicion;
+	Model Pawn;
 public:
+
+//Constructor para inicializar los distintos modelos
+	piece() : Pawn("model/Pawn.obj") {}
+
 //Métodos
-	void mueve(Punto2D posicion, Model modelo);
-	void elige(piezas p, Punto2D posicion);
+	void dibuja1Pieza(Punto2D posicion, Model modelo);
+	void elige(TipoPieza p, Punto2D posicion);
+	void dibujaPiezas();
+
 };
 

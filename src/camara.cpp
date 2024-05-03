@@ -1,4 +1,5 @@
 #include "camara.h"
+#include <iostream>
 
 Camara::Camara()
 {
@@ -8,6 +9,8 @@ Camara::Camara()
     mirax = 12.0;
     miray = 0.0;
     miraz = 15.0;
+    suma = 0.0;
+    angulo = 0.0;
 }
 
 void Camara::dibuja(Menu& principal)
@@ -115,19 +118,33 @@ void Camara::rota(Menu& principal)
 {
     if (!principal.getMenu())
     {
-        if (rotar)
+        double d{};
+        double theta{};
+        double DistRecorrida{};
+        while (rotar && angulo<=3.14)   //Ángulo en radianes. Permite un giro hasta 180º
         {
-            float theta{};
-            float d;
-
+            //Se guarda la posición anterior
+            double antesX=posx, antesZ=posz;
+            //Se calcula la nueva posición de la cámara
             d = sqrt((posx - mirax) * (posx - mirax) + (posz - miraz) * (posz - miraz));
             theta = atan2((posz - miraz), (posx - mirax));
             theta = theta + 0.05;
             posx = mirax + d * cos(theta);
             posz = miraz + d * sin(theta);
-
-            theta = 0;
+            //Se calcula la distancia recorrida entre cada incremento de la cámara
+            DistRecorrida = sqrt((posx - antesX) * (posx - antesX) + (posz - antesZ) * (posz - antesZ));
+            //Se calcula la longitud recorrida a lo largo del perímetro de la circunferencia que forma la cámara
+            suma += DistRecorrida;
+            //Mediante la distancia recorrida, se calcula el ángulo formado con respecto el centro
+            angulo = (suma / d) ;
             rotar = FALSE;
+        }
+        //Vuelve a la posición inicial cuando gira más de 180º. Cambiar más tarde cuando se añadan los turnos.
+        if (angulo >= 3.14)
+        {
+            posx = -20.0;
+            posy = 40.0;
+            posz = 15.0;
         }
     }
 }

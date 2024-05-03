@@ -3,6 +3,7 @@
 #include "Board.h"
 #include <iostream>
 #include "camara.h"
+#include "Piece.h"
 
 Model Pawn("model/Pawn.obj");
 
@@ -18,6 +19,7 @@ double x, y;
 Menu principal;
 Game juego;
 Camara camara;
+piece piezas;
 
 int main(int argc,char* argv[])
 {
@@ -70,7 +72,7 @@ void OnDraw(void)
 
 	camara.dibuja(principal);
 
-	principal.getMenu() ? principal.iniciaMenu(principal.getMenu(), principal.getSonido()) : juego.dibujaJuego(Pawn);
+	principal.getMenu() ? principal.iniciaMenu(principal.getMenu(), principal.getSonido()) : juego.dibujaJuego(piezas);
 	//El operador ternario llama a iniciaMenu si el booleano menu es true, si no, dibuja el juego
 
 	//Botón música y empezar. Falta modificar el funcionamiento del sonido para que funcione correctamente e imlplementar cuadros

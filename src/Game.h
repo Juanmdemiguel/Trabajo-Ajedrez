@@ -3,11 +3,12 @@
 #include "Menu.h"
 #include "Model.h"
 #include "Board.h"
+#include "Piece.h"
 
 class Game
 {
 	Board board;
 public:
-	void dibujaJuego(Model Pawn);
+	void dibujaJuego(piece piezas);
 };
 

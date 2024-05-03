@@ -1,46 +1,90 @@
 #include "Piece.h"
 #include "freeglut.h"
+#include <iostream>
 
-void piece::elige(piezas p, Punto2D posicion)
+void piece::elige(TipoPieza p, Punto2D posicion)
 {
-	int i{};
+	int i{}, movimientos{};
 	switch(p)
 	{
-	case piezas::pawn:
+	case TipoPieza::pawn:
 		posicion.x += square;
+		
 		break;
-	case piezas::king:
+	case TipoPieza::king:
 		posicion.x += square;
 		posicion.z += square;
 		posicion.x -= square;
 		posicion.z -= square;
 		break;
-	case piezas::queen:
+	case TipoPieza::queen:
 		
 		break;
-	case piezas::bishop:
+	case TipoPieza::bishop:
 		posicion.x += square*i;
 		posicion.z += square*i;
 		posicion.x -= square*i;
 		posicion.z -= square*i;
 		break;
-	case piezas::rook:
+	case TipoPieza::rook:
 		
 		break;
-	case piezas::knight:
+	case TipoPieza::knight:
 		
 		break;
-	case piezas::cancellor:
+	case TipoPieza::cancellor:
 		
 		break;
-	case piezas::archbishop:
+	case TipoPieza::archbishop:
 		
 		break;
 	}
 }
-void piece::mueve(Punto2D posicion, Model modelo)
+void piece::dibuja1Pieza(Punto2D posicion, Model modelo)
 {
-	glTranslated(posicion.x,posicion.z, 0);
+	glTranslatef(posicion.x, posicion.z, 0.0);
 	modelo.Draw();
-	glTranslated(-posicion.x, -posicion.z, 0);
+	glTranslatef(-posicion.x, -posicion.z,0.0);
+}
+
+void piece::dibujaPiezas()
+{
+	//Dibujo de los peones
+	for (double i = 1.0; i<= fil - 2; i += (fil - 3))
+	{
+		for (double j = 0.0; j < col; j++)
+		{
+			this->dibuja1Pieza({ square * (i+0.5*square),square *(j+0.5*square) }, Pawn);
+		}
+	}
+
+	
+	
+	//Dibujo del resto de piezas
+	for (double i = 0; i <= fil-1; i += (fil-2))
+	{
+		for (double j = 0; j < col; j++)
+		{
+			//Dibujo de las torres
+			if (j==0 || j==col-1)
+			this->dibuja1Pieza({ square * i,square * j }, Pawn);
+
+			//Dibujo de los caballos
+			if (j == 1 || j == col - 2)
+				this->dibuja1Pieza({ square * i,square * j }, Pawn);
+
+			//Dibujo de los alfiles
+			if (j == 2 || j == col - 3)
+				this->dibuja1Pieza({ square * i,square * j }, Pawn);
+
+			//Dibujo del rey
+			if (j == 3)
+				this->dibuja1Pieza({ square * i,square * j }, Pawn);
+
+			//Dibujo de la reina
+			if (j == 4)
+				this->dibuja1Pieza({ square * i,square * j }, Pawn);
+		}
+	}
+	
 }

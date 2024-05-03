@@ -12,6 +12,9 @@ class Camara
 	double miray;
 	double miraz;
 	bool rotar = FALSE;
+	//Se generan suma y angulo como atributos para guardar los valores que adquieren y no reiniciarlos al llamar de nuevo al método
+	double suma;
+	double angulo;
 
 public:
 	Camara();
