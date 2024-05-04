@@ -1,4 +1,5 @@
 #include "Board.h"
+#include <iostream>
 
 //Constructor de Board;
 Board::Board()
@@ -37,10 +38,41 @@ void Board::dibuja()
     }
 }
 
-Tile Board::getTile(Punto2D pos)
+Tile& Board::getTile(Punto2D pos)
 {
 	// Como la posicion de las casillas inicia en el (1,1), se traduce en una menos en la matriz
 	// El criterio [filas][columnas] es contrario al [eje z][eje x].
 	// Como el input del código va a ser la posición en el tablero, su equivalente matricial es invertido
 	return board[(int)pos.x - 1][(int)pos.z - 1];
+}
+
+void Board::detectpieza(Punto2D esfera)
+{
+	float m = 1000;
+	Punto2D s;
+	for (float i = 1; i < col + 1; i++) {
+		for (float j = 1; j < fil + 1; j++)
+		{
+			if (modulo(getTile({ i,j }).getCenter(), esfera) < m)
+			{
+				m = modulo(getTile({ i,j }).getCenter(), esfera);
+				s.x = j;
+				s.z = i;
+			}
+		}
+	}
+	
+	getTile(s).selecciona(true);
+	
+
+	for (float i = 1; i < col + 1; i++) {
+		for (float j = 1; j < fil + 1; j++)
+		{
+			if(!(i == s.z && j == s.x))
+			getTile({i,j}).selecciona(false);
+				
+
+		}
+	}
+
 }

@@ -5,6 +5,15 @@
 #include "camara.h"
 #include "Piece.h"
 
+// Posición de la esfera
+Punto2D esfera = { 0,0 };
+vector<double> solucion;
+vector<vector<double>> matriz = {
+	{125 * 125, 125, 1, 0},
+	{400 * 400, 400, 1, 15},
+	{641 * 641, 641, 1, 30}
+};
+
 Model Pawn("model/Pawn.obj");
 
 void OnDraw(void);		 //esta funcion sera llamada para dibujar
@@ -52,8 +61,8 @@ int main(int argc,char* argv[])
 	glutMouseFunc(mouseClick); // Clic del ratón
 
 
-	//glutMotionFunc(mouseMove); // Movimiento del ratón
-	//glutPassiveMotionFunc(mouseMove); // Movimiento pasivo del ratón (sin botón presionado)
+	glutMotionFunc(mouseMove); // Movimiento del ratón
+	glutPassiveMotionFunc(mouseMove); // Movimiento pasivo del ratón (sin botón presionado)
 
 	//pasarle el control a GLUT,que llamara a los callbacks
 	glutMainLoop();	  //Bucle infinito
@@ -72,6 +81,7 @@ void OnDraw(void)
 	glLoadIdentity();
 
 	camara.dibuja(principal);
+	drawEsferadePruebas(esfera.x, esfera.z);
 
 	principal.getMenu() ? principal.iniciaMenu(principal.getMenu(), principal.getSonido()) : juego.dibujaJuego(piezas);
 	//El operador ternario llama a iniciaMenu si el booleano menu es true, si no, dibuja el juego
@@ -125,8 +135,30 @@ void mouseClick(int _button, int state, int _x, int _y) {
 	
 }
 
-void mouseMove(int x, int y) {
+void mouseMove(int x, int y1) 
+{
 	// Acciones cuando el ratón se mueve
+
+	float y = 600 - y1;
+	Punto2D s;
+	if (x > map(y, 125, 431, 117, 190) && x < map(y, 125, 431, 682, 610))
+	{
+		matriz = {
+		{map(y, 125, 431, 117, 190) * map(y, 125, 431, 117, 190), map(y, 125, 431, 117, 190), 1, 0},
+		{400 * 400, 400, 1, 15},
+		{map(y, 125, 431, 682, 610) * map(y, 125, 431, 682, 610), map(y, 125, 431, 682, 610), 1, 30}
+		};
+
+		solucion = resolverSistema(matriz);
+		esfera.x = map2(x, solucion[0], solucion[1], solucion[2]);
+	}
+	if (y > 120 && y < 430)
+		esfera.z = map2(y, 0.0000798, 0.034, -5.393);
+
+	juego.getboard().detectpieza(esfera);
+
+
+
 }
 
 void mouseDrag(int x, int y) {

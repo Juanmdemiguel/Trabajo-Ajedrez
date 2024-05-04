@@ -1,5 +1,10 @@
 #include"Game.h"
 
+
+Board& Game::getboard()
+{
+	return board;
+}
 void Game::dibujaJuego(piece piezas) {	//Funcion dibujaJuego provisional, se añade a clase Juego/Game cuando se desarrolle
 	
 	//Dibuja el tablero

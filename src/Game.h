@@ -9,7 +9,10 @@ class Game
 {
 	Board board;
 public:
+
+	Board& getboard();
 	void dibujaJuego(piece piezas);
 	void musica(bool sonido, int tema);
+
 };
 

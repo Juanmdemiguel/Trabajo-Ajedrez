@@ -15,6 +15,9 @@ public:
 	Board();
 //Métodos de Board
 	void dibuja();
-	Tile getTile(Punto2D pos);
+	Tile& getTile(Punto2D pos);
+	void detectpieza(Punto2D esfera);
+//Amigos
+	friend class Game;
 };
 

@@ -1,9 +1,13 @@
 #include "Tile.h"
+#include <iostream>
 
 //Métodos de Tile
 void Tile::Dibuja(int i, int j) 
 {
 	glEnable(GL_TEXTURE_2D);
+	if (seleccionada)
+		glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("images/menu.png").id);
+	else
 	this->color ? glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("images/WhiteTileSW2.png").id) : glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("images/BlackTileSW2.png").id);
 	glDisable(GL_LIGHTING);
 
@@ -38,4 +42,10 @@ Punto2D Tile::getCenter()
 bool Tile::esta_ocupado()
 {
 	return ocupada;
+}
+
+void Tile::selecciona(bool s)
+{
+	seleccionada = s;
+	//std::cout << s << std:: endl;
 }
