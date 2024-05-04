@@ -40,5 +40,7 @@ void Board::dibuja()
 Tile Board::getTile(Punto2D pos)
 {
 	// Como la posicion de las casillas inicia en el (1,1), se traduce en una menos en la matriz
-	return board[(int)pos.x - 1][(int)pos.z - 1]; 
+	// El criterio [filas][columnas] es contrario al [eje z][eje x].
+	// Como el input del código va a ser la posición en el tablero, su equivalente matricial es invertido
+	return board[(int)pos.x - 1][(int)pos.z - 1];
 }

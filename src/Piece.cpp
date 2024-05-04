@@ -42,7 +42,7 @@ void piece::elige(TipoPieza p, Punto2D posicion)
 void piece::dibuja1Pieza(Punto2D posicion, Model modelo)
 {
 	glPushMatrix();
-	glTranslatef(posicion.x, 0.0, posicion.z);
+	glTranslatef(posicion.z, 0.0, posicion.x);
 	glScalef(0.05f, 0.05f, 0.05f);
 	glRotatef(-90, 90.0f, 0.0f, 1.0f);
 	glColor3f(0.1f, 0.1f, 0.1f);

@@ -2,6 +2,6 @@
 class Punto2D
 {
 public:
-	double x, z;
+	double z, x;
 };
 

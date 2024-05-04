@@ -18,7 +18,7 @@ public:
 
 //Métodos
 	void Dibuja(int i, int j); //Dibuja la casilla. Recibe las coordenadas como argumento
-	void setPos(int row, int col);
+	void setPos(int col, int row);
 	Punto2D getCenter();
 	bool esta_ocupado();
 //Amigos

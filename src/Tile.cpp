@@ -21,15 +21,18 @@ void Tile::Dibuja(int i, int j)
 	glDisable(GL_TEXTURE_2D);
 }
 
-void Tile::setPos(int row, int col)
+void Tile::setPos(int col, int row)
 {
-	this->posicion = { (double)row,(double)col };
+	this->posicion = { (double)col,(double)row };
 }
 
 Punto2D Tile::getCenter()
 {
 	//Como el sistema de coordenadas empieza en (0,0) y las posiciones en (1,1), se debe extrapolar del sistema de casillas al del glut 
-	return {this->tam * (this->posicion.x - 0.5), this->tam *  (this->posicion.z - 0.5) }; 
+	//Como esta funciona está especificada para el gltranslatef(), y ese método coge la x como horizontal, se han invertido la salida
+	//De esta manera, ya que se ha establecido el eje z como el horizontal, el programador puede introducir su eje horizontal en la función
+
+	return { this->tam * (this->posicion.x - 0.5), this->tam * (this->posicion.z - 0.5) };
 }
 
 bool Tile::esta_ocupado()
