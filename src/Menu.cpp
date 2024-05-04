@@ -4,7 +4,7 @@ void Menu::iniciaMenu(bool menu, bool sonido)
 {
 	glEnable(GL_TEXTURE_2D);
 
-	sonido ? glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("images/menu.png").id): glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("images/menusin.png").id);
+	sonido ? glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/menu.png").id): glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/menusin.png").id);
 	
 	glDisable(GL_LIGHTING);
 	glBegin(GL_POLYGON);
@@ -34,5 +34,5 @@ void Menu::clickBotonesMenu(double x, double y) // Función primitiva, futuras it
 
 void Menu::musica(bool sonido)
 {
-	(sonido == true) ? ETSIDI::playMusica("sounds/menu.mp3", true) : ETSIDI::stopMusica();
+	(sonido == true) ? ETSIDI::playMusica("resources/sounds/menu.mp3", true) : ETSIDI::stopMusica();
 }

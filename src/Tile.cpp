@@ -6,9 +6,9 @@ void Tile::Dibuja(int i, int j)
 {
 	glEnable(GL_TEXTURE_2D);
 	if (seleccionada)
-		glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("images/menu.png").id);
+		glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/Arturito.png").id);
 	else
-	this->color ? glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("images/WhiteTileSW2.png").id) : glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("images/BlackTileSW2.png").id);
+	this->color ? glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/WhiteTileSW2.png").id) : glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/BlackTileSW2.png").id);
 	glDisable(GL_LIGHTING);
 
 	glBegin(GL_POLYGON);

@@ -11,7 +11,7 @@ class piece
 public:
 
 //Constructor para inicializar los distintos modelos
-	piece() : Pawn("model/Pawn.obj") {}
+	piece() : Pawn("resources/model/Pawn.obj") {}
 
 //Métodos
 	void dibuja1Pieza(Punto2D posicion, Model modelo);
