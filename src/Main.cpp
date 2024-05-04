@@ -102,6 +102,7 @@ void OnKeyboardDown(unsigned char key, int x_t, int y_t)
 	camara.zoom(principal, key);
 	camara.actuador(principal, key);
 	camara.vertical(principal, key);
+	camara.cambio_modo_libre(principal, key);
 	glutPostRedisplay();  //Poner siempre al final y no se pone nada más debajo. Dibuja otro frame
 }
 

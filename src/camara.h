@@ -20,6 +20,7 @@ class Camara
 	//Se generan suma y angulo como atributos para guardar los valores que adquieren y no reiniciarlos al llamar de nuevo al método
 	double suma;
 	double angulo;
+	bool modolibre = FALSE;
 
 public:
 	Camara();
@@ -29,6 +30,7 @@ public:
 	void rota(Menu& principal);
 	void zoom(Menu& principal, unsigned char key);
 	void vertical(Menu& principal, unsigned char key);
+	void cambio_modo_libre(Menu& principak, unsigned char key);
 
 };
 
