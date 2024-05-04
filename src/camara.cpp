@@ -68,22 +68,26 @@ void Camara::zoom(Menu& principal, unsigned char key)
         double unitariodirz = dirz / modulodir;
 
 
-        if (key == '+')
+        if (key == '+' && angulo ==0 && zoomin < 30)
         {
             // Mueve el punto de mira en la dirección opuesta al vector de dirección de la cámara
             posx = posx + unitariodirx * zoom;
             posy = posy + unitariodiry * zoom;
             posz = posz + unitariodirz * zoom;
+            zoomin = zoomin + 1;
+            zoomout = zoomout - 1;
         }
 
 
 
-        else if (key == '-')
+        else if (key == '-' && angulo == 0 && zoomout < 20)
         {
             // Mueve el punto de mira en la dirección del vector de dirección de la cámara
             posx = posx - unitariodirx * zoom;
             posy = posy - unitariodiry * zoom;
             posz = posz - unitariodirz * zoom;
+            zoomin = zoomin - 1;
+            zoomout = zoomout + 1;
         }
     }
 }
@@ -92,23 +96,53 @@ void Camara::vertical(Menu& principal, unsigned char key)
 {
     if (!principal.getMenu())
     {
-        if (key == 'w')
+        float d = sqrt((posx - mirax) * (posx - mirax) + (posy - miray) * (posy - miray));
+        double theta = atan2((posy - miray), (posx - mirax));
+        if (cambionegro)
         {
-            float d = sqrt((posx - mirax) * (posx - mirax) + (posy - miray) * (posy - miray));
-            double theta = atan2((posy - miray), (posx - mirax));
-            theta = theta + 0.05;
-            posx = mirax + d * cos(theta);
-            posy = miray + d * sin(theta);
+            if ((key == 'w' || key == 'W') && arriba < 10 && angulo == 0)
+            {
+                
+                theta = theta + 0.05;
+                posx = mirax + d * cos(theta);
+                posy = miray + d * sin(theta);
+                arriba = arriba + 1;
+                abajo = abajo - 1;
 
+            }
+            if ((key == 's' || key == 'S') && abajo < 18 && angulo == 0)
+            {
+                
+                theta = theta - 0.05;
+                posx = mirax + d * cos(theta);
+                posy = miray + d * sin(theta);
+                arriba = arriba - 1;
+                abajo = abajo + 1;
+
+            }
         }
-        if (key == 's')
+        if (!cambionegro)
         {
-            float d = sqrt((posx - mirax) * (posx - mirax) + (posy - miray) * (posy - miray));
-            double theta = atan2((posy - miray), (posx - mirax));
-            theta = theta - 0.05;
-            posx = mirax + d * cos(theta);
-            posy = miray + d * sin(theta);
+            if ((key == 's' || key == 'S') && abajo < 18 && suma == 0)
+            {
+               
+                theta = theta + 0.05;
+                posx = mirax + d * cos(theta);
+                posy = miray + d * sin(theta);
+                arriba = arriba - 1;
+                abajo = abajo + 1;
 
+            }
+            if ((key == 'w' || key == 'W') && arriba < 10 && suma == 0)
+            {
+                
+                theta = theta - 0.05;
+                posx = mirax + d * cos(theta);
+                posy = miray + d * sin(theta);
+                arriba = arriba + 1;
+                abajo = abajo - 1;
+
+            }
         }
     }
 }

@@ -11,6 +11,10 @@ class Camara
 	double mirax;
 	double miray;
 	double miraz;
+	double arriba = 0;
+	double abajo = 0;
+	double zoomin = 0;
+	double zoomout = 0;
 	bool rotar = FALSE;
 	bool cambionegro = FALSE;
 	//Se generan suma y angulo como atributos para guardar los valores que adquieren y no reiniciarlos al llamar de nuevo al método
