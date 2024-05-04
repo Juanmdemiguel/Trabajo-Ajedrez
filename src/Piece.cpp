@@ -42,24 +42,23 @@ void piece::elige(TipoPieza p, Punto2D posicion)
 }
 void piece::dibuja1Pieza(Punto2D posicion, Model modelo)
 {
-	glTranslatef(posicion.x, posicion.z, 0.0);
+	glTranslatef(posicion.x, 0.0, posicion.z);
 	modelo.Draw();
-	glTranslatef(-posicion.x, -posicion.z,0.0);
+	glTranslatef(-posicion.x, 0.0,-posicion.z);
 }
 
-void piece::dibujaPiezas()
+void piece::dibujaPiezas(Board tablero)
 {
 	//Dibujo de los peones
 	for (double i = 1.0; i<= fil - 2; i += (fil - 3))
 	{
 		for (double j = 0.0; j < col; j++)
 		{
-			this->dibuja1Pieza({ square * (i+0.5*square),square *(j+0.5*square) }, Pawn);
+			this->dibuja1Pieza({tablero.getTile({5,8}).getCenter()}, Pawn);
 		}
 	}
 
-	
-	
+	/*
 	//Dibujo del resto de piezas
 	for (double i = 0; i <= fil-1; i += (fil-2))
 	{
@@ -86,5 +85,5 @@ void piece::dibujaPiezas()
 				this->dibuja1Pieza({ square * i,square * j }, Pawn);
 		}
 	}
-	
+	*/
 }

@@ -16,7 +16,7 @@ public:
 //Métodos
 	void dibuja1Pieza(Punto2D posicion, Model modelo);
 	void elige(TipoPieza p, Punto2D posicion);
-	void dibujaPiezas();
+	void dibujaPiezas(Board tablero);
 
 };
 

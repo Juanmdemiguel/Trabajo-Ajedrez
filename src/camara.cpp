@@ -113,7 +113,6 @@ void Camara::vertical(Menu& principal, unsigned char key)
     }
 }
 
-//Restricción de giro sin implemetar
 void Camara::rota(Menu& principal)
 {
     if (!principal.getMenu())
@@ -121,14 +120,18 @@ void Camara::rota(Menu& principal)
         double d{};
         double theta{};
         double DistRecorrida{};
-        while (rotar && angulo<=3.14)   //Ángulo en radianes. Permite un giro hasta 180º
+        //Ángulo en radianes. Permite un giro hasta 180º
+
+        if (rotar && angulo < 3.141592653589793)
         {
             //Se guarda la posición anterior
-            double antesX=posx, antesZ=posz;
+            double antesX = posx, antesZ = posz;
             //Se calcula la nueva posición de la cámara
             d = sqrt((posx - mirax) * (posx - mirax) + (posz - miraz) * (posz - miraz));
             theta = atan2((posz - miraz), (posx - mirax));
-            theta = theta + 0.05;
+            //Giro muy lento pero el incremento no debe ser mayor porque si no el tablero se tuerce.
+            // Debe buscarse una alternativa 
+            theta = theta + 0.001;
             posx = mirax + d * cos(theta);
             posz = miraz + d * sin(theta);
             //Se calcula la distancia recorrida entre cada incremento de la cámara
@@ -136,15 +139,24 @@ void Camara::rota(Menu& principal)
             //Se calcula la longitud recorrida a lo largo del perímetro de la circunferencia que forma la cámara
             suma += DistRecorrida;
             //Mediante la distancia recorrida, se calcula el ángulo formado con respecto el centro
-            angulo = (suma / d) ;
-            rotar = FALSE;
+            angulo = (suma / d);
+
+            //Cuando se llega a los 180º, cambia de turno y al volver a pulsar el espacio gira otra vez.
+            if (angulo >= 3.141592653789793)
+            {
+                if (cambionegro == true)
+                {
+                    cambionegro = false;
+                }
+                else if (cambionegro == false)
+                {
+                    cambionegro = true;
+                }
+                rotar = FALSE;
+                angulo = 0;
+                suma = 0;
+            }
         }
-        //Vuelve a la posición inicial cuando gira más de 180º. Cambiar más tarde cuando se añadan los turnos.
-        if (angulo >= 3.14)
-        {
-            posx = -20.0;
-            posy = 40.0;
-            posz = 15.0;
-        }
+
     }
 }
