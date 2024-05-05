@@ -1,10 +1,22 @@
 #include"Game.h"
-
+#include "cstring"
 
 Board& Game::getboard()
 {
 	return board;
 }
+
+void Game::inicializa()
+{
+	//Switch de modo de juego
+	char cancion[] = "resources/sounds/marcha.mp3";
+	//Fin de switch
+	strcpy_s(music, cancion);
+
+	board.initPath();
+
+}
+
 void Game::dibujaJuego(piece piezas) {	//Funcion dibujaJuego provisional, se añade a clase Juego/Game cuando se desarrolle
 	
 	//Dibuja el tablero
@@ -14,20 +26,7 @@ void Game::dibujaJuego(piece piezas) {	//Funcion dibujaJuego provisional, se aña
 	piezas.dibujaPiezas(board);
 }
 
-void Game::musica(bool sonido, int tema)
-{
-	switch (tema) //Añadir pistas de música según temática elegida en el menú
-	{
-	case 0:
-		(sonido == true) ? ETSIDI::playMusica("sounds/marchav2.mp3", true) : ETSIDI::stopMusica();
-		break;
-	case 1:
-		break;
-	case 2:
-		break;
-		//...
-	}
-		
-
-
+void Game::musica(bool sonido, char tema[])
+{	
+		(sonido == true) ? ETSIDI::playMusica(tema, true) : ETSIDI::stopMusica();
 }

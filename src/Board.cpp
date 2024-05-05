@@ -15,6 +15,18 @@ Board::Board()
 }
 
 //Métodos de Board
+void Board::initPath()
+{
+	//Aqui iría un switch de los distintos modos de juego
+	char negras[] = "resources/images/BlackTileSW2.png";
+	char blancas[] = "resources/images/WhiteTileSW2.png";
+	char seleccionada[] = "resources/images/Arturito.png";
+	//Aqui se saldría del switch
+
+	strcpy_s(WhiteTile, blancas);
+	strcpy_s(BlackTile, negras);
+	strcpy_s(SelecTile, seleccionada);
+}
 
 void Board::dibuja()
 {
@@ -31,10 +43,14 @@ void Board::dibuja()
 
 	glEnable(GL_LIGHTING);
 
+
+
 	//Dibujo superpuesto de las casillas
     for (int i = 0; i < fil; i++) {
-		for (int j = 0; j < col; j++) 
-			board[i][j].Dibuja(i,j);
+		for (int j = 0; j < col; j++) {
+			board[i][j].Dibuja(i, j, WhiteTile, BlackTile, SelecTile);
+		}
+			
     }
 }
 
@@ -76,4 +92,23 @@ void Board::detectpieza(Punto2D esfera)
 		}
 	}
 
+}
+
+void Board :: getDiagonal(Punto2D pos, int reach) //Creo que debería funcionar sin los if pero probando a parte me daba fallos
+{
+	int fila = (int)pos.x - 1;     //Traduce el punto 2D a posiciones matriciales
+	int columna = (int)pos.z - 1;
+	for (int i = 1; i <= reach; i++) { //asigna a las matrices en la diagonal el estatus de posible
+		if ((fila + i) < fil && (columna + i) < col)
+			board[fila + i][columna + i].posible = true;
+
+		if ((fila - i) >= 0 && (columna - i) >= 0)
+			board[fila - i][columna - i].posible = true;
+
+		if ((fila - i) >= 0 && (columna + i) < col)
+			board[fila - i][columna + i].posible = true;
+
+		if ((fila + i) < fil && (columna - i) >= 0)
+			board[fila + i][columna - i].posible = true;
+	}
 }

@@ -57,6 +57,8 @@ int main(int argc,char* argv[])
 	glutMotionFunc(mouseMove); // Movimiento del ratón
 	glutPassiveMotionFunc(mouseMove); // Movimiento pasivo del ratón (sin botón presionado)
 
+	juego.inicializa();
+
 	//pasarle el control a GLUT,que llamara a los callbacks
 	glutMainLoop();	  //Bucle infinito
 
@@ -122,11 +124,8 @@ void mouseClick(int _button, int state, int _x, int _y) {
 
 		if ((x > 579) && (x < 788) && (y > 483) && (y < 553))
 			if(principal.getMenu())
-				juego.musica(principal.getSonido(),0); //De momento se le pasa un 0 para que funcione	
-													   // marchav2, cuando haya desarrollo de botones se implementa el int
-
+				juego.musica(principal.getSonido(), juego.music); 
 	}
-	
 }
 
 void mouseMove(int x, int y1) 

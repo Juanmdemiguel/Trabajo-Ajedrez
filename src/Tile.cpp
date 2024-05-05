@@ -1,16 +1,20 @@
 #include "Tile.h"
 #include <iostream>
-
+#include "cstring"
 //Métodos de Tile
-void Tile::Dibuja(int i, int j) 
-{
-	glEnable(GL_TEXTURE_2D);
-	if (seleccionada)
-		glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/Arturito.png").id);
-	else
-	this->color ? glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/WhiteTileSW2.png").id) : glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/BlackTileSW2.png").id);
-	glDisable(GL_LIGHTING);
 
+
+
+void Tile::Dibuja(int i, int j, char blancas[], char negras[], char selec[])
+{
+
+	glEnable(GL_TEXTURE_2D);
+
+	seleccionada ? 
+		(glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture(selec).id)) : 
+		(color ? glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture(blancas).id) : glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture(negras).id));
+	
+	glDisable(GL_LIGHTING);
 	glBegin(GL_POLYGON);
 	glColor3f(1, 1, 1);
 
@@ -50,7 +54,8 @@ void Tile::selecciona(bool s)
 	//std::cout << s << std:: endl;
 }
 
-void Tile::ocupamiento()
+void Tile::ocupamiento(bool s)
 {
-	ocupada = TRUE;
+	ocupada = s;
 }
+

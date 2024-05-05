@@ -42,7 +42,7 @@ void piece::elige(TipoPieza p, Punto2D posicion)
 
 void piece::ocupado(Tile casilla)
 {
-	casilla.ocupamiento();
+	casilla.ocupamiento(true);
 }
 
 void piece::dibuja1Pieza(Punto2D posicion, Model modelo, TipoPieza pieza, Board tablero)
@@ -57,19 +57,18 @@ void piece::dibuja1Pieza(Punto2D posicion, Model modelo, TipoPieza pieza, Board 
 	case TipoPieza::pawn:
 		glScalef(0.05f, 0.05f, 0.05f);
 		glRotatef(-90, 90.0f, 0.0f, 1.0f);
+
 		if (color == TRUE)
-		{
 			glColor3ub(15, 15, 15);
-		}
 		else
-		{
 			glColor3ub(5, 5, 5);
-		}
+
 		break;
 	
 		//Para el caso del caza
 	case TipoPieza::knight:
 		glScalef(1.0f, 1.0f, 1.0f);
+
 		if (color == TRUE)
 		{
 			glRotatef(-90, 90.0f, 180.0f, 120.0f);

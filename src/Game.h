@@ -8,11 +8,14 @@
 class Game
 {
 	Board board;
+	
 public:
+	char music[50];
 
 	Board& getboard();
 	void dibujaJuego(piece piezas);
-	void musica(bool sonido, int tema);
+	void musica(bool sonido, char tema[]);
+	void inicializa();
 
 };
 
