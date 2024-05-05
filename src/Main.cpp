@@ -7,13 +7,6 @@
 
 // Posición de la esfera
 Punto2D esfera = { 0,0 };
-vector<double> solucion;
-vector<vector<double>> matriz = {
-	{125 * 125, 125, 1, 0},
-	{400 * 400, 400, 1, 15},
-	{641 * 641, 641, 1, 30}
-};
-
 Model Pawn("model/Pawn.obj");
 
 void OnDraw(void);		 //esta funcion sera llamada para dibujar
@@ -50,7 +43,7 @@ int main(int argc,char* argv[])
 	glMatrixMode(GL_PROJECTION);
 	gluPerspective( 40.0, width/height, 0.1, 150);
 	
-	ETSIDI::playMusica("sounds/menu.mp3", true);
+	ETSIDI::playMusica("resources/sounds/menu.mp3", true);
 
 	//Registrar los callbacks
 	glutDisplayFunc(OnDraw);
@@ -144,21 +137,24 @@ void mouseMove(int x, int y1)
 	Punto2D s;
 	if (x > map(y, 125, 431, 117, 190) && x < map(y, 125, 431, 682, 610))
 	{
-		matriz = {
+		vector<vector<double>> matriz = {
 		{map(y, 125, 431, 117, 190) * map(y, 125, 431, 117, 190), map(y, 125, 431, 117, 190), 1, 0},
 		{400 * 400, 400, 1, 15},
 		{map(y, 125, 431, 682, 610) * map(y, 125, 431, 682, 610), map(y, 125, 431, 682, 610), 1, 30}
 		};
-
-		solucion = resolverSistema(matriz);
-		esfera.x = map2(x, solucion[0], solucion[1], solucion[2]);
+		esfera.x = map2(matriz,x);
 	}
-	if (y > 120 && y < 430)
-		esfera.z = map2(y, 0.0000798, 0.034, -5.393);
+	if (y > 120 && y < 430) 
+	{
+		vector<vector<double>> matriz1 = {
+		{123 * 123, 123, 1, 0},
+		{300 * 300, 300, 1, 12},
+		{430 * 430, 430, 1, 24}
+		};
+		esfera.z = map2(matriz1,y);
+	}
 
 	juego.getboard().detectpieza(esfera);
-
-
 
 }
 

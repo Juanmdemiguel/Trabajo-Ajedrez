@@ -56,6 +56,7 @@ void Board::detectpieza(Punto2D esfera)
 			if (modulo(getTile({ i,j }).getCenter(), esfera) < m)
 			{
 				m = modulo(getTile({ i,j }).getCenter(), esfera);
+
 				s.x = j;
 				s.z = i;
 			}
@@ -69,7 +70,7 @@ void Board::detectpieza(Punto2D esfera)
 		for (float j = 1; j < fil + 1; j++)
 		{
 			if(!(i == s.z && j == s.x))
-			getTile({i,j}).selecciona(false);
+				getTile({i,j}).selecciona(false);
 				
 
 		}

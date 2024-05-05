@@ -2,8 +2,12 @@
 #include "freeglut.h"
 #include <math.h>
 
-
-vector<double> resolverSistema(vector<vector<double>> matriz) {
+float map(float x, float in_min, float in_max, float out_min, float out_max) 
+{
+	return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+}
+float map2(vector<vector<double>> matriz, float x)
+{
 	int n = matriz.size();
 
 	for (int i = 0; i < n; ++i) {
@@ -41,14 +45,7 @@ vector<double> resolverSistema(vector<vector<double>> matriz) {
 		}
 	}
 
-	return solucion;
-}
-
-float map(float x, float in_min, float in_max, float out_min, float out_max) {
-	return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
-}
-float map2(float x, float a, float b, float c) {
-	return (a * pow(x, 2) + b * x + c);
+	return (solucion[0] * pow(x, 2) + solucion[1] * x + solucion[2]);
 }
 
 // Función para dibujar la esfera de pruebas
