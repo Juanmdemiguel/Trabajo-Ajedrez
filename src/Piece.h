@@ -17,7 +17,8 @@ public:
 
 //Constructor para inicializar los distintos modelos
 	piece() : Pawn("resources/model/Pawn.obj"), Tie("resources/model/tie_UV.obj") {}
-
+	//Problemas con: arturito, citripio, darthvader, destroyer, gonk, jawa, r5d4, Sandtrooper, vadertie en línea 1894
+	//Con BB8 baja rendimiento
 //Métodos
 	void dibuja1Pieza(Punto2D posicion, Model modelo, TipoPieza pieza, Board tablero);
 	void elige(TipoPieza p, Punto2D posicion);

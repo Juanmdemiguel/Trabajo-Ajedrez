@@ -9,7 +9,7 @@ Board& Game::getboard()
 void Game::inicializa()
 {
 	//Switch de modo de juego
-	char cancion[] = "resources/sounds/marcha.mp3";
+	char cancion[] = "resources/sounds/marchav2.mp3";
 	//Fin de switch
 	strcpy_s(music, cancion);
 
