@@ -49,3 +49,8 @@ void Tile::selecciona(bool s)
 	seleccionada = s;
 	//std::cout << s << std:: endl;
 }
+
+void Tile::ocupamiento()
+{
+	ocupada = TRUE;
+}

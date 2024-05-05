@@ -21,9 +21,11 @@ public:
 	void setPos(int col, int row);
 	Punto2D getCenter();
 	bool esta_ocupado();
+	void ocupamiento();
 	void selecciona(bool);
 	//Amigos
 	friend class Board;
 	friend class Game;
+	friend class Piece;
 };
 
