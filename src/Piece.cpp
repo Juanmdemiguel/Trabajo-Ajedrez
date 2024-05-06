@@ -1,5 +1,4 @@
 #include "Piece.h"
-#include "freeglut.h"
 
 void piece::elige(TipoPieza p, Punto2D posicion)
 {
@@ -40,12 +39,8 @@ void piece::elige(TipoPieza p, Punto2D posicion)
 	}
 }
 
-void piece::ocupado(Tile casilla)
-{
-	casilla.ocupamiento(true);
-}
 
-void piece::dibuja1Pieza(Punto2D posicion, Model modelo, TipoPieza pieza, Board tablero)
+void piece::dibuja1Pieza(Punto2D posicion, Model modelo, TipoPieza pieza, Board& tablero)
 {
 	glPushMatrix();
 	glTranslatef(posicion.z, 0.0, posicion.x);
@@ -86,11 +81,9 @@ void piece::dibuja1Pieza(Punto2D posicion, Model modelo, TipoPieza pieza, Board 
 	glPopMatrix();
 	//glColor3f(0, 0, 0);
 
-	//Se informa a la casilla que donde se ha dibujado el modelo, está ocupado
-	this->ocupado(tablero.getTile(posicion));
 }
 
-void piece::dibujaPiezas(Board tablero)
+void piece::dibujaPiezas(Board& tablero)
 {
 	//Dibujo de los peones
 	for (double i = 2; i <= fil - 1; i += (fil - 3))
@@ -100,6 +93,7 @@ void piece::dibujaPiezas(Board tablero)
 		for (double j = 1; j <= col; j++)
 		{
 			this->dibuja1Pieza(tablero.getTile({ j,i }).getCenter(), Pawn,TipoPieza::pawn, tablero);
+			tablero.getTile({ j,i }).setocupada(true);
 		}
 	}
 
@@ -137,6 +131,8 @@ void piece::dibujaPiezas(Board tablero)
 			//Dibujo del rey
 			if (j == 6)
 				this->dibuja1Pieza(tablero.getTile({ j,i }).getCenter(), Pawn, TipoPieza::pawn, tablero);
+
+			tablero.getTile({ j,i }).setocupada(true);
 		}
 	}
 }

@@ -69,24 +69,25 @@ void Board::detectpieza(Punto2D esfera)
 	for (float i = 1; i < col + 1; i++) {
 		for (float j = 1; j < fil + 1; j++)
 		{
+			//std::cout <<getTile({ j,i }).esta_ocupado();
 			if (modulo(getTile({ i,j }).getCenter(), esfera) < m)
 			{
 				m = modulo(getTile({ i,j }).getCenter(), esfera);
-
+				
 				s.x = j;
 				s.z = i;
 			}
 		}
 	}
 	
-	getTile(s).selecciona(true);
+	getTile(s).apunta(true);
 	
 
 	for (float i = 1; i < col + 1; i++) {
 		for (float j = 1; j < fil + 1; j++)
 		{
 			if(!(i == s.z && j == s.x))
-				getTile({i,j}).selecciona(false);
+				getTile({i,j}).apunta(false);
 				
 
 		}

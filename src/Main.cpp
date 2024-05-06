@@ -1,9 +1,9 @@
 #include "Game.h"
 #include "Model.h"
 #include "Board.h"
-#include <iostream>
 #include "camara.h"
 #include "Piece.h"
+#include "Mouse.h"
 
 // Posición de la esfera
 Punto2D esfera = { 0,0 };
@@ -22,6 +22,7 @@ Menu principal;
 Game juego;
 Camara camara;
 piece piezas;
+Mouse raton;
 
 int main(int argc,char* argv[])
 {
@@ -125,36 +126,18 @@ void mouseClick(int _button, int state, int _x, int _y) {
 		if ((x > 579) && (x < 788) && (y > 483) && (y < 553))
 			if(principal.getMenu())
 				juego.musica(principal.getSonido(), juego.music); 
+
+		//Seleccion de la casilla
+		raton.seleccion(juego, _button);
 	}
+	
 }
 
 void mouseMove(int x, int y1) 
 {
 	// Acciones cuando el ratón se mueve
-
-	float y = 600 - y1;
-	Punto2D s;
-	if (x > map(y, 125, 431, 117, 190) && x < map(y, 125, 431, 682, 610))
-	{
-		vector<vector<double>> matriz = {
-		{map(y, 125, 431, 117, 190) * map(y, 125, 431, 117, 190), map(y, 125, 431, 117, 190), 1, 0},
-		{400 * 400, 400, 1, 15},
-		{map(y, 125, 431, 682, 610) * map(y, 125, 431, 682, 610), map(y, 125, 431, 682, 610), 1, 30}
-		};
-		esfera.x = map2(matriz,x);
-	}
-	if (y > 120 && y < 430) 
-	{
-		vector<vector<double>> matriz1 = {
-		{123 * 123, 123, 1, 0},
-		{300 * 300, 300, 1, 12},
-		{430 * 430, 430, 1, 24}
-		};
-		esfera.z = map2(matriz1,y);
-	}
-
-	juego.getboard().detectpieza(esfera);
-
+	raton.movimiento(x, y1, juego, esfera);
+	
 }
 
 void mouseDrag(int x, int y) {

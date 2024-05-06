@@ -1,5 +1,4 @@
 #include"Game.h"
-#include "cstring"
 
 Board& Game::getboard()
 {
@@ -17,13 +16,15 @@ void Game::inicializa()
 
 }
 
-void Game::dibujaJuego(piece piezas) {	//Funcion dibujaJuego provisional, se añade a clase Juego/Game cuando se desarrolle
+void Game::dibujaJuego(piece& piezas) {	//Funcion dibujaJuego provisional, se añade a clase Juego/Game cuando se desarrolle
 	
 	//Dibuja el tablero
 	board.dibuja();
 
 	//Dibuja todas las piezas
 	piezas.dibujaPiezas(board);
+
+	//std::cout <<board.getTile({2,2}).esta_ocupado();
 }
 
 void Game::musica(bool sonido, char tema[])

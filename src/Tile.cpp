@@ -1,8 +1,4 @@
 #include "Tile.h"
-#include <iostream>
-#include "cstring"
-//Métodos de Tile
-
 
 
 void Tile::Dibuja(int i, int j, char blancas[], char negras[], char selec[])
@@ -10,7 +6,7 @@ void Tile::Dibuja(int i, int j, char blancas[], char negras[], char selec[])
 
 	glEnable(GL_TEXTURE_2D);
 
-	seleccionada ? 
+	apuntada ? 
 		(glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture(selec).id)) : 
 		(color ? glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture(blancas).id) : glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture(negras).id));
 	
@@ -43,19 +39,33 @@ Punto2D Tile::getCenter()
 	return { this->tam * (this->posicion.x - 0.5), this->tam * (this->posicion.z - 0.5) };
 }
 
-bool Tile::esta_ocupado()
+bool Tile::getocupada()
 {
 	return ocupada;
 }
 
-void Tile::selecciona(bool s)
+void Tile::apunta(bool s)
 {
-	seleccionada = s;
-	//std::cout << s << std:: endl;
+	apuntada = s;
 }
 
-void Tile::ocupamiento(bool s)
+void Tile::setocupada(bool s)
 {
 	ocupada = s;
+}
+void Tile::getpiezapuntada(int boton)
+{
+	//cout << ocupada;
+	if (apuntada == true && ocupada == true && boton == GLUT_LEFT_BUTTON)
+	{
+		seleccionada = true;
+	}
+	else
+		seleccionada = false;
+
+}
+bool Tile::getseleccionada()
+{
+	return seleccionada;
 }
 

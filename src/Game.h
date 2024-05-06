@@ -4,6 +4,8 @@
 #include "Model.h"
 #include "Board.h"
 #include "Piece.h"
+#include "cstring"
+#include <iostream>
 
 class Game
 {
@@ -13,7 +15,7 @@ public:
 	char music[50];
 
 	Board& getboard();
-	void dibujaJuego(piece piezas);
+	void dibujaJuego(piece& piezas);
 	void musica(bool sonido, char tema[]);
 	void inicializa();
 
