@@ -4,10 +4,10 @@
 #include "camara.h"
 #include "Piece.h"
 #include "Mouse.h"
+#include "Coordinator.h"
+#include "iostream"
 
-// Posición de la esfera
-Punto2D esfera = { 0,0 };
-Model Pawn("model/Pawn.obj");
+
 
 void OnDraw(void);		 //esta funcion sera llamada para dibujar
 void OnTimer(int value); //esta funcion sera llamada cuando transcurra una temporizacion
@@ -17,12 +17,12 @@ void mouseClick(int button, int state, int _x, int _y);
 void mouseMove(int _x, int _y);
 void mouseDrag(int _x, int _y);
 
-double x, y;
+
+Coordinator coord;
+
 Menu principal;
-Game juego;
 Camara camara;
-piece piezas;
-Mouse raton;
+
 
 int main(int argc,char* argv[])
 {
@@ -44,21 +44,18 @@ int main(int argc,char* argv[])
 	glMatrixMode(GL_PROJECTION);
 	gluPerspective( 40.0, width/height, 0.1, 150);
 	
-	ETSIDI::playMusica("resources/sounds/menu.mp3", true);
+
 
 	//Registrar los callbacks
 	glutDisplayFunc(OnDraw);
 	glutTimerFunc(25,OnTimer,0);//le decimos que dentro de 25ms llame 1 vez a la funcion OnTimer()
 	glutKeyboardFunc(OnKeyboardDown);
-
 	// Registrar funciones de callback para eventos del ratón
 	glutMouseFunc(mouseClick); // Clic del ratón
-
-
 	glutMotionFunc(mouseMove); // Movimiento del ratón
 	glutPassiveMotionFunc(mouseMove); // Movimiento pasivo del ratón (sin botón presionado)
 
-	juego.inicializa();
+	coord.Inicializa();
 
 	//pasarle el control a GLUT,que llamara a los callbacks
 	glutMainLoop();	  //Bucle infinito
@@ -70,21 +67,19 @@ void OnDraw(void)
 	//Borrado de la pantalla	
    	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	
-
 	//Para definir el punto de vista
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
+	
+	
+	coord.Dibuja();
+	
 
-	camara.dibuja(principal);
-	drawEsferadePruebas(esfera.x, esfera.z);
+	
 
-	principal.getMenu() ? principal.iniciaMenu(principal.getMenu(), principal.getSonido()) : juego.dibujaJuego(piezas);
-	//El operador ternario llama a iniciaMenu si el booleano menu es true, si no, dibuja el juego
-
+	
 	//Botón música y empezar. Falta modificar el funcionamiento del sonido para que funcione correctamente e imlplementar cuadros
 
-	principal.clickBotonesMenu(x, y);
 
 	glEnd();
 	glEnable(GL_LIGHTING);
@@ -95,49 +90,27 @@ void OnDraw(void)
 }
 void OnKeyboardDown(unsigned char key, int x_t, int y_t)
 {
-	camara.zoom(principal, key);
-	camara.actuador(principal, key);
-	camara.vertical(principal, key);
-	camara.cambio_modo_libre(principal, key);
+	coord.Teclado(key, x_t, y_t);
+
 	glutPostRedisplay();  //Poner siempre al final y no se pone nada más debajo. Dibuja otro frame
 }
 
 void OnTimer(int value)
 {
-	camara.rota(principal);
+	coord.Temp(value);
 	glutTimerFunc(25, OnTimer, 0);
 	glutPostRedisplay();
 }
 
-void mouseClick(int _button, int state, int _x, int _y) {
-	if (_button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
-		// Acciones cuando se hace clic con el botón izquierdo del ratón
-		x = _x;
-		y = _y;
-		principal.setBoton(false);
-	}
-	
-	if (_button == GLUT_LEFT_BUTTON) //Solo si se pulsa el botón izquierdo del ratón
-	{
-		if ((x > 33) && (x < 151) && (y > 488) && (y < 557)) //Y se tienen las coordenadas del botón de sonido
-			if (principal.getMenu())
-				principal.musica(principal.getSonido());
-
-		if ((x > 579) && (x < 788) && (y > 483) && (y < 553))
-			if(principal.getMenu())
-				juego.musica(principal.getSonido(), juego.music); 
-
-		//Seleccion de la casilla
-		raton.seleccion(juego, _button);
-	}
-	
+void mouseClick(int _button, int state, int _x, int _y) 
+{
+	coord.Click(_button, state, _x, _y);
 }
 
 void mouseMove(int x, int y1) 
 {
 	// Acciones cuando el ratón se mueve
-	raton.movimiento(x, y1, juego, esfera);
-	
+	coord.Mouse(x, y1);
 }
 
 void mouseDrag(int x, int y) {

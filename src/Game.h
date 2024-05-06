@@ -10,12 +10,11 @@
 class Game
 {
 	Board board;
-	
-public:
-	char music[50];
+	piece piezas;
 
+public:
 	Board& getboard();
-	void dibujaJuego(piece& piezas);
+	void dibujaJuego();
 	void musica(bool sonido, char tema[]);
 	void inicializa();
 

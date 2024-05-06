@@ -22,6 +22,7 @@ public:
 	void detectpieza(Punto2D esfera);
 	void initPath();
 	void getDiagonal(Punto2D pos, int reach = 10);
+	void getHorizontal(Punto2D pos, int reach = 10);
 //Amigos
 	friend class Game;
 };

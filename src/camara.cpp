@@ -1,14 +1,14 @@
 #include "camara.h"
 #include <iostream>
+#define mirax 12.0
+#define miray 0.0
+#define miraz 15.0
 
 Camara::Camara()
 {
     posx = -20.0;
     posy = 40.0;
     posz = 15.0;
-    mirax = 12.0;
-    miray = 0.0;
-    miraz = 15.0;
     suma = 0.0;
     angulo = 0.0;
 }
@@ -16,7 +16,6 @@ Camara::Camara()
 //Establece posiciones iniciales de la camara tanto en el menu como al iniciar la partida
 void Camara::dibuja(Menu& principal)
 {
-
     if (principal.getMenu())
     {
         gluLookAt(0.0, 7.5, 20.0,  // posicion del ojo
@@ -37,7 +36,6 @@ void Camara::set_pos(double _posx, double _posy, double _posz)
     posx = _posx;
     posy = _posy;
     posz = _posz;
-
 }
 
 //Permite cambiar al modo en el que se mueven las piezas, que no admite movimientos de camara adicionales y regresar
@@ -150,7 +148,6 @@ void Camara::vertical(Menu& principal, unsigned char key)
                 posy = miray + d * sin(theta);
                 arriba = arriba + 1;
                 abajo = abajo - 1;
-
             }
             if ((key == 's' || key == 'S') && abajo < 18 && angulo == 0)
             {
@@ -209,7 +206,7 @@ void Camara::rota(Menu& principal)
             theta = atan2((posz - miraz), (posx - mirax));
             //Giro muy lento pero el incremento no debe ser mayor porque si no el tablero se tuerce.
             // Debe buscarse una alternativa 
-            theta = theta + 0.001;
+            theta = theta + 0.0291;
             posx = mirax + d * cos(theta);
             posz = miraz + d * sin(theta);
             //Se calcula la distancia recorrida entre cada incremento de la cámara
@@ -222,14 +219,7 @@ void Camara::rota(Menu& principal)
             //Cuando se llega a los 180º, cambia de turno y al volver a pulsar el espacio gira otra vez.
             if (angulo >= 3.141592653789793)
             {
-                if (cambionegro == true)
-                {
-                    cambionegro = false;
-                }
-                else if (cambionegro == false)
-                {
-                    cambionegro = true;
-                }
+                cambionegro = !cambionegro;
                 rotar = FALSE;
                 angulo = 0;
                 suma = 0;

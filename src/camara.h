@@ -8,9 +8,7 @@ class Camara
 	double posx;
 	double posy;
 	double posz;
-	double mirax;
-	double miray;
-	double miraz;
+
 	double arriba = 0;
 	double abajo = 0;
 	double zoomin = 0;

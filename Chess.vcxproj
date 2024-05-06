@@ -154,6 +154,7 @@
     <ClInclude Include="src\Board.h" />
     <ClInclude Include="src\camara.h" />
     <ClInclude Include="src\Color.h" />
+    <ClInclude Include="src\Coordinator.h" />
     <ClInclude Include="src\Game.h" />
     <ClInclude Include="src\Menu.h" />
     <ClInclude Include="src\Model.h" />
@@ -166,6 +167,7 @@
     <ClCompile Include="src\Board.cpp" />
     <ClCompile Include="src\camara.cpp" />
     <ClCompile Include="src\Color.cpp" />
+    <ClCompile Include="src\Coordinator.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\Menu.cpp" />
