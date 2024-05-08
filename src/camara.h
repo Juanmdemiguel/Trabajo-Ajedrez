@@ -15,10 +15,8 @@ class Camara
 	double zoomout = 0;
 	bool rotar = FALSE;
 	bool cambionegro = FALSE;
-	//Se generan suma y angulo como atributos para guardar los valores que adquieren y no reiniciarlos al llamar de nuevo al método
-	double suma;
-	double angulo;
 	bool modolibre = FALSE;
+	bool estatico = TRUE;
 
 public:
 	Camara();

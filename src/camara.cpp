@@ -9,8 +9,6 @@ Camara::Camara()
     posx = -20.0;
     posy = 40.0;
     posz = 15.0;
-    suma = 0.0;
-    angulo = 0.0;
 }
 
 //Establece posiciones iniciales de la camara tanto en el menu como al iniciar la partida
@@ -41,7 +39,7 @@ void Camara::set_pos(double _posx, double _posy, double _posz)
 //Permite cambiar al modo en el que se mueven las piezas, que no admite movimientos de camara adicionales y regresar
 void Camara::cambio_modo_libre(Menu& principal, unsigned char key)
 {
-    if (!principal.getMenu() && angulo == 0)
+    if (!principal.getMenu() && estatico)
     {
         //Al pulsar l se entra en el modo y se vuelve a la posición de la camara original segun juege un color u otro
         if (key == 'l' && modolibre == FALSE)
@@ -92,7 +90,7 @@ void Camara::actuador(Menu& principal, unsigned char key)
 //Permite acercar la camara al tablero al pulsar '+' y alejarla al pulsar '-'
 void Camara::zoom(Menu& principal, unsigned char key)
 {
-    if (!principal.getMenu() && modolibre)
+    if (!principal.getMenu() && modolibre && estatico)
     {
         double zoom = 0.5; // Ajusta el factor de zoom según sea necesario
 
@@ -107,7 +105,7 @@ void Camara::zoom(Menu& principal, unsigned char key)
         double unitariodirz = dirz / modulodir;
 
 
-        if (key == '+' && angulo ==0 && zoomin < 30)
+        if (key == '+' && zoomin < 30)
         {
             // Mueve el punto de mira en la dirección opuesta al vector de dirección de la cámara
             posx = posx + unitariodirx * zoom;
@@ -119,7 +117,7 @@ void Camara::zoom(Menu& principal, unsigned char key)
 
 
 
-        else if (key == '-' && angulo == 0 && zoomout < 20)
+        else if (key == '-' && zoomout < 20)
         {
             // Mueve el punto de mira en la dirección del vector de dirección de la cámara
             posx = posx - unitariodirx * zoom;
@@ -134,13 +132,13 @@ void Camara::zoom(Menu& principal, unsigned char key)
 //Permite ver el tablero desde arriba al pulsar 'w' y de forma frontal al pulsar 's' independientemente del color que tenga el turno
 void Camara::vertical(Menu& principal, unsigned char key)
 {
-    if (!principal.getMenu() && modolibre)
+    if (!principal.getMenu() && modolibre && estatico)
     {
         float d = sqrt((posx - mirax) * (posx - mirax) + (posy - miray) * (posy - miray));
         double theta = atan2((posy - miray), (posx - mirax));
         if (cambionegro)
         {
-            if ((key == 'w' || key == 'W') && arriba < 10 && angulo == 0)
+            if ((key == 'w' || key == 'W') && arriba < 10)
             {
                 
                 theta = theta + 0.05;
@@ -149,7 +147,7 @@ void Camara::vertical(Menu& principal, unsigned char key)
                 arriba = arriba + 1;
                 abajo = abajo - 1;
             }
-            if ((key == 's' || key == 'S') && abajo < 18 && angulo == 0)
+            if ((key == 's' || key == 'S') && abajo < 18)
             {
                 
                 theta = theta - 0.05;
@@ -163,7 +161,7 @@ void Camara::vertical(Menu& principal, unsigned char key)
         //Si se cambia de turno se invierten los comandos
         if (!cambionegro)
         {
-            if ((key == 's' || key == 'S') && abajo < 18 && suma == 0)
+            if ((key == 's' || key == 'S') && abajo < 18)
             {
                
                 theta = theta + 0.05;
@@ -173,7 +171,7 @@ void Camara::vertical(Menu& principal, unsigned char key)
                 abajo = abajo + 1;
 
             }
-            if ((key == 'w' || key == 'W') && arriba < 10 && suma == 0)
+            if ((key == 'w' || key == 'W') && arriba < 10)
             {
                 
                 theta = theta - 0.05;
@@ -194,35 +192,41 @@ void Camara::rota(Menu& principal)
     {
         double d{};
         double theta{};
-        double DistRecorrida{};
+
         //Ángulo en radianes. Permite un giro hasta 180º
 
-        if (rotar && angulo < 3.141592653589793)
+        if (rotar && fabs(theta) <= 0)
         {
+            estatico = FALSE;
             //Se guarda la posición anterior
             double antesX = posx, antesZ = posz;
+
             //Se calcula la nueva posición de la cámara
             d = sqrt((posx - mirax) * (posx - mirax) + (posz - miraz) * (posz - miraz));
             theta = atan2((posz - miraz), (posx - mirax));
-            //Giro muy lento pero el incremento no debe ser mayor porque si no el tablero se tuerce.
-            // Debe buscarse una alternativa 
             theta = theta + 0.0291;
+
+            if (theta >= 0 && theta != (atan2((15.0 - 15.0), (-20.0 - 12.0)) + 0.0291) && cambionegro == FALSE)
+                theta = 0;
+            if (theta <= 0 && cambionegro == TRUE)
+                theta = 3.1416;
+
             posx = mirax + d * cos(theta);
             posz = miraz + d * sin(theta);
-            //Se calcula la distancia recorrida entre cada incremento de la cámara
-            DistRecorrida = sqrt((posx - antesX) * (posx - antesX) + (posz - antesZ) * (posz - antesZ));
-            //Se calcula la longitud recorrida a lo largo del perímetro de la circunferencia que forma la cámara
-            suma += DistRecorrida;
-            //Mediante la distancia recorrida, se calcula el ángulo formado con respecto el centro
-            angulo = (suma / d);
 
             //Cuando se llega a los 180º, cambia de turno y al volver a pulsar el espacio gira otra vez.
-            if (angulo >= 3.141592653789793)
+            if (theta == 0)
             {
-                cambionegro = !cambionegro;
+                estatico = TRUE;
                 rotar = FALSE;
-                angulo = 0;
-                suma = 0;
+                cambionegro = TRUE;
+            }
+
+            if (theta == 3.1416)
+            {
+                estatico = TRUE;
+                rotar = FALSE;
+                cambionegro = FALSE;
             }
         }
 
