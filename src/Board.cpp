@@ -64,34 +64,34 @@ Tile& Board::getTile(Punto2D pos)
 
 void Board::detectpieza(Punto2D esfera)
 {
+	if (esfera.z == 404 && esfera.x == 404){ //Des-apuntar todas las casillas
+		for (float i = 1; i < col + 1; i++) {
+			for (float j = 1; j < fil + 1; j++)
+			{
+					getTile({ i,j }).apunta(false);
+					return;
+			}
+		}
+	}
+
 	float m = 1000;
 	Punto2D s;
-	for (float i = 1; i < col + 1; i++) {
+	static Punto2D ns;
+	for (float i = 1; i < col + 1; i++) {//Buscar casilla más cercana a las coordenadas del raton para establecerla como apuntada
 		for (float j = 1; j < fil + 1; j++)
 		{
-			//std::cout <<getTile({ j,i }).esta_ocupado();
 			if (modulo(getTile({ i,j }).getCenter(), esfera) < m)
 			{
 				m = modulo(getTile({ i,j }).getCenter(), esfera);
-				
+				getTile(ns).apunta(false);//Desapunto la que fue apuntada previamente 
 				s.x = j;
 				s.z = i;
+				getTile(s).apunta(true);
+				ns = s;
 			}
 		}
 	}
 	
-	getTile(s).apunta(true);
-	
-
-	for (float i = 1; i < col + 1; i++) {
-		for (float j = 1; j < fil + 1; j++)
-		{
-			if(!(i == s.z && j == s.x))
-				getTile({i,j}).apunta(false);
-				
-
-		}
-	}
 
 }
 

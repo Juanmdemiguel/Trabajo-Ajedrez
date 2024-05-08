@@ -53,10 +53,10 @@ void Tile::setocupada(bool s)
 {
 	ocupada = s;
 }
-void Tile::getpiezapuntada(int boton)
+void Tile::setpiezapuntada(int boton, int state)
 {
 	//cout << ocupada;
-	if (apuntada == true && ocupada == true && boton == GLUT_LEFT_BUTTON)
+	if (apuntada == true && ocupada == true && boton == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
 	{
 		seleccionada = true;
 	}

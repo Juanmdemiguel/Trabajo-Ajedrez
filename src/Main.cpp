@@ -71,15 +71,7 @@ void OnDraw(void)
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	
-	
 	coord.Dibuja();
-	
-
-	
-
-	
-	//Botón música y empezar. Falta modificar el funcionamiento del sonido para que funcione correctamente e imlplementar cuadros
-
 
 	glEnd();
 	glEnable(GL_LIGHTING);
@@ -110,6 +102,7 @@ void mouseClick(int _button, int state, int _x, int _y)
 void mouseMove(int x, int y1) 
 {
 	// Acciones cuando el ratón se mueve
+	if (!coord.principal.getMenu())
 	coord.Mouse(x, y1);
 }
 

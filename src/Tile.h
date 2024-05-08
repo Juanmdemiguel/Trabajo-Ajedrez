@@ -27,7 +27,7 @@ public:
 	bool getocupada();
 	void setocupada(bool);
 	void apunta(bool);
-	void getpiezapuntada(int boton);
+	void setpiezapuntada(int boton, int state);
 	bool getseleccionada();
 
 	//Amigos

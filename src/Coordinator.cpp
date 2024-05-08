@@ -29,8 +29,9 @@ void Coordinator::Click(int _button, int state, int _x, int _y)
 				juego.musica(principal.getSonido(), music);
 
 		//Seleccion de la casilla
-		raton.seleccion(juego, _button);
+		raton.seleccion(juego, _button, state);
 	}
+	
 
 }
 
