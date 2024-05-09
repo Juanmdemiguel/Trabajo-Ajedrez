@@ -83,6 +83,8 @@ void OnDraw(void)
 void OnKeyboardDown(unsigned char key, int x_t, int y_t)
 {
 	coord.Teclado(key, x_t, y_t);
+	//float x1=x_t, y1=y_t;
+	//std::cout << x1 << ' ' << y1 << std::endl;
 
 	glutPostRedisplay();  //Poner siempre al final y no se pone nada más debajo. Dibuja otro frame
 }

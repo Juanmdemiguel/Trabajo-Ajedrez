@@ -1,11 +1,14 @@
 #pragma once
 #include "freeglut.h"
 #include "ETSIDI.h"
+#include "Comentario.h"
 
 class Menu
 {
 	bool menu = true, sonido = true;
 	bool boton{};
+	int Ventana = 0;
+	Comentario comentario1, comentario2, comentario3, comentario4;
 
 public:
 
