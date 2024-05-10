@@ -2,9 +2,10 @@
 
 #include "Comentario.h"
 
-void Comentario::dibujaComentario(bool sonido)
+void Comentario::dibujaComentario(bool BotonSonido, bool sonido)	//BotonSonido indica si comentario tiene naturaleza de botoón de sonido
+																	//sonido es el booleano de la música
 {
-	if (sonido) {
+	if (sonido||!BotonSonido) {
 		glEnable(GL_TEXTURE_2D);
 		glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/Cuadro.png").id);
 
@@ -25,7 +26,7 @@ void Comentario::dibujaComentario(bool sonido)
 	else
 	{
 		glEnable(GL_TEXTURE_2D);
-		glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/CuadroSin.png").id);
+		glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/CuadroSin.png").id);	//Tachado
 
 		glDisable(GL_LIGHTING);
 		glBegin(GL_POLYGON);
@@ -44,23 +45,41 @@ void Comentario::dibujaComentario(bool sonido)
 	dibujaTexto(0, 1);
 }
 
-void Comentario::dibujaTexto(int menu, int numCuad)
+void Comentario::dibujaTexto(int menu, int numCuad)	//menu es un entero que indica la pantalla del menú en la que se está
+													//numCuad indica qué comentario es   1  2
+													//									 3	4
 {
 	ETSIDI::setTextColor(1, 1, 1);
 	ETSIDI::setFont("fuentes/Bitwise.ttf", 16);
+
 	switch (menu)
 	{
-	case 0:
-		if (numCuad == 1) ETSIDI::printxy("SONIDO", p1.x,0, p1.z); //Le doy como referencia la esquina de abajo a la izqda
-		if (numCuad == 2) ETSIDI::printxy("TEMÁTICA", p1.x,0, p1.z);
-		if (numCuad == 3) ETSIDI::printxy("VISIÓN", p1.x, 0, p1.z);
-		if (numCuad == 4) ETSIDI::printxy("EMPEZAR", p1.x, 0, p1.z);
-		break;
-	case 1:
-		break;
-	case 2:
-		break;
-	case 3:
+	case 0:	//Menú inicial
+
+		switch (numCuad)
+		{
+		case 1: ETSIDI::printxy("SONIDO", p1.x, 0, p1.z); break; //Le doy como referencia la esquina de abajo a la izqda
+		case 2: ETSIDI::printxy("TEMÁTICA", p1.x, 0, p1.z); break;
+		case 3: ETSIDI::printxy("VISIÓN", p1.x, 0, p1.z); break;
+		case 4: ETSIDI::printxy("EMPEZAR", p1.x, 0, p1.z); break;
+		}
+		
+	case 1: //Menú TEMÁTICA
+
+		switch (numCuad)
+		{
+		case 1: ETSIDI::printxy("STAR WARS", p1.x, 0, p1.z); break; //Le doy como referencia la esquina de abajo a la izqda
+		case 2: ETSIDI::printxy(" ", p1.x, 0, p1.z); break;
+		case 3: ETSIDI::printxy(" ", p1.x, 0, p1.z); break;
+		case 4: ETSIDI::printxy("VOLVER", p1.x, 0, p1.z); break;
+		}
+	case 2: //Menú VISIÓN
+
+		switch (numCuad)
+		{
+		case 1: ETSIDI::printxy("2D", p1.x, 0, p1.z); break; //Le doy como referencia la esquina de abajo a la izqda
+		case 2: ETSIDI::printxy("3D", p1.x, 0, p1.z); break;
+		}
 		break;
 	}
 	

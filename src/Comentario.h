@@ -6,6 +6,7 @@ class Comentario
 {
 	Punto2D p1{};		//Esquina abajo izquierda
 	Punto2D p2{};		//Esquina superior derecha
+	bool BotonSonido{};	//Indica si es de sonido el botón para poder tachar el cuadro o no
 
 public:
 
@@ -16,7 +17,9 @@ public:
 	Punto2D getEsquinaIzqdaCuadro() { return p1; }
 	Punto2D getEsquinaDrchaCuadro() { return p2; }
 
-	void dibujaComentario(bool sonido);
+	void dibujaComentario(bool BotonSonido, bool sonido);
 	void dibujaTexto(int menu, int numCuad);
+	void setSound() { BotonSonido = true; }
+	bool getSound() { return BotonSonido; }
 };
 
