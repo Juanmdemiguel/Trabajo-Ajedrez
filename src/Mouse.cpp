@@ -48,8 +48,10 @@ void Mouse::movimiento(int x, int y1, Game& juego, Punto2D& esfera)
 		//Asocia coordenadas de pantalla con coordenadas de objetos con las matrices del sistema. 
 		gluUnProject(winX, winY, winZ, modelview, projection, viewport, &posZ, &posY, &posX);
 
+		setCoordenadas(posZ, posX);
+
 		// Seleccionar el punto en el plano x-z
-		//std::cout << "Punto seleccionado en el plano x-z: (" << posZ << ", 0, " << posX << ")" << std::endl;
+		std::cout << "Punto seleccionado en el plano x-z: (" << posZ << ", 0, " << posX << ")" << std::endl;
 		if (posX > -2 && posX < 32 && posZ > -2 && posZ < 26)
 		{
 			if (posX > 0 && posX < 30)

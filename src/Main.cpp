@@ -104,7 +104,6 @@ void mouseClick(int _button, int state, int _x, int _y)
 void mouseMove(int x, int y1) 
 {
 	// Acciones cuando el ratón se mueve
-	if (!coord.principal.getMenu())
 	coord.Mouse(x, y1);
 }
 
