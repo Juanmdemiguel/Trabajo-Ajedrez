@@ -10,27 +10,29 @@ void Coordinator::Dibuja()
 }
 
 void Coordinator::Click(int _button, int state, int _x, int _y)
-{
-	principal.clickBotonesMenu(_x, _y);
+{	
 
 	if (_button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
 		// Acciones cuando se hace clic con el botón izquierdo del ratón
-		principal.setBoton(false);
+
+		if (principal.getMenu())
+		{
+			if (principal.getBoton()) principal.setBoton(false); //Al hacer click, si estaba a true, se vuelve a poner a false
+
+			principal.clickBotonesMenu(_x, _y);
+			//principal.clickBotonesMenu2(_x, _y, principal.comentario1);
+			principal.getMenu() ? principal.musica(principal.getSonido()) : juego.musica(principal.getSonido(), music);
+		}
+		
+
+		if (_button == GLUT_LEFT_BUTTON) //Solo si se pulsa el botón izquierdo del ratón
+		{
+			//Seleccion de la casilla
+			raton.seleccion(juego, _button, state);
+		}
 	}
 
-	if (_button == GLUT_LEFT_BUTTON) //Solo si se pulsa el botón izquierdo del ratón
-	{
-		if ((_x > 33) && (_x < 151) && (_y > 488) && (_y < 557)) //Y se tienen las coordenadas del botón de sonido
-			if (principal.getMenu())
-				principal.musica(principal.getSonido());
-
-		if ((_x > 579) && (_x < 788) && (_y > 483) && (_y < 553))
-			if (!principal.getMenu())
-				juego.musica(principal.getSonido(), music);
-
-		//Seleccion de la casilla
-		raton.seleccion(juego, _button, state);
-	}
+	
 	
 
 }

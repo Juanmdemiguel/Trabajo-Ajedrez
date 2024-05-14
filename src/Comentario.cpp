@@ -50,7 +50,7 @@ void Comentario::dibujaTexto(int menu, int numCuad)	//menu es un entero que indi
 													//									 3	4
 {
 	ETSIDI::setTextColor(1, 1, 1);
-	ETSIDI::setFont("fuentes/Bitwise.ttf", 16);
+	ETSIDI::setFont("resources/fuentes/Bitwise.ttf", 16);
 
 	switch (menu)
 	{
