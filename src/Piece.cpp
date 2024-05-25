@@ -62,7 +62,7 @@ void piece::dibuja1Pieza(Punto2D posicion, Model modelo, TipoPieza pieza, Board&
 	
 		//Para el caso del caza
 	case TipoPieza::knight:
-		glScalef(1.0f, 1.0f, 1.0f);
+		glScalef(0.05f, 0.05f, 0.05f);
 
 		if (color == TRUE)
 		{
@@ -110,7 +110,8 @@ void piece::dibujaPiezas(Board& tablero)
 			//Dibujo de los caballos
 			if (j == 2 || j == col - 1)
 			{
-				this->dibuja1Pieza(tablero.getTile({ j,i }).getCenter(), Tie, TipoPieza::knight, tablero);
+				this->dibuja1Pieza(tablero.getTile({ j,i }).getCenter(), Knight, TipoPieza::knight, tablero);
+				this->dibuja1Pieza(tablero.getTile({ j,i }).getCenter(), Bishop, TipoPieza::knight, tablero);
 			}
 			//Dibujo del arzobispo
 			if (j == 3)

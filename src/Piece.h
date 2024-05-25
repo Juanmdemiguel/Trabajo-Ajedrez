@@ -14,11 +14,12 @@ class piece
 //Se define el color de las piezas. 0 para negro y 1 para blanco.
 	bool color;
 	Model Pawn;
-	Model Tie;
+	Model Bishop;
+	Model Knight;
 public:
 
 //Constructor para inicializar los distintos modelos
-	piece() : Pawn("resources/model/Pawn.obj"), Tie("resources/model/tie_UV.obj") {}
+	piece() : Pawn("resources/model/Pawn.obj"), Bishop("resources/model/Bishop.obj"), Knight("resources/model/Knight.obj") {}
 	//Problemas con: arturito, citripio, darthvader, destroyer, gonk, jawa, r5d4, Sandtrooper, vadertie en línea 1894
 	//Con BB8 baja rendimiento
 //Métodos
