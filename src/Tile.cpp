@@ -8,7 +8,7 @@ void Tile::Dibuja(int i, int j)
 
 	apuntada ? 
 		(glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/Arturito.png").id)) :
-		(color ? glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/WhiteTileSW2.png").id) : glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/BlackTileSW2.png").id));
+		(color ? glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/WhiteTileSW.png").id) : glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/BlackTileSW.png").id));
 	
 	glDisable(GL_LIGHTING);
 	glBegin(GL_POLYGON);
