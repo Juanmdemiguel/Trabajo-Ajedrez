@@ -49,7 +49,7 @@ void Coordinator::Inicializa()
 
 void Coordinator::Mouse(int x, int y1)
 {
-	raton.movimiento(x, y1, juego, esfera);
+	raton.movimiento(x, y1, juego, esfera, principal.getMenu());
 }
 
 void Coordinator::Teclado(unsigned char key, int x_t, int y_t)

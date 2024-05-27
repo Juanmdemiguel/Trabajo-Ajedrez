@@ -6,7 +6,7 @@ class Mouse
 	//int x, y, click_izq;
 	double z{}, x{};
 public:
-	void movimiento(int x, int y1, Game& juego, Punto2D& esfera);
+	void movimiento(int x, int y1, Game& juego, Punto2D& esfera, bool menu);
 	void seleccion(Game& juego, int boton, int state);
 	void setCoordenadas(double x1, double y1)
 	{

@@ -4,22 +4,20 @@
 
 class Comentario
 {
-	Punto2D p1{};		//Esquina abajo izquierda
-	Punto2D p2{};		//Esquina superior derecha
+	Punto2D p1{};		//Esquina superior derecha
 	bool BotonSonido{};	//Indica si es de sonido el botón para poder tachar el cuadro o no
 
 public:
 
-	void setPosicionCuadro(Punto2D punto1, Punto2D punto2){
-		p1 = punto1;
-		p2 = punto2;
-	}
-	Punto2D getEsquinaIzqdaCuadro() { return p1; }
-	Punto2D getEsquinaDrchaCuadro() { return p2; }
+	void setEsquina(Punto2D punto) { p1 = punto; }
 
-	void dibujaComentario(bool BotonSonido, bool sonido);
-	void dibujaTexto(int menu, int numCuad);
+	Punto2D getEsquinaDrchaCuadro() { return p1; }
+
+	void dibuja(bool BotonSonido, bool sonido, int ventana, int n_com);
+	void creaComentario(bool sonido, int ventana, int n_com);
+	//void dibujaTexto(int menu, int numCuad);
 	void setSound() { BotonSonido = true; }
 	bool getSound() { return BotonSonido; }
+	void cargaTextura(int ventana, int n_com, bool sonido);
 };
 

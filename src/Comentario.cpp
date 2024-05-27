@@ -2,85 +2,57 @@
 
 #include "Comentario.h"
 
-void Comentario::dibujaComentario(bool BotonSonido, bool sonido)	//BotonSonido indica si comentario tiene naturaleza de botoón de sonido
-																	//sonido es el booleano de la música
+void Comentario::dibuja(bool BotonSonido, bool sonido, int ventana, int n_com)
 {
-	if (sonido||!BotonSonido) {
-		glEnable(GL_TEXTURE_2D);
-		glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/Cuadro.png").id);
-
-		glDisable(GL_LIGHTING);
-		glBegin(GL_POLYGON);
-		glColor3f(1, 1, 1);
-
-		glTexCoord2d(0, 1);    glVertex3f(p1.x, 0.01, p1.z);
-		glTexCoord2d(1, 1);    glVertex3f(p1.x, 0.01, p2.z); //bien
-		glTexCoord2d(1, 0);    glVertex3f(p2.x, 0.01, p2.z);
-		glTexCoord2d(0, 0);    glVertex3f(p2.x, 0.01, p1.z);
-
-		glEnd();
-
-		glEnable(GL_LIGHTING);
-		glDisable(GL_TEXTURE_2D);
-	}
-	else
-	{
-		glEnable(GL_TEXTURE_2D);
-		glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/CuadroSin.png").id);	//Tachado
-
-		glDisable(GL_LIGHTING);
-		glBegin(GL_POLYGON);
-		glColor3f(1, 1, 1);
-
-		glTexCoord2d(0, 1);    glVertex3f(p1.x, 0.01, p1.z);
-		glTexCoord2d(1, 1);    glVertex3f(p1.x, 0.01, p2.z); //bien
-		glTexCoord2d(1, 0);    glVertex3f(p2.x, 0.01, p2.z);
-		glTexCoord2d(0, 0);    glVertex3f(p2.x, 0.01, p1.z);
-
-		glEnd();
-
-		glEnable(GL_LIGHTING);
-		glDisable(GL_TEXTURE_2D);
-	}
-	dibujaTexto(0, 1);
+	creaComentario(sonido, ventana, n_com);
 }
 
-void Comentario::dibujaTexto(int menu, int numCuad)	//menu es un entero que indica la pantalla del menú en la que se está
-													//numCuad indica qué comentario es   1  2
-													//									 3	4
+void Comentario::creaComentario(bool sonido, int ventana, int n_com)
 {
-	ETSIDI::setTextColor(1, 1, 1);
-	ETSIDI::setFont("resources/fuentes/Bitwise.ttf", 16);
+	glEnable(GL_TEXTURE_2D);
 
-	switch (menu)
+	cargaTextura(ventana, n_com, sonido);
+
+	glDisable(GL_LIGHTING);
+	glBegin(GL_POLYGON);
+	glColor3f(1, 1, 1);
+
+	glTexCoord2d(0, 0);    glVertex3f(p1.z, p1.x, 0.01);
+	glTexCoord2d(1, 0);    glVertex3f(p1.z, p1.x - 4, 0.01);
+	glTexCoord2d(1, 1);    glVertex3f(p1.z - 1.5, p1.x - 4, 0.01);
+	glTexCoord2d(0, 1);    glVertex3f(p1.z - 1.5, p1.x, 0.01);
+
+	glEnd();
+
+	glEnable(GL_LIGHTING);
+	glDisable(GL_TEXTURE_2D);
+}
+
+void Comentario::cargaTextura(int ventana, int n_com, bool sonido)
+{
+	switch (ventana)
 	{
-	case 0:	//Menú inicial
-
-		switch (numCuad)
+	case 0:		//Inicio
+		switch (n_com)
 		{
-		case 1: ETSIDI::printxy("SONIDO", p1.x, 0, p1.z); break; //Le doy como referencia la esquina de abajo a la izqda
-		case 2: ETSIDI::printxy("TEMÁTICA", p1.x, 0, p1.z); break;
-		case 3: ETSIDI::printxy("VISIÓN", p1.x, 0, p1.z); break;
-		case 4: ETSIDI::printxy("EMPEZAR", p1.x, 0, p1.z); break;
+		case 1: sonido ? glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/sonido.png").id) : glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/sinsonido.png").id); break;
+		case 2:glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/tematica.png").id); break;
+		case 3:glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/vision.png").id); break;
+		case 4:glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/empezar.png").id); break;
 		}
-		
-	case 1: //Menú TEMÁTICA
-
-		switch (numCuad)
+	case 1:	//Temática	
+		switch (n_com)
 		{
-		case 1: ETSIDI::printxy("STAR WARS", p1.x, 0, p1.z); break; //Le doy como referencia la esquina de abajo a la izqda
-		case 2: ETSIDI::printxy(" ", p1.x, 0, p1.z); break;
-		case 3: ETSIDI::printxy(" ", p1.x, 0, p1.z); break;
-		case 4: ETSIDI::printxy("VOLVER", p1.x, 0, p1.z); break;
+		case 1:glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/Cuadro.png").id); break;
+		case 2:glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/Cuadro.png").id); break;
+		case 3:glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/Cuadro.png").id); break;
+		case 4:glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/Cuadro.png").id); break;
 		}
-	case 2: //Menú VISIÓN
-
-		switch (numCuad)
+	case 2: //Visión
+		switch (n_com)
 		{
-		case 1: ETSIDI::printxy("2D", p1.x, 0, p1.z); break; //Le doy como referencia la esquina de abajo a la izqda
-		case 2: ETSIDI::printxy("3D", p1.x, 0, p1.z); break;
+		case 1:glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/2D.png").id); break;
+		case 2:glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/3D.png").id); break;
 		}
-		break;
 	}
-	
 }

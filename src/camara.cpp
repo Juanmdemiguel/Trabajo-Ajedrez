@@ -16,8 +16,8 @@ void Camara::dibuja(Menu& principal)
 {
     if (principal.getMenu())
     {
-        gluLookAt(6, 16.0, 8,  // posicion del ojo
-            6, 0.0, 8,      // hacia que punto mira  (0,0,0)
+        gluLookAt(6, 8, 16,  // posicion del ojo
+            6, 8, 0,      // hacia que punto mira  (0,0,0)
            1.0, 0.0, 0.0);      // definimos hacia arriba (eje Y)
     }
     else

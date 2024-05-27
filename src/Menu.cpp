@@ -2,104 +2,70 @@
 
 void Menu::iniciaMenu(bool menu, bool sonido)
 {
-	//setVentana(2);  //Probar menú de VISIÓN
-
 	if (comienzo) {
 		musica(sonido);
 		comienzo = false;
 	}
 
-	if (Ventana == 0 || Ventana == 1) //Menú inicial o menú TEMÁTICA
+	//Para probar más ventanas, con el inicializador
+
+	if (ventana == 0 || ventana == 1) //Menú inicial o menú TEMÁTICA
 	{
-		//Cuadros de arriba
-		comentario1.setPosicionCuadro({6,2.5},{10,4});			//Izqda
-		if(Ventana==0) comentario1.setSound();
-		comentario1.dibujaComentario(comentario1.getSound(), sonido);
-	
-		comentario2.setPosicionCuadro({ 11,2.5 }, { 15, 4 });	//Drcha
-		comentario2.dibujaComentario(comentario2.getSound(),sonido);
+		dibujaFondo();
 
-		ETSIDI::setTextColor(1, 1, 0);
-		ETSIDI::setFont("resources/fuentes/Bitwise.ttf", 16);
-		glEnable(GL_TEXTURE_2D);
-		glDisable(GL_LIGHTING);
-		glPushMatrix();
-		glRotated(90, 1, 0, 1);
-		ETSIDI::printxy("SONIDO", 8, 0.02, 5);
-		glPopMatrix();
-		//Cuadros de abajo
-		comentario3.setPosicionCuadro({ 6,0.5 }, { 10,2 });		//Izqda
-		comentario3.dibujaComentario(comentario3.getSound(),sonido);
-
-		comentario4.setPosicionCuadro({ 11,0.5 }, { 15,2 });	//Drcha
-		comentario4.dibujaComentario(comentario4.getSound(),sonido);
-
-		ETSIDI::setTextColor(1, 1, 0);
-		ETSIDI::setFont("resources/fuentes/Bitwise.ttf", 16);
-		ETSIDI::printxy("SONIDO", 10, 5, 8);
-		
-		glEnable(GL_TEXTURE_2D);
-
-		//setTematica(1); //Prueba funcionamiento switch case del tema de fondo
-		Tema(Tematica);
-
-		glDisable(GL_LIGHTING);
-		glBegin(GL_POLYGON);
-		glColor3f(1, 1, 1);
-		
-		glTexCoord2d(0, 1);    glVertex3f(0, 0, 0);
-		glTexCoord2d(1, 1);    glVertex3f(0, 0, 16); //bien
-		glTexCoord2d(1, 0);    glVertex3f(12, 0, 16);
-		glTexCoord2d(0, 0);    glVertex3f(12, 0, 0);
-		glEnd();
+		comentario1.setEsquina({ 5, 10 }); //ArI
+		comentario1.dibuja(true, sonido, ventana, 1);
+		comentario2.setEsquina({ 5,5 }); //ArD
+		comentario2.dibuja(true, sonido, ventana, 2);
+		comentario3.setEsquina({ 3, 10 }); //AbI
+		comentario3.dibuja(true, sonido, ventana, 3);
+		comentario4.setEsquina({ 3,5 }); //AbD
+		comentario4.dibuja(true, sonido, ventana, 4);
 
 		glEnable(GL_LIGHTING);
 		glDisable(GL_TEXTURE_2D);
-		
+
 		glEnable(GL_TEXTURE_2D);
-		
-		
+
 	}
 	else
 	{
-		//Cuadro de arriba
-		comentario1.setPosicionCuadro({ 8,6.5 }, { 12,8 });			//2D o 3D
-		comentario1.dibujaComentario(comentario1.getSound(), sonido);
+		dibujaFondo();
 
-		comentario2.setPosicionCuadro({ 8,4 }, { 12, 5.5 });	//VOLVER
-		comentario2.dibujaComentario(comentario2.getSound(), sonido);
-
-		/*
-		ETSIDI::setTextColor(1, 1, 0);
-		ETSIDI::setFont("resources/fuentes/Bitwise.ttf", 16);
-		ETSIDI::printxy("SONIDO", 10, 0, 10);
-		*/
-
-		glEnable(GL_TEXTURE_2D);
-
-		
-		Tema(Tematica);
-		
-		glDisable(GL_LIGHTING);
-		glBegin(GL_POLYGON);
-		glColor3f(1, 1, 1);
-
-		glTexCoord2d(0, 1);    glVertex3f(12, 0, 0);
-		glTexCoord2d(1, 1);    glVertex3f(12, 0, 16); //bien
-		glTexCoord2d(1, 0);    glVertex3f(0, 0, 16);
-		glTexCoord2d(0, 0);    glVertex3f(0, 0, 0);
-		glEnd();
+		comentario1.setEsquina({ 8, 8 }); //Ar
+		comentario1.dibuja(true, sonido, ventana, 1);
+		comentario2.setEsquina({ 5,8 }); //Ab
+		comentario2.dibuja(true, sonido, ventana, 2);
 
 		glEnable(GL_LIGHTING);
 		glDisable(GL_TEXTURE_2D);
 
 		glEnable(GL_TEXTURE_2D);
 	}
-	
+
+}
+
+
+void Menu::dibujaFondo()
+{
+	glEnable(GL_TEXTURE_2D);
+
+	Tema();
+
+	glDisable(GL_LIGHTING);
+	glBegin(GL_POLYGON);
+	glColor3f(1, 1, 1);
+
+	glTexCoord2d(1, 1);    glVertex3f(0, 0, -0.1);
+	glTexCoord2d(0, 1);    glVertex3f(0, 16, -0.1);
+	glTexCoord2d(0, 0);    glVertex3f(12, 16, -0.1);
+	glTexCoord2d(1, 0);    glVertex3f(12, 0, -0.1);
+
+	glEnd();
 }
 
 void Menu::clickBotonesMenu(double x, double y) // Función primitiva, futuras iteraciones mirar creación de cuadros de texto
-												// sobre la imagen para tener las coordenadas según cuadro creado
+// sobre la imagen para tener las coordenadas según cuadro creado
 {
 	if ((x > 33) && (x < 151) && (y > 488) && (y < 557) && (getBoton() == false))
 	{
@@ -111,26 +77,15 @@ void Menu::clickBotonesMenu(double x, double y) // Función primitiva, futuras it
 		setMenu(false);
 }
 
-void Menu::clickBotonesMenu2(double x, double z, Comentario comentario) // Intento de desarrollo de los nubos cuadros de texto
-{
-	if ((getVentana() == 0) && (x > comentario.getEsquinaIzqdaCuadro().x) && (x < comentario.getEsquinaDrchaCuadro().x) && (z > comentario.getEsquinaIzqdaCuadro().z) && (z < comentario.getEsquinaDrchaCuadro().z) && (getBoton() == false))
-	{
-		setSonido(!getSonido());
-		setBoton(true);
-	}
-
-	if ((getVentana() == 0) && (x > 579) && (x < 788) && (z > 483) && (z < 553))
-		setMenu(false);
-}
 
 void Menu::musica(bool sonido)
 {
 	(sonido) ? ETSIDI::playMusica("resources/sounds/menu.mp3", true) : ETSIDI::stopMusica();
 }
 
-void Menu::Tema(int tema)
+void Menu::Tema()
 {
-	switch (tema)
+	switch (tematica)
 	{
 	case 0: glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/MenuPpal.png").id); break;
 	case 1: glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/Arturito.png").id); break;
