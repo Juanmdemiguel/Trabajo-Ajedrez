@@ -16,7 +16,6 @@ public:
 	Board& getboard();
 	void dibujaJuego();
 	void musica(bool sonido, char tema[]);
-	void inicializa();
 
 };
 

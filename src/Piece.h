@@ -16,12 +16,16 @@ class piece
 	Model Pawn;
 	Model Bishop;
 	Model Knight;
+	Model Rook;
+	Model King;
+	Model Queen;
 public:
 
 //Constructor para inicializar los distintos modelos
-	piece() : Pawn("resources/model/Pawn.obj"), Bishop("resources/model/Bishop.obj"), Knight("resources/model/Knight.obj") {}
-	//Problemas con: arturito, citripio, darthvader, destroyer, gonk, jawa, r5d4, Sandtrooper, vadertie en línea 1894
-	//Con BB8 baja rendimiento
+	piece() : Pawn("resources/model/Pawn.obj"), Bishop("resources/model/Bishop.obj"), 
+			Knight("resources/model/Knight.obj"), Rook("resources/model/Rook.obj"), 
+	 King("resources/model/King.obj"), Queen("resources/model/Queen.obj") {}
+	
 //Métodos
 	void dibuja1Pieza(Punto2D posicion, Model modelo, TipoPieza pieza, Board& tablero);
 	void elige(TipoPieza p, Punto2D posicion);

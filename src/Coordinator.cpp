@@ -45,8 +45,6 @@ void Coordinator::Inicializa()
 	char cancion[] = "resources/sounds/marchav2.mp3";
 	//Fin de switch
 	strcpy_s(music, cancion);
-
-	juego.inicializa();
 }
 
 void Coordinator::Mouse(int x, int y1)

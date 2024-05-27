@@ -5,10 +5,6 @@ Board& Game::getboard()
 	return board;
 }
 
-void Game::inicializa()
-{
-	board.initPath();
-}
 
 void Game::dibujaJuego() {	//Funcion dibujaJuego provisional, se añade a clase Juego/Game cuando se desarrolle
 	//Dibuja el tablero

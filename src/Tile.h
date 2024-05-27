@@ -21,7 +21,7 @@ class Tile
 public:
 
 //Métodos
-	void Dibuja(int i, int j, char blancas[], char negras[], char selec[]); //Dibuja la casilla. Recibe las coordenadas como argumento
+	void Dibuja(int i, int j); //Dibuja la casilla. Recibe las coordenadas como argumento
 	void setPos(int col, int row);
 	Punto2D getCenter();
 	bool getocupada();

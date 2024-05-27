@@ -14,20 +14,6 @@ Board::Board()
 	}
 }
 
-//Métodos de Board
-void Board::initPath()
-{
-	//Aqui iría un switch de los distintos modos de juego
-	char negras[] = "resources/images/BlackTileSW2.png";
-	char blancas[] = "resources/images/WhiteTileSW2.png";
-	char seleccionada[] = "resources/images/Arturito.png";
-	//Aqui se saldría del switch
-
-	strcpy_s(WhiteTile, blancas);
-	strcpy_s(BlackTile, negras);
-	strcpy_s(SelecTile, seleccionada);
-}
-
 void Board::dibuja()
 {
 	//Dibujo de la base del tablero
@@ -48,7 +34,7 @@ void Board::dibuja()
 	//Dibujo superpuesto de las casillas
     for (int i = 0; i < fil; i++) {
 		for (int j = 0; j < col; j++) {
-			board[i][j].Dibuja(i, j, WhiteTile, BlackTile, SelecTile);
+			board[i][j].Dibuja(i, j);
 		}
 			
     }

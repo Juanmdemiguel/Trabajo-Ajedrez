@@ -1,14 +1,14 @@
 #include "Tile.h"
 
 
-void Tile::Dibuja(int i, int j, char blancas[], char negras[], char selec[])
+void Tile::Dibuja(int i, int j)
 {
 
 	glEnable(GL_TEXTURE_2D);
 
 	apuntada ? 
-		(glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture(selec).id)) : 
-		(color ? glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture(blancas).id) : glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture(negras).id));
+		(glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/Arturito.png").id)) :
+		(color ? glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/WhiteTileSW2.png").id) : glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/BlackTileSW2.png").id));
 	
 	glDisable(GL_LIGHTING);
 	glBegin(GL_POLYGON);
