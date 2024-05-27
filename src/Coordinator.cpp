@@ -3,7 +3,7 @@
 void Coordinator::Dibuja()
 {
 	camara.dibuja(principal);
-	principal.getMenu() ? principal.iniciaMenu(principal.getMenu(), principal.getSonido()) : juego.dibujaJuego();
+	principal.getMenu() ? principal.iniciaMenu() : juego.dibujaJuego();
 	//El operador ternario llama a iniciaMenu si el booleano menu es true, si no, dibuja el juego
 
 	drawEsferadePruebas(esfera.x, esfera.z);
@@ -21,7 +21,7 @@ void Coordinator::Click(int _button, int state, int _x, int _y)
 
 			principal.clickBotonesMenu(_x, _y);
 			//principal.clickBotonesMenu2(_x, _y, principal.comentario1);
-			principal.getMenu() ? principal.musica(principal.getSonido()) : juego.musica(principal.getSonido(), music);
+			principal.getMenu() ? principal.musica() : juego.musica(principal.getSonido(), music);
 		}
 		
 

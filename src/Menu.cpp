@@ -1,9 +1,9 @@
 #include "Menu.h"
 
-void Menu::iniciaMenu(bool menu, bool sonido)
+void Menu::iniciaMenu()
 {
 	if (comienzo) {
-		musica(sonido);
+		musica();
 		comienzo = false;
 	}
 
@@ -25,17 +25,16 @@ void Menu::iniciaMenu(bool menu, bool sonido)
 		glEnable(GL_LIGHTING);
 		glDisable(GL_TEXTURE_2D);
 
-		glEnable(GL_TEXTURE_2D);
 
 	}
 	else
 	{
 		dibujaFondo();
 
-		comentario1.setEsquina({ 8, 8 }); //Ar
-		comentario1.dibuja(true, sonido, ventana, 1);
-		comentario2.setEsquina({ 5,8 }); //Ab
-		comentario2.dibuja(true, sonido, ventana, 2);
+		comentario5.setEsquina({ 8, 8 }); //Ar
+		comentario5.dibuja(true, sonido, ventana, 1);
+		comentario6.setEsquina({ 5,8 }); //Ab
+		comentario6.dibuja(true, sonido, ventana, 2);
 
 		glEnable(GL_LIGHTING);
 		glDisable(GL_TEXTURE_2D);
@@ -62,6 +61,8 @@ void Menu::dibujaFondo()
 	glTexCoord2d(1, 0);    glVertex3f(12, 0, -0.1);
 
 	glEnd();
+	glEnable(GL_LIGHTING);
+	glDisable(GL_TEXTURE_2D);
 }
 
 void Menu::clickBotonesMenu(double x, double y) // Función primitiva, futuras iteraciones mirar creación de cuadros de texto
@@ -78,7 +79,7 @@ void Menu::clickBotonesMenu(double x, double y) // Función primitiva, futuras it
 }
 
 
-void Menu::musica(bool sonido)
+void Menu::musica()
 {
 	(sonido) ? ETSIDI::playMusica("resources/sounds/menu.mp3", true) : ETSIDI::stopMusica();
 }

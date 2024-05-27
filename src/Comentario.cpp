@@ -40,6 +40,7 @@ void Comentario::cargaTextura(int ventana, int n_com, bool sonido)
 		case 3:glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/vision.png").id); break;
 		case 4:glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/empezar.png").id); break;
 		}
+		break;
 	case 1:	//Temática	
 		switch (n_com)
 		{
@@ -48,11 +49,13 @@ void Comentario::cargaTextura(int ventana, int n_com, bool sonido)
 		case 3:glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/Cuadro.png").id); break;
 		case 4:glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/Cuadro.png").id); break;
 		}
+		break;
 	case 2: //Visión
 		switch (n_com)
 		{
 		case 1:glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/2D.png").id); break;
 		case 2:glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/3D.png").id); break;
 		}
+		break;
 	}
 }

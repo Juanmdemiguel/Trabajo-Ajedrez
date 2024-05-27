@@ -28,10 +28,10 @@ public:
 	void setBoton(bool valor) { boton = valor; }
 	void setVentana(int valor) { Ventana = valor; }
 
-	void iniciaMenu(bool menu, bool sonido);
+	void iniciaMenu();
 	void clickBotonesMenu(double x, double y);
 	void clickBotonesMenu2(double x, double z, Comentario comentario);
-	void musica(bool sonido);
+	void musica();
 
 	void Tema();
 	friend class Coordinator;
