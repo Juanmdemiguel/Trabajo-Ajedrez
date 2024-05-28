@@ -10,29 +10,25 @@
 class Tile
 {
 	bool color;
-	bool ocupada = false;
-	bool seleccionada = false;
-	bool apuntada = false;
-	bool posible = false;
-	int tam = square;
-	Punto2D posicion;
+	bool ocupada = false; //informa si hay una pieza encima
+	bool apuntada = false; //informa si el ratón la está apuntando
+	bool posible = false; //informa si es un posible movimiento de una pieza
 
+	int tam = square;
+    Punto2D posicion;
 
 public:
-
 //Métodos
 	void Dibuja(int i, int j); //Dibuja la casilla. Recibe las coordenadas como argumento
-	void setPos(int col, int row);
-	Punto2D getCenter();
+	void setPos(const int & col, const int & row);
+	Punto2D getCenter(); 
+
 	bool getocupada();
-	void setocupada(bool);
-	void apunta(bool);
-	void setpiezapuntada(int boton, int state);
-	bool getseleccionada();
+	void setocupada(const bool&);
+	void apunta(const bool &);
+
 
 	//Amigos
-	friend class Board;
-	friend class Game;
-	friend class Piece;
+	friend class Board; //Solo esta para el movimiento diagonal/horizontal QUITAR CUANDO SE PASE A PIEZA
 };
 

@@ -18,14 +18,13 @@ void Tile::Dibuja(int i, int j)
 	glTexCoord2d(1, 1); glVertex3d(i * tam, 0.01, tam * (j + 1));
 	glTexCoord2d(1, 0); glVertex3d(tam * (i + 1), 0.01, tam * (j + 1));
 	glTexCoord2d(0, 0); glVertex3d(tam * (i + 1), 0.01, j * tam);
-
 	glEnd();
 
 	glEnable(GL_LIGHTING);
 	glDisable(GL_TEXTURE_2D);
 }
 
-void Tile::setPos(int col, int row)
+void Tile::setPos(const int& col, const int& row)
 {
 	this->posicion = { (double)col,(double)row };
 }
@@ -44,28 +43,14 @@ bool Tile::getocupada()
 	return ocupada;
 }
 
-void Tile::apunta(bool s)
+void Tile::apunta(const bool& s)
 {
 	apuntada = s;
 }
 
-void Tile::setocupada(bool s)
+void Tile::setocupada(const bool& s)
 {
 	ocupada = s;
 }
-void Tile::setpiezapuntada(int boton, int state)
-{
-	//cout << ocupada;
-	if (apuntada == true && ocupada == true && boton == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
-	{
-		seleccionada = true;
-	}
-	else
-		seleccionada = false;
 
-}
-bool Tile::getseleccionada()
-{
-	return seleccionada;
-}
 

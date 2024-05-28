@@ -1,5 +1,5 @@
 #include "Mouse.h"
-
+#define square 3
 
 
 void Mouse::movimiento(int x, int y1, Game& juego, Punto2D& esfera, bool menu)
@@ -101,14 +101,11 @@ void Mouse::movimiento(int x, int y1, Game& juego, Punto2D& esfera, bool menu)
 			juego.getboard().detectpieza(esfera);
 	}
 }
+
 void Mouse::seleccion(Game& juego, int boton, int state)
 {
-	for (float i = 1; i < col + 1; i++) {
-		for (float j = 1; j < fil + 1; j++)
-		{
-			juego.getboard().getTile({ i,j }).setpiezapuntada(boton, state);
-			if (juego.getboard().getTile({ i,j }).getseleccionada() == true)
-				cout << i << " " << j << endl;
-		}
-	}
+	//Se divide la coordenada entre el tamaño de la casilla
+	//Se suma uno para establecer el origenen (1,1)
+	if ( boton == GLUT_LEFT_BUTTON && state == GLUT_DOWN) 
+		cout << (int)z/square + 1 << " " << (int)x/square + 1 << endl; 
 }

@@ -10,15 +10,17 @@ class piece
 //Se empiezan definiendo las piezas en una enumeración. Más tarde se cambiará.
 	enum class TipoPieza {pawn,king,queen,bishop,rook,knight,cancellor,archbishop};
 	Punto2D posicion;
-	//Tile casilla;
+
 //Se define el color de las piezas. 0 para negro y 1 para blanco.
 	bool color;
+
 	Model Pawn;
 	Model Bishop;
 	Model Knight;
 	Model Rook;
 	Model King;
 	Model Queen;
+
 public:
 
 //Constructor para inicializar los distintos modelos
