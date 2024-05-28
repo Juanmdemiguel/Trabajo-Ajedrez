@@ -23,8 +23,10 @@ void Coordinator::Click(int _button, int state, int _x, int _y)
 
 			principal.clickBotonesMenu();
 			
-			principal.getMenu() ? principal.musica() : juego.musica(principal.getSonido(), music);
+			if ((raton.getCoordenadaZ() > (5 - 1.5)) && (raton.getCoordenadaZ() < 5) && (raton.getCoordenadaX() > (10 - 4)) && (raton.getCoordenadaX() < 10) && principal.ventana == 0)
+				principal.musica();
 		}
+		if(!principal.getMenu()) juego.musica(principal.getSonido(), music);
 		
 
 		if (_button == GLUT_LEFT_BUTTON) //Solo si se pulsa el botón izquierdo del ratón

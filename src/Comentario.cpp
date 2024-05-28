@@ -2,7 +2,7 @@
 
 #include "Comentario.h"
 
-void Comentario::dibuja(bool BotonSonido, bool sonido, int ventana, int n_com)
+void Comentario::dibuja(bool sonido, int ventana, int n_com)
 {
 	creaComentario(sonido, ventana, n_com);
 }
@@ -37,7 +37,7 @@ void Comentario::cargaTextura(int ventana, int n_com, bool sonido)
 		{
 		case 1: sonido ? glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/sonido.png").id) : glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/sinsonido.png").id); break;
 		case 2:glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/tematica.png").id); break;
-		case 3:glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/vision.png").id); break;
+		case 3:glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/vision3.png").id); break;
 		case 4:glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/empezar.png").id); break;
 		}
 		break;

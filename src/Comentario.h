@@ -13,7 +13,7 @@ public:
 
 	Punto2D getEsquinaDrchaCuadro() { return p1; }
 
-	void dibuja(bool BotonSonido, bool sonido, int ventana, int n_com);
+	void dibuja( bool sonido, int ventana, int n_com);
 	void creaComentario(bool sonido, int ventana, int n_com);
 	//void dibujaTexto(int menu, int numCuad);
 	void setSound() { BotonSonido = true; }
