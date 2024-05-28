@@ -15,5 +15,6 @@ public:
 	}
 	double getCoordenadaZ() {return z;}
 	double getCoordenadaX() { return x;}
+	friend class Menu;
 };
 

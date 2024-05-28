@@ -15,12 +15,14 @@ void Coordinator::Click(int _button, int state, int _x, int _y)
 	if (_button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
 		// Acciones cuando se hace clic con el botón izquierdo del ratón
 
+		principal.setCoord({ raton.getCoordenadaX(), raton.getCoordenadaZ() }); //Pasar coordenadas click al menú
+
 		if (principal.getMenu())
 		{
 			if (principal.getBoton()) principal.setBoton(false); //Al hacer click, si estaba a true, se vuelve a poner a false
 
-			principal.clickBotonesMenu(_x, _y);
-			//principal.clickBotonesMenu2(_x, _y, principal.comentario1);
+			principal.clickBotonesMenu();
+			
 			principal.getMenu() ? principal.musica() : juego.musica(principal.getSonido(), music);
 		}
 		
