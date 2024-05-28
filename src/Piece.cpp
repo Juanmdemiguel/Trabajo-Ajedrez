@@ -1,88 +1,26 @@
 #include "Piece.h"
 
-void piece::elige(TipoPieza p, Punto2D posicion)
-{
-	int i{}, movimientos{};
-	switch(p)
-	{
-	case TipoPieza::pawn:
-		posicion.x += square;
-		
-		break;
-	case TipoPieza::king:
-		posicion.x += square;
-		posicion.z += square;
-		posicion.x -= square;
-		posicion.z -= square;
-		break;
-	case TipoPieza::queen:
-		
-		break;
-	case TipoPieza::bishop:
-		posicion.x += square*i;
-		posicion.z += square*i;
-		posicion.x -= square*i;
-		posicion.z -= square*i;
-		break;
-	case TipoPieza::rook:
-		
-		break;
-	case TipoPieza::knight:
-		
-		break;
-	case TipoPieza::cancellor:
-		
-		break;
-	case TipoPieza::archbishop:
-		
-		break;
-	}
-}
-
-
-void piece::dibuja1Pieza(Punto2D posicion, Model modelo, TipoPieza pieza, Board& tablero)
+void piece::dibuja1Pieza(Board& tablero)
 {
 	glPushMatrix();
 	glTranslatef(posicion.z, 0.0, posicion.x);
 	glScalef(0.05f, 0.05f, 0.05f);
 
 	glRotatef(-90, 90.0f, 0.0f, 1.0f);
+
 	//Como cada modelo es distinto, la función scale y rotate dependerá de cada uno. La posición siempre será la misma
-	switch (pieza)
-	{
-		//Para el caso del peón
-	case TipoPieza::pawn:
-		
+	if (color == TRUE)
+		glColor3ub(15, 15, 15);
+	else
+		glColor3ub(5, 5, 5);
 
-
-		if (color == TRUE)
-			glColor3ub(15, 15, 15);
-		else
-			glColor3ub(5, 5, 5);
-
-		break;
-	
-		//Para el caso del caza
-	case TipoPieza::knight:
-	//	glScalef(0.05f, 0.05f, 0.05f);
-
-		if (color == TRUE)
-		{
-			glColor3ub(15, 15, 15);
-		}
-		else
-		{
-			//Cuando es negro, tiene que mirar hacia el lado contrario FALTA
-			glColor3ub(5, 5, 5);
-		}
-		break;
-	}
 	modelo.Draw();
 	glPopMatrix();
-	//glColor3f(0, 0, 0);
-
 }
 
+
+//Esto se hace en lista piezas
+/*
 void piece::dibujaPiezas(Board& tablero)
 {
 	//Dibujo de los peones
@@ -142,3 +80,4 @@ void piece::dibujaPiezas(Board& tablero)
 		}
 	}
 }
+*/
