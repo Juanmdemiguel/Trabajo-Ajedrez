@@ -16,6 +16,8 @@ private:
     int getInt(std::string input);
 public:
     Model(std::string objFilePath);
+    Model() = default;
+
     ~Model();
     void Draw();
 };

@@ -3,8 +3,8 @@
 #include "Model.h"
 class Archbishop: public piece
 {
-	Model archbishop;
+	Model bishop;
 public:
-	Archbishop(Punto2D pos, bool c) : piece(pos, c), archbishop("resources/model/Pawn.obj") {} //Cambiar este modelo
+	Archbishop(Punto2D pos, bool c) : piece(pos, c, "resources/model/Knight.obj"), bishop("resources/model/Bishop.obj") {} //Cambiar este modelo
 };
 

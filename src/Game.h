@@ -3,14 +3,15 @@
 #include "Menu.h"
 #include "Model.h"
 #include "Board.h"
-#include "Piece.h"
+#include "ListaPiezas.h"
 #include "cstring"
 #include <iostream>
 
 class Game
 {
 	Board board;
-	piece piezas;
+	ListaPiezas blancas;
+	ListaPiezas negras;
 
 public:
 	Board& getboard();

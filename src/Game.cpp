@@ -9,8 +9,10 @@ Board& Game::getboard()
 void Game::dibujaJuego() {	//Funcion dibujaJuego provisional, se añade a clase Juego/Game cuando se desarrolle
 	//Dibuja el tablero
 	board.dibuja();
-	//Dibuja todas las piezas
-	piezas.dibujaPiezas(board);
+
+	//Dibuja todas las piezas --> FALTA CONCRETAR EL MÉTODO
+	//blancas.dibuja();
+    // negras.dibuja();
 }
 
 void Game::musica(bool sonido, char tema[])

@@ -16,7 +16,7 @@ public:
 
 //Constructor para dar posición genérica y color a la pieza correspondiente
 	piece() = default;
-	piece(Punto2D pos, bool c) { posicion = pos, color = c; };
+	piece(Punto2D pos, bool c, std::string objFilePath) : modelo(objFilePath) { posicion = pos, color = c; };
 
 //Métodos
 	void dibuja1Pieza(Board& tablero);

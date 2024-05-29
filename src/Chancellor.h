@@ -3,8 +3,8 @@
 #include "Model.h"
 class Chancellor: public piece
 {
-	Model chancellor;
+	Model Rook;
 public:
-	Chancellor(Punto2D pos, bool c) : piece(pos, c), chancellor("resources/model/Pawn.obj") {} //Cambiar con otro modelo
+	Chancellor(Punto2D pos, bool c) : piece(pos, c, "resources/model/Knight.obj"), Rook("resources/model/Rook.obj") {} //Cambiar con otro modelo
 };
 
