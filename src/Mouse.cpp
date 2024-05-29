@@ -52,7 +52,7 @@ void Mouse::movimiento(int x, int y1, Game& juego, Punto2D& esfera, bool menu)
 		setCoordenadas(posX, posY);
 
 		// Seleccionar el punto en el plano x-y
-		std::cout << "Punto seleccionado en el plano x-y: (" << posX << ", " << posY << ", 0)" << std::endl;
+		//std::cout << "Punto seleccionado en el plano x-y: (" << posX << ", " << posY << ", 0)" << std::endl;
 		if (posX > -2 && posX < 32 && posY > -2 && posY < 26)
 		{
 			if (posX > 0 && posX < 30)
@@ -89,7 +89,7 @@ void Mouse::movimiento(int x, int y1, Game& juego, Punto2D& esfera, bool menu)
 		setCoordenadas(posZ, posX);
 
 		// Seleccionar el punto en el plano x-z
-		std::cout << "Punto seleccionado en el plano x-z: (" << posZ << ", 0, " << posX << ")" << std::endl;
+		//std::cout << "Punto seleccionado en el plano x-z: (" << posZ << ", 0, " << posX << ")" << std::endl;
 		if (posX > -2 && posX < 32 && posZ > -2 && posZ < 26)
 		{
 			if (posX > 0 && posX < 30)

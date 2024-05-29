@@ -1,6 +1,14 @@
 #pragma once
 #include<vector>
 #include "Piece.h"
+#include "Pawn.h"
+#include "Rook.h"
+#include "Knight.h"
+#include "King.h"
+#include "Queen.h"
+#include "Archbishop.h"
+#include "Chancellor.h"
+#include "Bishop.h"
 
 using std::vector;
 
@@ -10,9 +18,9 @@ class ListaPiezas
 
 public:
 	void agregar(piece* p) { lista.push_back(p); }
-/* Hay que apañarse con los argumentos
-	void dibuja() { 	for (auto b : blancas) b->dibuja1Pieza(); }
-	*/
+
+	void dibuja(Board& tablero) { for (auto b : lista) b->dibuja1Pieza(tablero); }
+	void cambiaTematica(int  d) { for (auto b : lista) b->cambiaTematica(d); }
 
 	auto begin() { return lista.begin(); }
 	auto end() { return lista.end(); }

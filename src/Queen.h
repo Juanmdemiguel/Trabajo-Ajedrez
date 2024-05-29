@@ -4,9 +4,7 @@
 
 class Queen: public piece
 {
-	Model queen;
-
 public:
-	Queen(Punto2D pos, bool c) : piece(pos, c), queen ("resources/model/Queen.obj") {}
+	Queen(Punto2D pos, bool c, int d) : piece(pos, c, "resources/model/Queen.obj", d) {}
 };
 

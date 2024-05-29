@@ -3,7 +3,7 @@
 void Coordinator::Dibuja()
 {
 	camara.dibuja(principal);
-	principal.getMenu() ? principal.iniciaMenu() : juego.dibujaJuego();
+	principal.getMenu() ? principal.iniciaMenu() : juego.dibujaJuego(principal.tematica);
 	//El operador ternario llama a iniciaMenu si el booleano menu es true, si no, dibuja el juego
 
 	drawEsferadePruebas(esfera.x, esfera.z);
@@ -35,10 +35,6 @@ void Coordinator::Click(int _button, int state, int _x, int _y)
 			raton.seleccion(juego, _button, state);
 		}
 	}
-
-	
-	
-
 }
 
 void Coordinator::Inicializa() 
@@ -49,6 +45,7 @@ void Coordinator::Inicializa()
 	char cancion[] = "resources/sounds/marchav2.mp3";
 	//Fin de switch
 	strcpy_s(music, cancion);
+	juego.inicializa(principal.tematica);
 }
 
 void Coordinator::Mouse(int x, int y1)

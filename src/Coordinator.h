@@ -8,6 +8,7 @@
 
 class Coordinator
 {
+	enum Estado { MENU, JUEGO} estado{};
 public:
 	Menu principal; 
 	Camara camara;
@@ -22,7 +23,5 @@ public:
 	void Mouse(int x, int y1);
 	void Teclado(unsigned char key, int x_t, int y_t);
 	void Inicializa();
-	//friend class Menu;
-	//friend class Comentario;
 };
 

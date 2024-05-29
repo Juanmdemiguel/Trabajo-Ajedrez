@@ -152,6 +152,7 @@
     <ClInclude Include="include\ETSIDI.h" />
     <ClInclude Include="include\freeglut.h" />
     <ClInclude Include="src\Archbishop.h" />
+    <ClInclude Include="src\Bishop.h" />
     <ClInclude Include="src\Board.h" />
     <ClInclude Include="src\camara.h" />
     <ClInclude Include="src\Chancellor.h" />
@@ -159,6 +160,7 @@
     <ClInclude Include="src\Comentario.h" />
     <ClInclude Include="src\Coordinator.h" />
     <ClInclude Include="src\Game.h" />
+    <ClInclude Include="src\King.h" />
     <ClInclude Include="src\Knight.h" />
     <ClInclude Include="src\ListaPiezas.h" />
     <ClInclude Include="src\Menu.h" />
@@ -167,10 +169,12 @@
     <ClInclude Include="src\Pawn.h" />
     <ClInclude Include="src\Piece.h" />
     <ClInclude Include="src\Punto2D.h" />
+    <ClInclude Include="src\Queen.h" />
     <ClInclude Include="src\Tile.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Archbishop.cpp" />
+    <ClCompile Include="src\Bishop.cpp" />
     <ClCompile Include="src\Board.cpp" />
     <ClCompile Include="src\camara.cpp" />
     <ClCompile Include="src\Chancellor.cpp" />
@@ -178,6 +182,7 @@
     <ClCompile Include="src\Comentario.cpp" />
     <ClCompile Include="src\Coordinator.cpp" />
     <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\King.cpp" />
     <ClCompile Include="src\Knight.cpp" />
     <ClCompile Include="src\ListaPiezas.cpp" />
     <ClCompile Include="src\Main.cpp" />
@@ -187,6 +192,7 @@
     <ClCompile Include="src\Pawn.cpp" />
     <ClCompile Include="src\Piece.cpp" />
     <ClCompile Include="src\Punto2D.cpp" />
+    <ClCompile Include="src\Queen.cpp" />
     <ClCompile Include="src\Tile.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

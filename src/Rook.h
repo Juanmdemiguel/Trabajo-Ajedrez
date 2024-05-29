@@ -4,10 +4,10 @@
 
 class Rook : public piece
 {
-	Model rook;
+	//Model rook;
 
 public:
-	Rook(Punto2D pos, bool c) : piece(pos, c), rook("resources/model/Rook.obj") {}
+	Rook(Punto2D pos, bool c, int d) : piece(pos, c, "resources/model/Rook.obj", d) {}
 		
 };
 

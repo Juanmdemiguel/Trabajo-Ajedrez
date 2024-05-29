@@ -7,6 +7,6 @@ class Bishop: public piece
 	Model bishop;
 
 public:
-	Bishop(Punto2D pos, bool c) : piece(pos, c),  bishop("resources/model/Bishop.obj") {}
+	Bishop(Punto2D pos, bool c, int d) : piece(pos, c, "resources/model/Bishop.obj", d) {}
 };
 

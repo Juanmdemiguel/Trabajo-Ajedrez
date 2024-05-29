@@ -5,6 +5,6 @@ class Pawn: public piece
 {
 	//Model pawn;
 public:
-	Pawn(Punto2D pos, bool c) : piece(pos,c, "resources/model/Pawn.obj") {}
+	Pawn(Punto2D pos, bool c, int d) : piece(pos,c, "resources/model/Pawn.obj", d) {}
 };
 
