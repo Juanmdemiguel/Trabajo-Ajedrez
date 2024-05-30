@@ -4,6 +4,6 @@
 class Knight: public piece
 {
 public:
-	Knight(Punto2D pos, bool c, int d) : piece(pos, c, "resources/model/Knight.obj", d){}
+	Knight(Punto2D pos, bool c, int d) : piece(pos, c, d) { tipo = KNIGHT; }
 };
 

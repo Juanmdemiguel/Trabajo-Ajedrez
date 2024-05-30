@@ -4,9 +4,7 @@
 
 class Bishop: public piece
 {
-	Model bishop;
-
 public:
-	Bishop(Punto2D pos, bool c, int d) : piece(pos, c, "resources/model/Bishop.obj", d) {}
+	Bishop(Punto2D pos, bool c, int d) : piece(pos, c, d) { tipo = BISHOP; }
 };
 

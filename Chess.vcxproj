@@ -170,6 +170,7 @@
     <ClInclude Include="src\Piece.h" />
     <ClInclude Include="src\Punto2D.h" />
     <ClInclude Include="src\Queen.h" />
+    <ClInclude Include="src\Rook.h" />
     <ClInclude Include="src\Tile.h" />
   </ItemGroup>
   <ItemGroup>

@@ -47,7 +47,6 @@ void Menu::dibujaFondo()
 	glEnable(GL_TEXTURE_2D);
 
 	Tema();
-
 	glDisable(GL_LIGHTING);
 	glBegin(GL_POLYGON);
 	glColor3f(1, 1, 1);
@@ -56,8 +55,8 @@ void Menu::dibujaFondo()
 	glTexCoord2d(0, 1);    glVertex3f(0, 16, -0.1);
 	glTexCoord2d(0, 0);    glVertex3f(12, 16, -0.1);
 	glTexCoord2d(1, 0);    glVertex3f(12, 0, -0.1);
-
 	glEnd();
+
 	glEnable(GL_LIGHTING);
 	glDisable(GL_TEXTURE_2D);
 }
@@ -83,7 +82,10 @@ void Menu::clickBotonesMenu() // Función primitiva, futuras iteraciones mirar cr
 		}
 		if ((r.x > (3 - 1.5)) && (r.x < 3) && (r.z > (5 - 4)) && (r.z < 5))								//AbD
 		{
-			if (ventana == 0) setMenu(false);
+			if (ventana == 0) {
+				setMenu(false);
+			}
+			
 			if (ventana == 1) ventana = INICIO, r.x = 0, r.z = 0;					//Para evitar que, al guardarse la posición, se inicie
 																					//el juego porque evalúa ventana == 0 y se cumple
 		}

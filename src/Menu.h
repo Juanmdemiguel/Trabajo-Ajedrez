@@ -2,10 +2,11 @@
 #include "freeglut.h"
 #include "ETSIDI.h"
 #include "Comentario.h"
+#include "Game.h"
 
 class Menu
 {
-	bool menu = true, sonido = true;
+	bool menu = true, sonido = true, tope = false;
 	bool boton{};
 	enum VENTANA { INICIO = 0, TEMATICA, VISION, COMENZAR } ventana{ INICIO };
 	enum TEMATICA { SW=0, T2, T3 } tematica{ SW };
@@ -17,7 +18,7 @@ class Menu
 
 public:
 
-	void gestionaMenu();
+//	void gestionaMenu();
 	void dibujaFondo();
 	bool getMenu() { return menu; }
 	bool getSonido() { return sonido; }
