@@ -100,19 +100,12 @@ void Menu::clickBotonesMenu() // Función primitiva, futuras iteraciones mirar cr
 	
 }
 
-
-void Menu::musica()
-{
-	(sonido) ? ETSIDI::playMusica("resources/sounds/menu.mp3", true) : ETSIDI::stopMusica();
-}
-
 void Menu::Tema()
 {
 	switch (tematica)
 	{
 	case 0: glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/MenuPpal.png").id); break;
 	case 1: glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/Arturito.png").id); break;
-	case 2: glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/BlackTileSW.png").id); 
-		break;
+	case 2: glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/BlackTileSW.png").id); break;
 	}
 }

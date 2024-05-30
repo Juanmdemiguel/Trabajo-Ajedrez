@@ -4,36 +4,19 @@
 #define miray 0.0
 #define miraz 15.0
 
-Camara::Camara()
-{
-    posx = -20.0;
-    posy = 40.0;
-    posz = 15.0;
-}
-
 //Establece posiciones iniciales de la camara tanto en el menu como al iniciar la partida
 void Camara::dibuja(Menu& principal)
 {
-    if (principal.getMenu())
-    {
+    if (principal.getMenu()){
         gluLookAt(6, 8, 16,  // posicion del ojo
             6, 8, 0,      // hacia que punto mira  (0,0,0)
            1.0, 0.0, 0.0);      // definimos hacia arriba (eje Y)
     }
-    else
-    {
+    else{
         gluLookAt(posx, posy, posz,  // posicion del ojo
             mirax, miray, miraz,      // hacia que punto mira  (0,0,0) 
             0.0, 1.0, 0.0);      // definimos hacia arriba (eje Y)*/  
     }
-}
-
-//No se usa todavía
-void Camara::set_pos(double _posx, double _posy, double _posz)
-{
-    posx = _posx;
-    posy = _posy;
-    posz = _posz;
 }
 
 //Permite cambiar al modo en el que se mueven las piezas, que no admite movimientos de camara adicionales y regresar
@@ -77,8 +60,7 @@ void Camara::cambio_modo_libre(Menu& principal, unsigned char key)
 //Permite la rotación al cambiar de turno (provisionalmente se acciona al pulsar el espacio)
 void Camara::actuador(Menu& principal, unsigned char key)
 {
-    if (!principal.getMenu())
-    {
+    if (!principal.getMenu()) {
         bool _rotar;
         _rotar = FALSE;
         if (key == ' ')
@@ -229,6 +211,5 @@ void Camara::rota(Menu& principal)
                 cambionegro = FALSE;
             }
         }
-
     }
 }

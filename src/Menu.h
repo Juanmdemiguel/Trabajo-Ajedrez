@@ -12,29 +12,24 @@ class Menu
 	enum TEMATICA { SW=0, T2, T3 } tematica{ SW };
 	enum VISION { _2D = 0, _3D } vision{ _3D };
 	Comentario comentario1, comentario2, comentario3, comentario4, comentario5, comentario6, comentario7;
-	
 	Punto2D r;		//Guarda coordenadas del ratón
 
-
 public:
-
-//	void gestionaMenu();
+//Métodos
+  //void gestionaMenu();
 	void dibujaFondo();
-	bool getMenu() { return menu; }
-	bool getSonido() { return sonido; }
-	bool getBoton() { return boton; }
+	const bool getMenu() { return menu; }
+	const bool getSonido() { return sonido; }
+	const bool getBoton() { return boton; }
 	void setCoord(Punto2D p) { r = p; }
-
 	void setMenu(const bool& valor) { menu = valor; }
 	void setSonido(const bool& valor) { sonido = valor; }
 	void setBoton(const bool& valor) { boton = valor; }
-
 	void iniciaMenu();
 	void clickBotonesMenu();
-	
-	void musica();
-
+	void musica() { (sonido) ? ETSIDI::playMusica("resources/sounds/menu.mp3", true) : ETSIDI::stopMusica(); };
 	void Tema();
+//Amigos
 	friend class Coordinator;
 
 };

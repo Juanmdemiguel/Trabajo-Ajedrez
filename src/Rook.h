@@ -4,10 +4,8 @@
 
 class Rook : public piece
 {
-	//Model rook;
-
 public:
+//Constructor
 	Rook(Punto2D pos, bool c, int d) : piece(pos, c, d) { tipo = ROOK; }
-		
 };
 

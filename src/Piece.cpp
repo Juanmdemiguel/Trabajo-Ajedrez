@@ -17,7 +17,32 @@ void piece::dibujaSprite(Board& tablero)
 {
 	glEnable(GL_TEXTURE_2D);
 
-	glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/Arturito.png").id);
+	switch (tipo) {
+	case TIPO::PAWN:
+		glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/Arturito.png").id);
+		break;
+	case TIPO::ROOK:
+		glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/Arturito.png").id);
+		break;
+	case TIPO::BISHOP:
+		glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/Arturito.png").id);
+		break;
+	case TIPO::KNIGHT:
+		glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/Arturito.png").id);
+		break;
+	case TIPO::KING:
+		glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/Arturito.png").id);
+		break;
+	case TIPO::QUEEN:
+		glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/Arturito.png").id);
+		break;
+	case TIPO::CHANCELLOR:
+		glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/Arturito.png").id);
+		break;
+	case TIPO::ARCHBISHOP:
+		glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/Arturito.png").id);
+		break;
+	}
 
 	glDisable(GL_LIGHTING);
 	glBegin(GL_POLYGON);
@@ -33,7 +58,7 @@ void piece::dibujaSprite(Board& tablero)
 	glDisable(GL_TEXTURE_2D);
 }
 
-void piece::dibujaModelo(Board& tablero)
+void piece::dibujaModelo(Board& tablero) const
 {
 	glPushMatrix();
 	glTranslatef(tablero.getTile({ posicion.z, posicion.x }).getCenter().z, 0.0, tablero.getTile({ posicion.z, posicion.x }).getCenter().x);

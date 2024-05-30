@@ -1,11 +1,5 @@
 #pragma once
-
 #include "Comentario.h"
-
-void Comentario::dibuja(bool sonido, int ventana, int n_com)
-{
-	creaComentario(sonido, ventana, n_com);
-}
 
 void Comentario::creaComentario(bool sonido, int ventana, int n_com)
 {

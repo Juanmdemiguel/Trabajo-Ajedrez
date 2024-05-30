@@ -18,12 +18,14 @@ public:
 	Punto2D esfera; 
 	char music[50];
 
+//Métodos
+	void Temp(int value) { camara.rota(principal); };
+	void Mouse(int x, int y1) { raton.movimiento(x, y1, juego, esfera, principal.getMenu()); };
 	void Dibuja(); 
-	void Temp(int value);
 	void Click(int _button, int state, int _x, int _y);
-	void Mouse(int x, int y1);
 	void Teclado(unsigned char key, int x_t, int y_t);
 	void Inicializa();
+//Amigos
 
 };
 

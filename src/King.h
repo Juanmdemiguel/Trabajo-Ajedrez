@@ -5,6 +5,6 @@
 class King : public piece
 {
 public:
+//Constructor
 	King(Punto2D pos, bool c, int d) : piece(pos, c, d) { tipo = KING; }
 };
-

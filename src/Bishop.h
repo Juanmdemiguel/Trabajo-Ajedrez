@@ -5,6 +5,7 @@
 class Bishop: public piece
 {
 public:
+//Constructor
 	Bishop(Punto2D pos, bool c, int d) : piece(pos, c, d) { tipo = BISHOP; }
 };
 

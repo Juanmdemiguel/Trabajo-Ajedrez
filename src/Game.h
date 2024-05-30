@@ -14,10 +14,12 @@ class Game
 	ListaPiezas negras;
 
 public:
-	Board& getboard();
+//Métodos
+	Board& getboard() { return board; };
+	void musica(bool sonido, char tema[]) { (sonido == true) ? ETSIDI::playMusica(tema, true) : ETSIDI::stopMusica(); };
 	void dibujaJuego(int d);
-	void musica(bool sonido, char tema[]);
 	void inicializa(int t, int v);
+//Amigos
 
 };
 

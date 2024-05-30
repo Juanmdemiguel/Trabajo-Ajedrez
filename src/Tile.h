@@ -13,22 +13,18 @@ class Tile
 	bool ocupada = false; //informa si hay una pieza encima
 	bool apuntada = false; //informa si el ratón la está apuntando
 	bool posible = false; //informa si es un posible movimiento de una pieza
-
 	int tam = square;
     Punto2D posicion;
 
 public:
 //Métodos
 	void Dibuja(int i, int j); //Dibuja la casilla. Recibe las coordenadas como argumento
-	void setPos(const int & col, const int & row);
+	void setPos(const int& col, const int& row) { this->posicion = { (double)col,(double)row }; };
 	Punto2D getCenter(); 
-
-	bool getocupada();
-	void setocupada(const bool&);
-	void apunta(const bool &);
-
-
-	//Amigos
+	bool getocupada() { return ocupada; };
+	void setocupada(const bool& s) { ocupada = s; };
+	void apunta(const bool& s) { apuntada = s; };
+//Amigos
 	friend class Board; //Solo esta para el movimiento diagonal/horizontal QUITAR CUANDO SE PASE A PIEZA
 };
 

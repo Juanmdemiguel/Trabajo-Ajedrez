@@ -1,9 +1,7 @@
 #include "Tile.h"
 
-
 void Tile::Dibuja(int i, int j)
 {
-
 	glEnable(GL_TEXTURE_2D);
 
 	apuntada ? 
@@ -24,33 +22,10 @@ void Tile::Dibuja(int i, int j)
 	glDisable(GL_TEXTURE_2D);
 }
 
-void Tile::setPos(const int& col, const int& row)
-{
-	this->posicion = { (double)col,(double)row };
-}
-
 Punto2D Tile::getCenter()
 {
 	//Como el sistema de coordenadas empieza en (0,0) y las posiciones en (1,1), se debe extrapolar del sistema de casillas al del glut 
 	//Como esta funciona está especificada para el gltranslatef(), y ese método coge la x como horizontal, se han invertido la salida
 	//De esta manera, ya que se ha establecido el eje z como el horizontal, el programador puede introducir su eje horizontal en la función
-
 	return { this->tam * (this->posicion.x - 0.5), this->tam * (this->posicion.z - 0.5) };
 }
-
-bool Tile::getocupada()
-{
-	return ocupada;
-}
-
-void Tile::apunta(const bool& s)
-{
-	apuntada = s;
-}
-
-void Tile::setocupada(const bool& s)
-{
-	ocupada = s;
-}
-
-

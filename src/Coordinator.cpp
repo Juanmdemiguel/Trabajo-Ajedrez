@@ -50,17 +50,11 @@ void Coordinator::Click(int _button, int state, int _x, int _y)
 void Coordinator::Inicializa() 
 {
 	ETSIDI::playMusica("resources/sounds/menu.mp3", true);
-
 	//Switch de modo de juego
 	char cancion[] = "resources/sounds/marchav2.mp3";
 	//Fin de switch
 	strcpy_s(music, cancion);
 
-}
-
-void Coordinator::Mouse(int x, int y1)
-{
-	raton.movimiento(x, y1, juego, esfera, principal.getMenu());
 }
 
 void Coordinator::Teclado(unsigned char key, int x_t, int y_t)
@@ -69,10 +63,5 @@ void Coordinator::Teclado(unsigned char key, int x_t, int y_t)
 	camara.actuador(principal, key);
 	camara.vertical(principal, key);
 	camara.cambio_modo_libre(principal, key);
-}
-
-void Coordinator::Temp(int value)
-{
-	camara.rota(principal);
 }
 

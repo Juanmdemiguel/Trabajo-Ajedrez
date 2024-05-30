@@ -1,6 +1,5 @@
 #include "ListaPiezas.h"
 
-
 void ListaPiezas::eliminar(int index)
 {
 	int numero = lista.size();
