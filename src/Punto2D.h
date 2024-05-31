@@ -17,3 +17,8 @@ double modulo(Punto2D, Punto2D);
 float map(float x, float in_min, float in_max, float out_min, float out_max); //Escala linealmente una variable en un rango de valores
 float map2(vector<vector<double>> matriz, float x);//Escala cuadraticamente una variable en un rango de valores
 double cronometro(int x);//0 para reiniciar cornometro, 1 para tomar medida desde inicio, 2 para tomar medida desde la anterior medida
+
+bool operator==(const Punto2D& p1, const Punto2D& p2)
+{
+	return (p1.x == p2.x && p1.z == p2.z) ? true : false;
+}

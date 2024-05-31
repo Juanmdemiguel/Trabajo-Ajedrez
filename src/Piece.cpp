@@ -107,3 +107,8 @@ void piece::dibujaModelo(Board& tablero) const
 	}
 	glPopMatrix();
 }
+
+Punto2D piece::get_pos()
+{
+	return posicion;
+}

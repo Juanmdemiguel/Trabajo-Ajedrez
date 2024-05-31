@@ -24,6 +24,8 @@ public:
 	bool getocupada() { return ocupada; };
 	void setocupada(const bool& s) { ocupada = s; };
 	void apunta(const bool& s) { apuntada = s; };
+	bool get_posible() { return posible; };
+	bool set_posible(bool pos) { posible = pos; };
 //Amigos
 	friend class Board; //Solo esta para el movimiento diagonal/horizontal QUITAR CUANDO SE PASE A PIEZA
 };
