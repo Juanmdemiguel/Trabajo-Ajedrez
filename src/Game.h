@@ -6,24 +6,20 @@
 #include "ListaPiezas.h"
 #include "cstring"
 #include <iostream>
-#include "Mouse.h"
 
 class Game
 {
 	Board board;
 	ListaPiezas blancas;
 	ListaPiezas negras;
-	bool turno = true;
-
 
 public:
-//Métodos
+	//Métodos
 	Board& getboard() { return board; };
 	void musica(bool sonido, char tema[]) { (sonido == true) ? ETSIDI::playMusica(tema, true) : ETSIDI::stopMusica(); };
 	void dibujaJuego(int d);
 	void inicializa(int t, int v);
-	void seleccion(Mouse raton);
-//Amigos
+	//Amigos
 
 };
 

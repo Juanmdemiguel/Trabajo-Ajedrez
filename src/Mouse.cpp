@@ -80,16 +80,10 @@ void Mouse::movimiento(int x, int y1, Game& juego, Punto2D& esfera, bool menu)
 	}
 }
 
-void Mouse::seleccion( int boton, int state)
+void Mouse::seleccion(Game& juego, int boton, int state)const
 {
 	//Se divide la coordenada entre el tamaño de la casilla
 	//Se suma uno para establecer el origenen (1,1)
-	if ( boton == GLUT_LEFT_BUTTON && state == GLUT_DOWN) 
-	cout << (int)z/square + 1 << " " << (int)x/square + 1 << endl;
-	casilla = { (double)z / square + 1 , (double)x / square + 1 };
-}
-
-Punto2D Mouse::get_casilla()
-{
-	return casilla;
+	if (boton == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
+		cout << (int)z / square + 1 << " " << (int)x / square + 1 << endl;
 }

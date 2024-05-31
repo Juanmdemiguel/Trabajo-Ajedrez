@@ -1,6 +1,5 @@
 #include"Game.h"
 
-
 void Game::dibujaJuego(int d) {	//Funcion dibujaJuego provisional, se añade a clase Juego/Game cuando se desarrolle
 	//Dibuja el tablero
 	board.dibuja();
@@ -9,12 +8,12 @@ void Game::dibujaJuego(int d) {	//Funcion dibujaJuego provisional, se añade a cl
 	negras.cambiaTematica(d);
 	//Dibuja todas las piezas --> FALTA CONCRETAR EL MÉTODO
 	blancas.dibuja(board);
-    negras.dibuja(board);
+	negras.dibuja(board);
 }
 
 void Game::inicializa(int t, int v)
 {
-	for (double i = 1; i <= 10; ++i){
+	for (double i = 1; i <= 10; ++i) {
 		blancas.agregar(new Pawn({ i,2 }, 1, t));
 		negras.agregar(new Pawn({ i,7 }, 0, t));
 	}
@@ -40,21 +39,4 @@ void Game::inicializa(int t, int v)
 	negras.agregar(new Bishop({ 7,8 }, 0, t));
 	negras.agregar(new Queen({ 5,8 }, 0, t));
 	negras.agregar(new King({ 6,8 }, 0, t));
-}
-
-void Game::seleccion(Mouse raton)
-{
-	if (turno)
-	{
-		for (auto i : blancas)
-		{
-			if (raton.get_casilla() == i->get_pos())
-			{
-				i->
-			}
-		}
-	}
-
-
-	
 }
