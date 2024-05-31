@@ -1,5 +1,6 @@
 #include"Game.h"
 
+
 void Game::dibujaJuego(int d) {	//Funcion dibujaJuego provisional, se añade a clase Juego/Game cuando se desarrolle
 	//Dibuja el tablero
 	board.dibuja();
@@ -39,4 +40,21 @@ void Game::inicializa(int t, int v)
 	negras.agregar(new Bishop({ 7,8 }, 0, t));
 	negras.agregar(new Queen({ 5,8 }, 0, t));
 	negras.agregar(new King({ 6,8 }, 0, t));
+}
+
+void Game::seleccion(Mouse raton)
+{
+	if (turno)
+	{
+		for (auto i : blancas)
+		{
+			if (raton.get_casilla() == i->get_pos())
+			{
+				i->
+			}
+		}
+	}
+
+
+	
 }

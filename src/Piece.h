@@ -29,6 +29,9 @@ public:
 	void cambiaTematica(int d) { tematica = d; }
 	void dibujaSprite(Board& tablero);
 	void dibujaModelo(Board& tablero) const;
+
+	 Punto2D get_pos();
+
 //Amigos
 };
 
