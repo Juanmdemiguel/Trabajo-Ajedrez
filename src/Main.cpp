@@ -20,9 +20,6 @@ void mouseDrag(int _x, int _y);
 
 Coordinator coord;
 
-Menu principal;
-Camara camara;
-
 
 int main(int argc,char* argv[])
 {
