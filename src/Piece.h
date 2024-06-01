@@ -29,5 +29,6 @@ public:
 	void cambiaTematica(int d) { tematica = d; }
 	void dibujaSprite(Board& tablero);
 	void dibujaModelo(Board& tablero) const;
+	virtual void getHorizontal(Punto2D pos, int reach) = 0;
 	//Amigos
 };

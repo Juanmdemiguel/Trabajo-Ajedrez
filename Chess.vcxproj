@@ -194,6 +194,7 @@
     <ClCompile Include="src\Piece.cpp" />
     <ClCompile Include="src\Punto2D.cpp" />
     <ClCompile Include="src\Queen.cpp" />
+    <ClCompile Include="src\Rook.cpp" />
     <ClCompile Include="src\Tile.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
