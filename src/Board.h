@@ -14,8 +14,6 @@ public:
 	Tile& getTile(Punto2D pos);
 	void dibuja();
 	void detectpieza(Punto2D esfera);
-	void getDiagonal(Punto2D pos, int reach = 10);
-	void getHorizontal(Punto2D pos, int reach = 10);
 //Amigos
 };
 

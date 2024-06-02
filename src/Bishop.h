@@ -7,6 +7,6 @@ class Bishop: public piece
 public:
 //Constructor
 	Bishop(Punto2D pos, bool c, int d) : piece(pos, c, d) { tipo = BISHOP; }
-	void getHorizontal(Punto2D pos, int reach);
+	void getPosibles(Punto2D pos, int reach, Board& tablero);
 };
 

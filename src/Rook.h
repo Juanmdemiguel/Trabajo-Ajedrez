@@ -7,6 +7,6 @@ class Rook : public piece
 public:
 //Constructor
 	Rook(Punto2D pos, bool c, int d) : piece(pos, c, d) { tipo = ROOK; }
-	void getHorizontal(Punto2D pos, int reach);
+	void getPosibles(Punto2D pos, int reach, Board& tablero);
 };
 

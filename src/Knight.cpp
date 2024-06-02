@@ -1,6 +1,6 @@
 #include "Knight.h"
 
-void Knight::getHorizontal(Punto2D pos, int reach) {
+void Knight::getPosibles(Punto2D pos, int reach, Board& tablero) {
 
 	int fila = (int)pos.x - 1;     //Traduce el punto 2D a posiciones matriciales
 	int columna = (int)pos.z - 1;

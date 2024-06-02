@@ -1,23 +1,22 @@
 #include "Rook.h"
 
-void Rook::getHorizontal(Punto2D pos, int reach) {
+void Rook::getPosibles(Punto2D pos, int reach, Board& tablero) {
 
-	int fila = (int)pos.x - 1;     //Traduce el punto 2D a posiciones matriciales
-	int columna = (int)pos.z - 1;
+	double fila = (int)pos.x - 1;     //Traduce el punto 2D a posiciones matriciales
+	double columna = (int)pos.z - 1;
 
-	for (int i = 1; i <= reach; i++) { //asigna a las matrices en la diagonal el estatus de posible
-		/*
+	for (int i = 1; i <= reach; i++) { //asigna posible a las casillas en horizontal y vertical
+
 		if ((fila + i) < fil)
-			board[fila + i][columna].posible = true;
+			tablero.getTile({ fila + i,columna }).setposible(true);
 
 		if ((fila - i) >= 0)
-			board[fila - i][columna].posible = true;
+			tablero.getTile({ fila - i,columna }).setposible(true);
 
 		if ((columna + i) < col)
-			board[fila][columna + i].posible = true;
+			tablero.getTile({ fila,columna + i }).setposible(true);
 
 		if ((columna - i) >= 0)
-			board[fila][columna - i].posible = true;
-			*/
+			tablero.getTile({ fila,columna - i }).setposible(true);
 	}
 }
