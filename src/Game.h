@@ -20,6 +20,7 @@ public:
 	void dibujaJuego(int d);
 	void inicializa(int t, int v);
 	//Amigos
+	void posibles();
 
 };
 

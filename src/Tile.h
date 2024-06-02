@@ -27,6 +27,8 @@ public:
 	void setposible(bool p) { posible = p; };
 	bool getposible() { return posible; };
 	//Amigos
+
+	friend class Board;
 };
 
 

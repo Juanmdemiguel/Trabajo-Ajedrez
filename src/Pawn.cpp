@@ -1,9 +1,9 @@
 #include "Pawn.h"
 
 void Pawn::getPosibles(Punto2D pos, int reach, Board& tablero) {
-
-	double fila = (int)pos.x - 1;     //Traduce el punto 2D a posiciones matriciales
-	double columna = (int)pos.z - 1;
+	//cout << "Hola";
+	double columna = (int)pos.x - 1;     //Traduce el punto 2D a posiciones matriciales
+	double fila = (int)pos.z - 1;
 
 	for (int i = 1; i <= reach; i++) { //asigna posible a las casillas en horizontal y vertical
 		

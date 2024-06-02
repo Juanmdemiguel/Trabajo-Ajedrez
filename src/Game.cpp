@@ -40,3 +40,9 @@ void Game::inicializa(int t, int v)
 	negras.agregar(new Queen({ 5,8 }, 0, t));
 	negras.agregar(new King({ 6,8 }, 0, t));
 }
+
+void Game:: posibles()
+{
+	blancas[5]->getPosibles(blancas[5]->get_pos(), 10, board);
+
+}

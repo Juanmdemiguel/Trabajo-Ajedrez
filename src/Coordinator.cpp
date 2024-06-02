@@ -8,6 +8,7 @@ void Coordinator::Dibuja()
 	case Estado::MENU:
 		if (!principal.getMenu()) {
 			juego.inicializa(principal.tematica, principal.vision);
+			juego.posibles();
 			estado = JUEGO;
 		}
 		else

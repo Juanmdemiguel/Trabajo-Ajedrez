@@ -30,5 +30,6 @@ public:
 	void dibujaSprite(Board& tablero);
 	void dibujaModelo(Board& tablero) const;
 	virtual void getPosibles(Punto2D pos, int reach, Board& tablero) = 0;
+	Punto2D get_pos() { return posicion; };
 	//Amigos
 };
