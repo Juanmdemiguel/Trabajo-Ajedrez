@@ -12,6 +12,7 @@ class Game
 	Board board;
 	ListaPiezas blancas;
 	ListaPiezas negras;
+	Punto2D Click;
 
 public:
 	//Métodos
@@ -19,6 +20,7 @@ public:
 	void musica(bool sonido, char tema[]) { (sonido == true) ? ETSIDI::playMusica(tema, true) : ETSIDI::stopMusica(); };
 	void dibujaJuego(int d);
 	void inicializa(int t, int v);
+	void SetClick(Punto2D C) { Click = C; };
 	//Amigos
 	void posibles();
 

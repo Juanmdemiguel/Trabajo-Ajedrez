@@ -44,6 +44,7 @@ void Coordinator::Click(int _button, int state, int _x, int _y)
 		{
 			//Seleccion de la casilla
 			raton.seleccion(juego, _button, state);
+			MouseToGame();
 		}
 	}
 }
@@ -66,3 +67,7 @@ void Coordinator::Teclado(unsigned char key, int x_t, int y_t)
 	camara.cambio_modo_libre(principal, key);
 }
 
+void Coordinator::MouseToGame()
+{
+	juego.SetClick(raton.getClick());
+}

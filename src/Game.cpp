@@ -3,7 +3,6 @@
 void Game::dibujaJuego(int d) {	//Funcion dibujaJuego provisional, se añade a clase Juego/Game cuando se desarrolle
 	//Dibuja el tablero
 	board.dibuja();
-
 	blancas.cambiaTematica(d);
 	negras.cambiaTematica(d);
 	//Dibuja todas las piezas --> FALTA CONCRETAR EL MÉTODO

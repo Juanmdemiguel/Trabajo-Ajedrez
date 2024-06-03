@@ -25,7 +25,6 @@ public:
 	void Click(int _button, int state, int _x, int _y);
 	void Teclado(unsigned char key, int x_t, int y_t);
 	void Inicializa();
-//Amigos
-
+	void MouseToGame();
 };
 
