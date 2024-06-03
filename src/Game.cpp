@@ -8,6 +8,7 @@ void Game::dibujaJuego(int d) {	//Funcion dibujaJuego provisional, se añade a cl
 	//Dibuja todas las piezas --> FALTA CONCRETAR EL MÉTODO
 	blancas.dibuja(board);
 	negras.dibuja(board);
+	
 }
 
 void Game::inicializa(int t, int v)
@@ -38,12 +39,16 @@ void Game::inicializa(int t, int v)
 	negras.agregar(new Bishop({ 7,8 }, 0, t));
 	negras.agregar(new Queen({ 5,8 }, 0, t));
 	negras.agregar(new King({ 6,8 }, 0, t));
+
+
+	ocuparCasillas();
 }
 
 void Game:: posibles()
 {
-	blancas[19]->getPosibles(blancas[19]->get_pos(), board);
+	blancas[2]->getPosibles(blancas[2]->get_pos(), board);
 
+<<<<<<< Updated upstream
 }
 
 void Game::selecciona()
@@ -67,6 +72,18 @@ void Game::ClearSelec()
 	for (double i = 1; i <= fil; i++) {
 		for (double j = 1; j <= col; j++) {
 			board.getTile({j,i}).setposible(false);
+=======
+	
+}
+
+void Game::ocuparCasillas() {
+	Punto2D c;
+	for (double i = 1; i < fil + 1; i++) {
+		for (double j = 1; j < col + 1; j++) {
+			c = { j,i };
+			for (auto k : blancas) if (k->get_pos() == c) board.getTile({ j,i }).setocupada(true);
+			for (auto k : negras) if (k->get_pos() == c) board.getTile({ j,i }).setocupada(true);
+>>>>>>> Stashed changes
 		}
 	}
 }

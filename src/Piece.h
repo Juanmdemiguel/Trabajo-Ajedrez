@@ -32,5 +32,6 @@ public:
 	virtual void getPosibles(Punto2D pos, Board& tablero) = 0;
 	virtual void getDiagonal(Punto2D pos, int reach,  Board& tablero);
 	virtual void getHorizontal(Punto2D pos, int reach, Board& tablero);
+	virtual void getEle(Punto2D pos, Board& tablero);
 	Punto2D get_pos() { return posicion; };
 };

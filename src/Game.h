@@ -21,11 +21,18 @@ public:
 	void dibujaJuego(int d);
 	void inicializa(int t, int v);
 	void SetClick(Punto2D C) { Click = C; };
+<<<<<<< Updated upstream
 	void selecciona();
 	void ClearSelec();
 	//Amigos
 	void posibles();
 	void Listo() { turno = !turno; }
+=======
+	void posibles();
+	void ocuparCasillas();
+	//Amigos
+
+>>>>>>> Stashed changes
 
 };
 

@@ -110,36 +110,72 @@ void piece::dibujaModelo(Board& tablero) const
 
 void piece::getDiagonal(Punto2D pos, int reach, Board& tablero)
 {
+	bool d1=false, d2=false, d3=false, d4=false;
 	double columna = (int)pos.x;     //Traduce el punto 2D a posiciones matriciales
 	double fila = (int)pos.z;
 
 	//Para comer a otras piezas
 	for (int i = 1; i <= reach; i++) { //asigna a las matrices en la diagonal el estatus de posible
-		if ((fila + i) <= 10 && (columna + i) <= 8) //fil col
+		if ((fila + i) <= 10 && (columna + i) <= 8 && !d1) { //fil col
+			if (tablero.getTile({ fila + i,columna + i }).getocupada()) { d1 == true; break; }
 			tablero.getTile({ fila + i,columna + i }).setposible(true);
-		if ((fila - i) >= 1 && (columna - i) >= 0)
+		}
+		if ((fila - i) >= 1 && (columna - i) >= 0 && !d2){
+			if (tablero.getTile({ fila - i,columna - i }).getocupada()) { d2 == true; break; }
 			tablero.getTile({ fila - i,columna - i }).setposible(true);
-		if ((fila - i) >= 1 && (columna + i) <= 8) //col
+		}
+		if ((fila - i) >= 1 && (columna + i) <= 8 && !d3) { //col
+			if (tablero.getTile({ fila - i,columna + i }).getocupada()) { d3 == true; break; }
 			tablero.getTile({ fila - i,columna + i }).setposible(true);
-		if ((fila + i) <= fil && (columna - i) >= 0)
+		}
+		if ((fila + i) <= fil && (columna - i) >= 0 && !d4) {
+			if (tablero.getTile({ fila + i,columna - i }).getocupada()) { d4 == true; break; }
 			tablero.getTile({ fila + i,columna - i }).setposible(true);
+		}
 	}
 }
 void piece::getHorizontal(Punto2D pos, int reach, Board& tablero)
 {
+	bool d1 = false, d2 = false, d3 = false, d4 = false;
 	double columna = (int)pos.x;     //Traduce el punto 2D a posiciones matriciales
 	double fila = (int)pos.z;
 
 	for (int i = 1; i <= reach; i++) { //asigna posible a las casillas en horizontal y vertical
 
 		//UBICAR EL DEFINE Y CAMBIARLO POR EL VALOR BUENO
-		if ((fila + i) <= 10)   tablero.getTile({ fila + i,columna }).setposible(true); //fil
-		
-		if ((fila - i) >= 0)    tablero.getTile({ fila - i,columna }).setposible(true);
+		if ((fila + i) <= 10 && !d1) {
+			if (tablero.getTile({ fila + i,columna}).getocupada()) { d1 == true; break; }
+			tablero.getTile({ fila + i,columna }).setposible(true); //fil
+		} 
+		if ((fila - i) >= 0 && !d2) {
+			if (tablero.getTile({ fila - i,columna }).getocupada()) { d2 == true; break; }
+			tablero.getTile({ fila - i,columna }).setposible(true);
+		}
 			
-		if ((columna + i) <= 8)	tablero.getTile({ fila,columna + i }).setposible(true);//col
+		if ((columna + i) <= 8 && !d3) {
+			if (tablero.getTile({ fila,columna + i}).getocupada()) { d3 == true; break; }
+			tablero.getTile({ fila,columna + i }).setposible(true);//col
+		}
 		
-		if ((columna - i) >= 0) tablero.getTile({ fila,columna - i }).setposible(true);
+		if ((columna - i) >= 0 && !d4) {
+			if (tablero.getTile({ fila,columna - i}).getocupada()) { d4 == true; break; }
+			tablero.getTile({ fila,columna - i }).setposible(true);
+		} 
 			
 	}
+}
+void piece::getEle(Punto2D pos, Board& tablero)
+{
+	double columna = (int)pos.x;     //Traduce el punto 2D a posiciones matriciales
+	double fila = (int)pos.z;
+
+	tablero.getTile({ fila + 2, columna + 1 }).setposible(true); 
+	tablero.getTile({ fila + 2, columna - 1 }).setposible(true); 
+	tablero.getTile({ fila - 2, columna + 1 }).setposible(true); 
+	tablero.getTile({ fila - 2, columna - 1 }).setposible(true);
+	tablero.getTile({ fila + 1, columna + 2 }).setposible(true);
+	tablero.getTile({ fila + 1, columna - 2 }).setposible(true);
+	tablero.getTile({ fila - 1, columna + 2 }).setposible(true);
+	tablero.getTile({ fila - 1, columna - 2 }).setposible(true);
+
 }
