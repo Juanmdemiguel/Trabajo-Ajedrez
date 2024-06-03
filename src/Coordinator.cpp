@@ -37,7 +37,8 @@ void Coordinator::Click(int _button, int state, int _x, int _y)
 			if ((raton.getCoordenadaZ() > (5 - 1.5)) && (raton.getCoordenadaZ() < 5) && (raton.getCoordenadaX() > (10 - 4)) && (raton.getCoordenadaX() < 10) && principal.ventana == 0)
 				principal.musica();
 		}
-		if(!principal.getMenu()) juego.musica(principal.getSonido(), music);
+		static int i= 0;			//Se crea para que se inicialice solo una vez a 0, para comprobar lo siguiente
+		if(!principal.getMenu() && i == 0 ) juego.musica(principal.getSonido(), music), i++;
 		
 
 		if (_button == GLUT_LEFT_BUTTON && estado == JUEGO) //Solo si se pulsa el botón izquierdo del ratón

@@ -114,24 +114,30 @@ void piece::getDiagonal(Punto2D pos, int reach, Board& tablero)
 	double columna = (int)pos.x;     //Traduce el punto 2D a posiciones matriciales
 	double fila = (int)pos.z;
 
+	vector <Punto2D> posibles{};
+
 	//Para comer a otras piezas
 	for (int i = 1; i <= reach; i++) { //asigna a las matrices en la diagonal el estatus de posible
 		if ((fila + i) <= 10 && (columna + i) <= 8 && !d1) { //fil col
 			if (tablero.getTile({ fila + i,columna + i }).getocupada()) { d1 == true; break; }
-			tablero.getTile({ fila + i,columna + i }).setposible(true);
+			tablero.getTile({ fila + i,columna + i }).setposible(true), posibles.push_back({fila+i,columna+i});
 		}
 		if ((fila - i) >= 1 && (columna - i) >= 0 && !d2){
 			if (tablero.getTile({ fila - i,columna - i }).getocupada()) { d2 == true; break; }
-			tablero.getTile({ fila - i,columna - i }).setposible(true);
+			tablero.getTile({ fila - i,columna - i }).setposible(true), posibles.push_back({ fila + i,columna + i });
 		}
 		if ((fila - i) >= 1 && (columna + i) <= 8 && !d3) { //col
 			if (tablero.getTile({ fila - i,columna + i }).getocupada()) { d3 == true; break; }
-			tablero.getTile({ fila - i,columna + i }).setposible(true);
+			tablero.getTile({ fila - i,columna + i }).setposible(true), posibles.push_back({ fila + i,columna + i });
 		}
 		if ((fila + i) <= fil && (columna - i) >= 0 && !d4) {
 			if (tablero.getTile({ fila + i,columna - i }).getocupada()) { d4 == true; break; }
-			tablero.getTile({ fila + i,columna - i }).setposible(true);
+			tablero.getTile({ fila + i,columna - i }).setposible(true), posibles.push_back({ fila + i,columna + i });
 		}
+
+		for (auto i : posibles)
+			cout << i.x << i.z;
+
 	}
 }
 void piece::getHorizontal(Punto2D pos, int reach, Board& tablero)
@@ -140,29 +146,34 @@ void piece::getHorizontal(Punto2D pos, int reach, Board& tablero)
 	double columna = (int)pos.x;     //Traduce el punto 2D a posiciones matriciales
 	double fila = (int)pos.z;
 
+	vector <Punto2D> posibles{};
+
 	for (int i = 1; i <= reach; i++) { //asigna posible a las casillas en horizontal y vertical
 
 		//UBICAR EL DEFINE Y CAMBIARLO POR EL VALOR BUENO
 		if ((fila + i) <= 10 && !d1) {
 			if (tablero.getTile({ fila + i,columna}).getocupada()) { d1 == true; break; }
-			tablero.getTile({ fila + i,columna }).setposible(true); //fil
+			tablero.getTile({ fila + i,columna }).setposible(true), posibles.push_back({ fila + i,columna }); //fil
 		} 
 		if ((fila - i) >= 0 && !d2) {
 			if (tablero.getTile({ fila - i,columna }).getocupada()) { d2 == true; break; }
-			tablero.getTile({ fila - i,columna }).setposible(true);
+			tablero.getTile({ fila - i,columna }).setposible(true), posibles.push_back({ fila + i,columna });
 		}
 			
 		if ((columna + i) <= 8 && !d3) {
 			if (tablero.getTile({ fila,columna + i}).getocupada()) { d3 == true; break; }
-			tablero.getTile({ fila,columna + i }).setposible(true);//col
+			tablero.getTile({ fila,columna + i }).setposible(true), posibles.push_back({ fila,columna + i });//col
 		}
 		
 		if ((columna - i) >= 0 && !d4) {
 			if (tablero.getTile({ fila,columna - i}).getocupada()) { d4 == true; break; }
-			tablero.getTile({ fila,columna - i }).setposible(true);
+			tablero.getTile({ fila,columna - i }).setposible(true), posibles.push_back({ fila,columna - i });
 		} 
 			
 	}
+
+	for (auto i : posibles)
+		cout << i.x << i.z;
 }
 void piece::getEle(Punto2D pos, Board& tablero)
 {
@@ -194,3 +205,4 @@ void piece::getEle(Punto2D pos, Board& tablero)
 		tablero.getTile({ fila - 1, columna - 2 }).setposible(true);
 
 }
+

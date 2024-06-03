@@ -7,5 +7,6 @@ public:
 	//Constructor
 	Pawn(Punto2D pos, bool c, int d) : piece(pos, c, d) { tipo = PAWN; }
 	void getPosibles(Punto2D pos, Board& tablero);
+	void mueve(Punto2D pos, vector <Punto2D> posibles);
 };
 

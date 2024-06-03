@@ -21,6 +21,7 @@ protected:
 	inline static Model Knight{ "resources/model/Knight.obj" };
 	inline static Model Pawn{ "resources/model/Pawn.obj" };
 
+
 public:
 	//Constructor para dar posición genérica y color a la pieza correspondiente
 	piece(Punto2D pos, bool c, int d) { posicion = pos, color = c; tematica = d; }
@@ -34,4 +35,5 @@ public:
 	virtual void getHorizontal(Punto2D pos, int reach, Board& tablero);
 	virtual void getEle(Punto2D pos, Board& tablero);
 	Punto2D get_pos() { return posicion; };
+
 };
