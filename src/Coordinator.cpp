@@ -8,7 +8,7 @@ void Coordinator::Dibuja()
 	case Estado::MENU:
 		if (!principal.getMenu()) {
 			juego.inicializa(principal.tematica, principal.vision);
-			juego.posibles();
+			//juego.posibles();
 			estado = JUEGO;
 		}
 		else
@@ -16,6 +16,7 @@ void Coordinator::Dibuja()
 		break;
 	case Estado::JUEGO:
 		juego.dibujaJuego(principal.tematica);
+		juego.selecciona();
 		break;
 	}
 }
@@ -45,6 +46,7 @@ void Coordinator::Click(int _button, int state, int _x, int _y)
 			//Seleccion de la casilla
 			raton.seleccion(juego, _button, state);
 			MouseToGame();
+			juego.ClearSelec();
 		}
 	}
 }
@@ -65,6 +67,9 @@ void Coordinator::Teclado(unsigned char key, int x_t, int y_t)
 	camara.actuador(principal, key);
 	camara.vertical(principal, key);
 	camara.cambio_modo_libre(principal, key);
+
+	if (key == ' ')
+		juego.Listo();
 }
 
 void Coordinator::MouseToGame()

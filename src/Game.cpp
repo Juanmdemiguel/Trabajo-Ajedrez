@@ -45,3 +45,28 @@ void Game:: posibles()
 	blancas[19]->getPosibles(blancas[19]->get_pos(), board);
 
 }
+
+void Game::selecciona()
+{
+	if (turno) {
+		for (auto b : blancas) {
+			if (b->get_pos() == Click)
+				b->getPosibles(b->get_pos(), board);
+		}
+	}
+	if (!turno) {
+		for (auto n : negras) {
+			if (n->get_pos() == Click)
+				n->getPosibles(n->get_pos(), board);
+		}
+	}
+}
+
+void Game::ClearSelec()
+{
+	for (double i = 1; i <= fil; i++) {
+		for (double j = 1; j <= col; j++) {
+			board.getTile({j,i}).setposible(false);
+		}
+	}
+}

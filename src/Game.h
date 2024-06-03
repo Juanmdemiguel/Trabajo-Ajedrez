@@ -13,7 +13,7 @@ class Game
 	ListaPiezas blancas;
 	ListaPiezas negras;
 	Punto2D Click;
-
+	bool turno = true; 
 public:
 	//Métodos
 	Board& getboard() { return board; };
@@ -21,8 +21,11 @@ public:
 	void dibujaJuego(int d);
 	void inicializa(int t, int v);
 	void SetClick(Punto2D C) { Click = C; };
+	void selecciona();
+	void ClearSelec();
 	//Amigos
 	void posibles();
+	void Listo() { turno = !turno; }
 
 };
 

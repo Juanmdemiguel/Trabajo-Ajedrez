@@ -7,6 +7,7 @@ class Punto2D
 {
 public:
 	double z, x;
+	bool operator==(Punto2D p) { return (z == p.z && x == p.x) ? true : false ; };
 };
 
 //Funciones matematicas de utilidad relativa
