@@ -43,6 +43,6 @@ void Game::inicializa(int t, int v)
 
 void Game:: posibles()
 {
-	blancas[5]->getPosibles(blancas[5]->get_pos(), 10, board);
+	blancas[19]->getPosibles(blancas[19]->get_pos(), board);
 
 }

@@ -1,9 +1,8 @@
 #include "Pawn.h"
 
-void Pawn::getPosibles(Punto2D pos, int reach, Board& tablero) 
-{
+void Pawn::getPosibles(Punto2D pos, Board& tablero) {
 
-
+	int reach = 10;
 	double columna = (int)pos.x;     //Traduce el punto 2D a posiciones matriciales
 	double fila = (int)pos.z;
 
@@ -19,7 +18,5 @@ void Pawn::getPosibles(Punto2D pos, int reach, Board& tablero)
 			if ((columna - i) >= 0)	tablero.getTile({ fila,columna - i }).setposible(true);//col
 		}
 	}
-	
-
 	//piece::getDiagonal(pos,reach,tablero);
 }

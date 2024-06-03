@@ -117,9 +117,9 @@ void piece::getDiagonal(Punto2D pos, int reach, Board& tablero)
 	for (int i = 1; i <= reach; i++) { //asigna a las matrices en la diagonal el estatus de posible
 		if ((fila + i) <= 10 && (columna + i) <= 8) //fil col
 			tablero.getTile({ fila + i,columna + i }).setposible(true);
-		if ((fila - i) >= 0 && (columna - i) >= 0)
+		if ((fila - i) >= 1 && (columna - i) >= 0)
 			tablero.getTile({ fila - i,columna - i }).setposible(true);
-		if ((fila - i) >= 0 && (columna + i) <= 8) //col
+		if ((fila - i) >= 1 && (columna + i) <= 8) //col
 			tablero.getTile({ fila - i,columna + i }).setposible(true);
 		if ((fila + i) <= fil && (columna - i) >= 0)
 			tablero.getTile({ fila + i,columna - i }).setposible(true);
