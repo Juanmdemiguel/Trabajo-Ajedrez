@@ -9,6 +9,7 @@ void Coordinator::Dibuja()
 		if (!principal.getMenu()) {
 			juego.inicializa(principal.tematica, principal.vision);
 			//juego.posibles();
+			juego.ClearSelec();
 			estado = JUEGO;
 		}
 		else
@@ -68,8 +69,10 @@ void Coordinator::Teclado(unsigned char key, int x_t, int y_t)
 	camara.vertical(principal, key);
 	camara.cambio_modo_libre(principal, key);
 
-	if (key == ' ')
+	if (key == ' ') {
 		juego.Listo();
+		juego.ClearSelec();
+	}
 }
 
 void Coordinator::MouseToGame()

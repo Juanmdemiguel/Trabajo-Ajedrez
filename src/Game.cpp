@@ -44,12 +44,6 @@ void Game::inicializa(int t, int v)
 	ocuparCasillas();
 }
 
-void Game:: posibles()
-{
-	blancas[2]->getPosibles(blancas[2]->get_pos(), board);
-
-<<<<<<< Updated upstream
-}
 
 void Game::selecciona()
 {
@@ -70,10 +64,8 @@ void Game::selecciona()
 void Game::ClearSelec()
 {
 	for (double i = 1; i <= fil; i++) {
-		for (double j = 1; j <= col; j++) {
-			board.getTile({j,i}).setposible(false);
-=======
-	
+		for (double j = 1; j <= col; j++) board.getTile({ j,i }).setposible(false);
+	}
 }
 
 void Game::ocuparCasillas() {
@@ -83,7 +75,6 @@ void Game::ocuparCasillas() {
 			c = { j,i };
 			for (auto k : blancas) if (k->get_pos() == c) board.getTile({ j,i }).setocupada(true);
 			for (auto k : negras) if (k->get_pos() == c) board.getTile({ j,i }).setocupada(true);
->>>>>>> Stashed changes
 		}
 	}
 }

@@ -169,13 +169,28 @@ void piece::getEle(Punto2D pos, Board& tablero)
 	double columna = (int)pos.x;     //Traduce el punto 2D a posiciones matriciales
 	double fila = (int)pos.z;
 
-	tablero.getTile({ fila + 2, columna + 1 }).setposible(true); 
-	tablero.getTile({ fila + 2, columna - 1 }).setposible(true); 
-	tablero.getTile({ fila - 2, columna + 1 }).setposible(true); 
-	tablero.getTile({ fila - 2, columna - 1 }).setposible(true);
-	tablero.getTile({ fila + 1, columna + 2 }).setposible(true);
-	tablero.getTile({ fila + 1, columna - 2 }).setposible(true);
-	tablero.getTile({ fila - 1, columna + 2 }).setposible(true);
-	tablero.getTile({ fila - 1, columna - 2 }).setposible(true);
+	if (fila + 2 < 11 && columna + 1 < 9 && !tablero.getTile({ fila + 2,columna + 1}).getocupada()) 
+		tablero.getTile({ fila + 2, columna + 1 }).setposible(true);
+
+	if (fila + 2 < 11 && columna - 1 > 0 && !tablero.getTile({ fila + 2,columna - 1}).getocupada())
+		tablero.getTile({ fila + 2, columna - 1 }).setposible(true);
+
+	if (fila - 2 > 0 && columna + 1 < 9 && !tablero.getTile({ fila - 2,columna + 1 }).getocupada())
+		tablero.getTile({ fila - 2, columna + 1 }).setposible(true);
+
+	if (fila - 2 > 0 && columna - 1 > 0 && !tablero.getTile({ fila - 2,columna - 1 }).getocupada())
+		tablero.getTile({ fila - 2, columna - 1 }).setposible(true);
+
+	if (fila + 1 < 11 && columna + 2 < 9 && !tablero.getTile({ fila + 1,columna + 2 }).getocupada())
+		tablero.getTile({ fila + 1, columna + 2 }).setposible(true);
+
+	if (fila + 1 < 11 && columna - 2 > 0 && !tablero.getTile({ fila + 1,columna - 2 }).getocupada())
+		tablero.getTile({ fila + 1, columna - 2 }).setposible(true);
+
+	if (fila - 1 > 0 && columna + 2 < 9 && !tablero.getTile({ fila - 1,columna + 2 }).getocupada())
+		tablero.getTile({ fila - 1, columna + 2 }).setposible(true);
+
+	if (fila - 1 > 0 && columna - 2 > 0 && !tablero.getTile({ fila - 1,columna - 2 }).getocupada())
+		tablero.getTile({ fila - 1, columna - 2 }).setposible(true);
 
 }
