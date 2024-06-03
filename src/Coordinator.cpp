@@ -8,8 +8,6 @@ void Coordinator::Dibuja()
 	case Estado::MENU:
 		if (!principal.getMenu()) {
 			juego.inicializa(principal.tematica, principal.vision);
-			//juego.posibles();
-			juego.ClearSelec();
 			estado = JUEGO;
 		}
 		else
@@ -42,7 +40,7 @@ void Coordinator::Click(int _button, int state, int _x, int _y)
 		if(!principal.getMenu()) juego.musica(principal.getSonido(), music);
 		
 
-		if (_button == GLUT_LEFT_BUTTON) //Solo si se pulsa el botón izquierdo del ratón
+		if (_button == GLUT_LEFT_BUTTON && estado == JUEGO) //Solo si se pulsa el botón izquierdo del ratón
 		{
 			//Seleccion de la casilla
 			raton.seleccion(juego, _button, state);
@@ -65,13 +63,13 @@ void Coordinator::Inicializa()
 void Coordinator::Teclado(unsigned char key, int x_t, int y_t)
 {
 	camara.zoom(principal, key);
-	camara.actuador(principal, key);
 	camara.vertical(principal, key);
 	camara.cambio_modo_libre(principal, key);
 
-	if (key == ' ') {
+	if (key == ' ' && juego.getMov()) {
 		juego.Listo();
 		juego.ClearSelec();
+		camara.actuador(principal, key);
 	}
 }
 

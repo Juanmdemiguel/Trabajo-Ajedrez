@@ -14,6 +14,8 @@ class Game
 	ListaPiezas negras;
 	Punto2D Click;
 	bool turno = true; 
+	bool mov = true; //Solo pasa de turno si ya has movido. No puedes mover si ya has movido. DEBERIA EMPEZAR EN FALSE, ESTA EN TRUE PARA PODER PASAR 
+	//TERMINAR DE IMPLEMENTAR CUANDO SE HAGA EL MOVIMIENTO. Y BORRAR ESTO AL IMPLEMENTAR 
 public:
 	//Métodos
 	Board& getboard() { return board; };
@@ -25,6 +27,7 @@ public:
 	void ClearSelec();
 	void Listo() { turno = !turno; }
 	void ocuparCasillas();
+	bool getMov() { return mov; }
 	//Amigos
 
 };
