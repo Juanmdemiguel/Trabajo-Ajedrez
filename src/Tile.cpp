@@ -4,13 +4,10 @@ void Tile::Dibuja(int i, int j)
 {
 	glEnable(GL_TEXTURE_2D);
 
-	apuntada ? 
-		(glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/Arturito.png").id)) :
-		(color ? glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/WhiteTileSW.png").id) : glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/BlackTileSW.png").id));
-	
-	posible ? //Si se pone esto, al seleccionar una casilla no se dibuja Arturito, se dibujan posibles que hay que retocar
-		(glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/Arturito.png").id)) :
-		(color ? glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/WhiteTileSW.png").id) : glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/BlackTileSW.png").id));
+	//Primero la dibuja como psible. Si no es, pregunta si la estás apuntado cn el ratón. Si no, la fibuja según color. 
+	posible ? (glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/Arturito.png").id)) : (
+		apuntada ? (glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/Arturito.png").id)) : (
+			color ? glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/WhiteTileSW.png").id) : glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/BlackTileSW.png").id)));
 
 	glDisable(GL_LIGHTING);
 	glBegin(GL_POLYGON);

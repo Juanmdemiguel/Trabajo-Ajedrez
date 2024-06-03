@@ -107,3 +107,39 @@ void piece::dibujaModelo(Board& tablero) const
 	}
 	glPopMatrix();
 }
+
+void piece::getDiagonal(Punto2D pos, int reach, Board& tablero)
+{
+	double columna = (int)pos.x;     //Traduce el punto 2D a posiciones matriciales
+	double fila = (int)pos.z;
+
+	//Para comer a otras piezas
+	for (int i = 1; i <= reach; i++) { //asigna a las matrices en la diagonal el estatus de posible
+		if ((fila + i) <= 10 && (columna + i) <= 8) //fil col
+			tablero.getTile({ fila + i,columna + i }).setposible(true);
+		if ((fila - i) >= 0 && (columna - i) >= 0)
+			tablero.getTile({ fila - i,columna - i }).setposible(true);
+		if ((fila - i) >= 0 && (columna + i) <= 8) //col
+			tablero.getTile({ fila - i,columna + i }).setposible(true);
+		if ((fila + i) <= fil && (columna - i) >= 0)
+			tablero.getTile({ fila + i,columna - i }).setposible(true);
+	}
+}
+void piece::getHorizontal(Punto2D pos, int reach, Board& tablero)
+{
+	double columna = (int)pos.x;     //Traduce el punto 2D a posiciones matriciales
+	double fila = (int)pos.z;
+
+	for (int i = 1; i <= reach; i++) { //asigna posible a las casillas en horizontal y vertical
+
+		//UBICAR EL DEFINE Y CAMBIARLO POR EL VALOR BUENO
+		if ((fila + i) <= 10)   tablero.getTile({ fila + i,columna }).setposible(true); //fil
+		
+		if ((fila - i) >= 0)    tablero.getTile({ fila - i,columna }).setposible(true);
+			
+		if ((columna + i) <= 8)	tablero.getTile({ fila,columna + i }).setposible(true);//col
+		
+		if ((columna - i) >= 0) tablero.getTile({ fila,columna - i }).setposible(true);
+			
+	}
+}
