@@ -116,7 +116,7 @@ void piece::getDiagonal(Punto2D pos, int reach, Board& tablero)
 
 	//Para comer a otras piezas
 	for (int i = 1; i <= reach; i++) { //asigna a las matrices en la diagonal el estatus de posible
-		if ((fila + i) <= 8 && (columna + i) <= 8 && !d1) { //fil col
+		if ((fila + i) <= 10 && (columna + i) <= 8 && !d1) { //fil col
 
 			//Si el color de la pieza es igual al color de la pieza que está comprobando mediante la casilla entonces no la hace posible, sino sí que es posible
 			if (int(color) == tablero.getTile({ fila + i,columna + i }).getocupada()) { d1 = true; }
@@ -167,7 +167,7 @@ void piece::getHorizontal(Punto2D pos, int reach, Board& tablero)
 			if (tablero.getTile({ fila + i,columna }).getposible() && tablero.getTile({ fila + i,columna }).getocupada() != int(color) && tablero.getTile({ fila + i,columna }).getocupada() != 2)
 				tablero.getTile({ fila + i,columna }).setcomestible(true);
 		} 
-		if ((fila - i) > 0 && !d2) {
+		if ((fila - i) >= 1 && !d2) {
 			if (int(color) == tablero.getTile({ fila - i,columna }).getocupada()) { d2 = true; }
 			if (d2 == false) tablero.getTile({ fila - i,columna }).setposible(true), posibles.push_back({ fila - i,columna });
 			if (tablero.getTile({ fila - i,columna }).getposible() && tablero.getTile({ fila - i,columna }).getocupada() != int(color) && tablero.getTile({ fila - i,columna }).getocupada() != 2)
@@ -181,7 +181,7 @@ void piece::getHorizontal(Punto2D pos, int reach, Board& tablero)
 				tablero.getTile({ fila ,columna + i }).setcomestible(true);
 		}
 		
-		if ((columna - i) > 0 && !d4) {
+		if ((columna - i) >= 1 && !d4) {
 			if (int(color) == tablero.getTile({ fila,columna - i }).getocupada()) { d4 = true; }
 			if (d4 == false) tablero.getTile({ fila,columna - i }).setposible(true), posibles.push_back({ fila,columna - i });
 			if (tablero.getTile({ fila ,columna - i }).getposible() && tablero.getTile({ fila ,columna - i }).getocupada() != int(color) && tablero.getTile({ fila ,columna - i }).getocupada() != 2)
@@ -207,7 +207,7 @@ void piece::getEle(Punto2D pos, Board& tablero)
 	}
 		
 
-	if (fila + 2 < 11 && columna - 1 > 0 && int(color) != tablero.getTile({ fila + 2,columna - 1 }).getocupada())
+	if (fila + 2 < 11 && columna - 1 >= 1 && int(color) != tablero.getTile({ fila + 2,columna - 1 }).getocupada())
 	{
 		tablero.getTile({ fila + 2, columna - 1 }).setposible(true);
 		if (tablero.getTile({ fila + 2,columna - 1 }).getposible() && tablero.getTile({ fila + 2,columna - 1 }).getocupada() != int(color) && tablero.getTile({ fila + 2,columna - 1 }).getocupada() != 2)
@@ -216,7 +216,7 @@ void piece::getEle(Punto2D pos, Board& tablero)
 	}
 		
 
-	if (fila - 2 > 0 && columna + 1 < 9 && int(color) != tablero.getTile({ fila - 2,columna + 1 }).getocupada())
+	if (fila - 2 >= 1 && columna + 1 < 9 && int(color) != tablero.getTile({ fila - 2,columna + 1 }).getocupada())
 	{
 		tablero.getTile({ fila - 2, columna + 1 }).setposible(true);
 		if (tablero.getTile({ fila - 2,columna + 1 }).getposible() && tablero.getTile({ fila - 2,columna + 1 }).getocupada() != int(color) && tablero.getTile({ fila - 2,columna + 1 }).getocupada() != 2)
@@ -225,7 +225,7 @@ void piece::getEle(Punto2D pos, Board& tablero)
 	}
 		
 
-	if (fila - 2 > 0 && columna - 1 > 0 && int(color) != tablero.getTile({ fila - 2,columna - 1 }).getocupada())
+	if (fila - 2 >= 1 && columna - 1 >= 1 && int(color) != tablero.getTile({ fila - 2,columna - 1 }).getocupada())
 	{
 		tablero.getTile({ fila - 2, columna - 1 }).setposible(true);
 		if (tablero.getTile({ fila - 2,columna - 1 }).getposible() && tablero.getTile({ fila - 2,columna - 1 }).getocupada() != int(color) && tablero.getTile({ fila - 2,columna - 1 }).getocupada() != 2)
