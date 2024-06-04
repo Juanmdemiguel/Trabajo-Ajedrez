@@ -10,9 +10,10 @@
 class Tile
 {
 	bool color;
-	bool ocupada = false; //informa si hay una pieza encima
+	int ocupada = 2; //informa si no hay ninguna pieza (2), si hay una negra (0) o si hay una blanca (1) 
 	bool apuntada = false; //informa si el ratón la está apuntando
 	bool posible = false; //informa si es un posible movimiento de una pieza
+	bool comestible = false;
 	int tam = square;
 	Punto2D posicion;
 
@@ -21,11 +22,13 @@ public:
 	void Dibuja(int i, int j); //Dibuja la casilla. Recibe las coordenadas como argumento
 	void setPos(const int& col, const int& row) { this->posicion = { (double)col,(double)row }; };
 	Punto2D getCenter();
-	bool getocupada() { return ocupada; };
-	void setocupada(const bool& s) { ocupada = s; };
+	int getocupada() { return ocupada; };
+	void setocupada(const int& s) { ocupada = s; };
 	void apunta(const bool& s) { apuntada = s; };
 	void setposible(bool p) { posible = p; };
 	bool getposible() { return posible; };
+	void setcomestible(bool p) { comestible = p; };
+	bool getcomestible() { return comestible; };
 	//Amigos
 
 	friend class Board;
