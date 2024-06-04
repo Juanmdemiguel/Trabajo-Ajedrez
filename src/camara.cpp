@@ -58,14 +58,13 @@ void Camara::cambio_modo_libre(Menu& principal, unsigned char key)
 }
 
 //Permite la rotación al cambiar de turno (provisionalmente se acciona al pulsar el espacio)
-void Camara::actuador(Menu& principal, unsigned char key)
+void Camara::actuador(Menu& principal, bool& _rotate)
 {
     if (!principal.getMenu()) {
-        bool _rotar;
-        _rotar = FALSE;
-        if (key == ' ')
-            _rotar = TRUE;
-        rotar = _rotar;
+    
+        rotar = _rotate;
+        _rotate = false;
+
     }
 }
 
@@ -186,7 +185,7 @@ void Camara::rota(Menu& principal)
             //Se calcula la nueva posición de la cámara
             d = sqrt((posx - mirax) * (posx - mirax) + (posz - miraz) * (posz - miraz));
             theta = atan2((posz - miraz), (posx - mirax));
-            theta = theta + 0.0291;
+            theta = theta + 0.04;
 
             if (theta >= 0 && theta != (atan2((15.0 - 15.0), (-20.0 - 12.0)) + 0.0291) && cambionegro == FALSE)
                 theta = 0;

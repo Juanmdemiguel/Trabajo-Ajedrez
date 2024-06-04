@@ -9,6 +9,7 @@ void Game::dibujaJuego(int d) {	//Funcion dibujaJuego provisional, se añade a cl
 	blancas.dibuja(board);
 	negras.dibuja(board);
 	
+
 }
 
 void Game::inicializa(int t, int v)
@@ -47,16 +48,30 @@ void Game::inicializa(int t, int v)
 
 void Game::selecciona()
 {
+	bool aux;
+
 	if (turno) {
 		for (auto b : blancas) {
-			if (b->get_pos() == Click)
-				b->getPosibles(b->get_pos(), board);
+
+			if (b->get_pos() == Click) b->getPosibles(b->get_pos(), board);
+			
+			aux = b->mueve(Click, b->getVectorPosibles());
+			
+			if (aux) mov = aux;
+
+			//cout << mov << endl;
 		}
 	}
 	if (!turno) {
 		for (auto n : negras) {
-			if (n->get_pos() == Click)
-				n->getPosibles(n->get_pos(), board);
+	
+			if (n->get_pos() == Click) n->getPosibles(n->get_pos(), board);
+
+			aux = n->mueve(Click, n->getVectorPosibles());
+
+			if (aux) mov = aux;
+
+			//cout << mov << endl;
 		}
 	}
 }

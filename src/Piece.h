@@ -8,11 +8,13 @@
 class piece
 {
 protected:
+	vector <Punto2D> posibles{};	//Almacena posiciones posibles ¡BORRAR POSICIONES TRAS SET DE POSICION!
 	Punto2D posicion;
 	//Se define el color de las piezas. 0 para negro y 1 para blanco.
 	bool color;
 	int tematica; //Star Wars ETSIDI...         Selecciona el como visualizar la pieza
 	enum TIPO { PAWN, ROOK, BISHOP, KNIGHT, KING, QUEEN, ARCHBISHOP, CHANCELLOR } tipo;
+	
 
 	inline static Model King{ "resources/model/King.obj" };
 	inline static Model Queen{ "resources/model/Queen.obj" };
@@ -35,5 +37,11 @@ public:
 	virtual void getHorizontal(Punto2D pos, int reach, Board& tablero);
 	virtual void getEle(Punto2D pos, Board& tablero);
 	Punto2D get_pos() { return posicion; };
+
+	vector <Punto2D> getVectorPosibles() { return posibles; }
+
+	bool mueve(const Punto2D& pos_raton, vector <Punto2D> posibles);
+
+	void cleanVector();
 
 };

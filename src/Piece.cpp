@@ -206,3 +206,32 @@ void piece::getEle(Punto2D pos, Board& tablero)
 
 }
 
+bool piece::mueve(const Punto2D& pos_raton, vector <Punto2D> posibles)
+{
+	for (auto p : posibles)
+	{
+		if (pos_raton == p)	// Si posición del ratón es igual a la de una de las posibles
+		{
+			posicion.x = p.x;	//Cambia posición de la pieza
+			posicion.z = p.z;
+			cleanVector();
+			return true;
+		}
+
+		if (posicion != pos_raton) cleanVector();
+
+		//cout << p.x << ',' << p.z << endl;
+		//cout << pos_raton.x <<','<< pos_raton.z << endl;
+
+	
+	}
+	return false;
+
+}
+
+void piece::cleanVector()
+{
+	int num = posibles.size();
+	for (int contador = 0; contador < num; contador++) { posibles.pop_back(); }
+
+}

@@ -8,7 +8,9 @@ class Punto2D
 public:
 	double z, x;
 	bool operator==(Punto2D p) { return (z == p.z && x == p.x) ? true : false ; };
+	
 };
+
 
 //Funciones matematicas de utilidad relativa
 void drawEsferadePruebas(float sphereX, float sphereY);//Dibuja una esfera roja en unas coordenadas (se debe borrar cuando queramos)

@@ -16,6 +16,9 @@ void Coordinator::Dibuja()
 	case Estado::JUEGO:
 		juego.dibujaJuego(principal.tematica);
 		juego.selecciona();
+		PasaTurno();
+		if (camara.Cambiando()) juego.ClearSelec();
+
 		break;
 	}
 }
@@ -48,6 +51,7 @@ void Coordinator::Click(int _button, int state, int _x, int _y)
 			MouseToGame();
 			juego.ClearSelec();
 		}
+
 	}
 }
 
@@ -67,14 +71,19 @@ void Coordinator::Teclado(unsigned char key, int x_t, int y_t)
 	camara.vertical(principal, key);
 	camara.cambio_modo_libre(principal, key);
 
-	if (key == ' ' && juego.getMov()) {
-		juego.Listo();
-		juego.ClearSelec();
-		camara.actuador(principal, key);
-	}
 }
 
 void Coordinator::MouseToGame()
 {
 	juego.SetClick(raton.getClick());
+}
+
+void Coordinator::PasaTurno()
+{
+	if (juego.getMov()) {
+		juego.Listo();
+		juego.ClearSelec();
+		camara.actuador(principal, juego.getMov());
+		juego.setMov(false);
+	}
 }
