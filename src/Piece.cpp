@@ -120,19 +120,19 @@ void piece::getDiagonal(Punto2D pos, int reach, Board& tablero)
 	for (int i = 1; i <= reach; i++) { //asigna a las matrices en la diagonal el estatus de posible
 		if ((fila + i) <= 10 && (columna + i) <= 8 && !d1) { //fil col
 			if (tablero.getTile({ fila + i,columna + i }).getocupada()) { d1 == true; break; }
-			tablero.getTile({ fila + i,columna + i }).setposible(true), posibles.push_back({fila+i,columna+i});
+			tablero.getTile({ fila + i,columna + i }).setposible(true), posibles.push_back({fila + i,columna + i});
 		}
 		if ((fila - i) >= 1 && (columna - i) >= 0 && !d2){
 			if (tablero.getTile({ fila - i,columna - i }).getocupada()) { d2 == true; break; }
-			tablero.getTile({ fila - i,columna - i }).setposible(true), posibles.push_back({ fila + i,columna + i });
+			tablero.getTile({ fila - i,columna - i }).setposible(true), posibles.push_back({ fila - i,columna - i });
 		}
 		if ((fila - i) >= 1 && (columna + i) <= 8 && !d3) { //col
 			if (tablero.getTile({ fila - i,columna + i }).getocupada()) { d3 == true; break; }
-			tablero.getTile({ fila - i,columna + i }).setposible(true), posibles.push_back({ fila + i,columna + i });
+			tablero.getTile({ fila - i,columna + i }).setposible(true), posibles.push_back({ fila - i,columna + i });
 		}
 		if ((fila + i) <= fil && (columna - i) >= 0 && !d4) {
 			if (tablero.getTile({ fila + i,columna - i }).getocupada()) { d4 == true; break; }
-			tablero.getTile({ fila + i,columna - i }).setposible(true), posibles.push_back({ fila + i,columna + i });
+			tablero.getTile({ fila + i,columna - i }).setposible(true), posibles.push_back({ fila + i,columna - i });
 		}
 
 		for (auto i : posibles)
@@ -157,7 +157,7 @@ void piece::getHorizontal(Punto2D pos, int reach, Board& tablero)
 		} 
 		if ((fila - i) >= 0 && !d2) {
 			if (tablero.getTile({ fila - i,columna }).getocupada()) { d2 == true; break; }
-			tablero.getTile({ fila - i,columna }).setposible(true), posibles.push_back({ fila + i,columna });
+			tablero.getTile({ fila - i,columna }).setposible(true), posibles.push_back({ fila - i,columna });
 		}
 			
 		if ((columna + i) <= 8 && !d3) {
@@ -181,28 +181,28 @@ void piece::getEle(Punto2D pos, Board& tablero)
 	double fila = (int)pos.z;
 
 	if (fila + 2 < 11 && columna + 1 < 9 && !tablero.getTile({ fila + 2,columna + 1}).getocupada()) 
-		tablero.getTile({ fila + 2, columna + 1 }).setposible(true);
+		tablero.getTile({ fila + 2, columna + 1 }).setposible(true), posibles.push_back({ fila + 2,columna + 1 });
 
 	if (fila + 2 < 11 && columna - 1 > 0 && !tablero.getTile({ fila + 2,columna - 1}).getocupada())
-		tablero.getTile({ fila + 2, columna - 1 }).setposible(true);
+		tablero.getTile({ fila + 2, columna - 1 }).setposible(true), posibles.push_back({ fila + 2,columna - 1 });
 
 	if (fila - 2 > 0 && columna + 1 < 9 && !tablero.getTile({ fila - 2,columna + 1 }).getocupada())
-		tablero.getTile({ fila - 2, columna + 1 }).setposible(true);
+		tablero.getTile({ fila - 2, columna + 1 }).setposible(true), posibles.push_back({ fila - 2,columna + 1 });
 
 	if (fila - 2 > 0 && columna - 1 > 0 && !tablero.getTile({ fila - 2,columna - 1 }).getocupada())
-		tablero.getTile({ fila - 2, columna - 1 }).setposible(true);
+		tablero.getTile({ fila - 2, columna - 1 }).setposible(true), posibles.push_back({ fila - 2,columna - 1 });
 
 	if (fila + 1 < 11 && columna + 2 < 9 && !tablero.getTile({ fila + 1,columna + 2 }).getocupada())
-		tablero.getTile({ fila + 1, columna + 2 }).setposible(true);
+		tablero.getTile({ fila + 1, columna + 2 }).setposible(true), posibles.push_back({ fila + 1,columna + 2 });
 
 	if (fila + 1 < 11 && columna - 2 > 0 && !tablero.getTile({ fila + 1,columna - 2 }).getocupada())
-		tablero.getTile({ fila + 1, columna - 2 }).setposible(true);
+		tablero.getTile({ fila + 1, columna - 2 }).setposible(true), posibles.push_back({ fila + 1,columna - 2 });
 
 	if (fila - 1 > 0 && columna + 2 < 9 && !tablero.getTile({ fila - 1,columna + 2 }).getocupada())
-		tablero.getTile({ fila - 1, columna + 2 }).setposible(true);
+		tablero.getTile({ fila - 1, columna + 2 }).setposible(true), posibles.push_back({ fila - 1,columna + 2 });
 
 	if (fila - 1 > 0 && columna - 2 > 0 && !tablero.getTile({ fila - 1,columna - 2 }).getocupada())
-		tablero.getTile({ fila - 1, columna - 2 }).setposible(true);
+		tablero.getTile({ fila - 1, columna - 2 }).setposible(true), posibles.push_back({ fila - 1,columna - 2 });
 
 }
 
