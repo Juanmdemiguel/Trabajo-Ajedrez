@@ -15,32 +15,146 @@ void piece::dibuja1Pieza(Board& tablero)
 
 void piece::dibujaSprite(Board& tablero)
 {
+	int tematica = 0;
 	glEnable(GL_TEXTURE_2D);
 
 	switch (tipo) {
 	case TIPO::PAWN:
-		glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/Arturito.png").id);
+		switch (tematica) {
+		case 0:
+			if (color)
+				glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/2D/SW/REBELDES/Arturito.png").id);
+			else
+				glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/2D/SW/IMPERIO/Stormtrooper.png").id);
+			break;
+
+		case 1:
+			if (color)
+				glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/2D/UPM/DELEGACIONES/ETSICCP.png").id);
+			else
+				glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/2D/UPM/ESCUELAS/peon.png").id);
+			break;
+		}
 		break;
+
 	case TIPO::ROOK:
-		glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/Arturito.png").id);
+		switch (tematica) {
+		case 0:
+			if (color)
+				glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/2D/SW/REBELDES/Chewbacca.png").id);
+			else
+				glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/2D/SW/IMPERIO/Java.png").id);
+			break;
+
+		case 1:
+			if (color)
+				glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/2D/UPM/DELEGACIONES/ETST.png").id);
+			else
+				glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/2D/UPM/ESCUELAS/torre.png").id);
+			break;
+		}
 		break;
+
 	case TIPO::BISHOP:
-		glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/Arturito.png").id);
+		switch (tematica) {
+		case 0:
+			if (color)
+				glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/2D/SW/REBELDES/Citripio.png").id);
+			else
+				glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/2D/SW/IMPERIO/BobaFett.png").id);
+			break;
+		case 1:
+			if (color)
+				glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/2D/UPM/DELEGACIONES/ESTIN.png").id);
+			else
+				glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/2D/UPM/ESCUELAS/alfil.png").id);
+			break;
+		}
 		break;
+
 	case TIPO::KNIGHT:
-		glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/Arturito.png").id);
+		switch (tematica) {
+		case 0:
+			if (color)
+				glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/2D/SW/REBELDES/XWing.png").id);
+			else
+				glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/2D/SW/IMPERIO/TIE.png").id);
+			break;
+		case 1:
+			if (color)
+				glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/2D/UPM/DELEGACIONES/ETSE.png").id);
+			else
+				glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/2D/UPM/ESCUELAS/caballo.png").id);
+			break;
+		}
 		break;
+
 	case TIPO::KING:
-		glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/Arturito.png").id);
+		switch (tematica) {
+		case 0:
+			if (color)
+				glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/2D/SW/REBELDES/Luke.png").id);
+			else
+				glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/2D/SW/IMPERIO/Jar.png").id);
+			break;
+		case 1:
+			if (color)
+				glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/2DUPM/DELEGACIONES//ETSIDI.png").id);
+			else
+				glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/2D/UPM/ESCUELAS/rey.png").id);
+			break;
+		}
 		break;
+
 	case TIPO::QUEEN:
-		glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/Arturito.png").id);
+		switch (tematica) {
+		case 0:
+			if (color)
+				glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/2D/SW/REBELDES/Leia.png").id);
+			else
+				glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/2D/SW/IMPERIO/Vader.png").id);
+			break;
+		case 1:
+			if (color)
+				glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/2D/UPM/DELEGACIONES/ETSII.png").id);
+			else
+				glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/2D/UPM/ESCUELAS/reina.png").id);
+			break;
+		}
 		break;
+
 	case TIPO::CHANCELLOR:
-		glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/Arturito.png").id);
+		switch (tematica) {
+		case 0:
+			if (color)
+				glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/2D/SW/REBELDES/Han.png").id);
+			else
+				glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/2D/SW/IMPERIO/Kylo.png").id);
+			break;
+		case 1:
+			if (color)
+				glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/2D/UPM/DELEGACIONES/ETSIME.png").id);
+			else
+				glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/2D/UPM/ESCUELAS/canciller.png").id);
+			break;
+		}
 		break;
+
 	case TIPO::ARCHBISHOP:
-		glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/Arturito.png").id);
+		switch (tematica) {
+		case 0:
+			if (color)
+				glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/2D/SW/REBELDES/Yoda.png").id);
+			else
+				glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/2D/SW/IMPERIO/Grievous.png").id);
+			break;
+		case 1:
+			if (color)
+				glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/2D/ETSIAE.png").id);
+			else
+				glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/2D/arzobispo.png").id);
+			break;
+		}
 		break;
 	}
 
