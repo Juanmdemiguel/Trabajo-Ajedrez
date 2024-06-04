@@ -55,7 +55,7 @@ void Game::selecciona()
 
 			if (b->get_pos() == Click) b->getPosibles(b->get_pos(), board);
 			
-			aux = b->mueve(Click, b->getVectorPosibles());
+			aux = b->mueve(Click, b->getVectorPosibles(),board);
 			
 			if (aux) mov = aux;
 
@@ -67,7 +67,7 @@ void Game::selecciona()
 	
 			if (n->get_pos() == Click) n->getPosibles(n->get_pos(), board);
 
-			aux = n->mueve(Click, n->getVectorPosibles());
+			aux = n->mueve(Click, n->getVectorPosibles(),board);
 
 			if (aux) mov = aux;
 
@@ -88,8 +88,8 @@ void Game::ocuparCasillas() {
 	for (double i = 1; i < fil + 1; i++) {
 		for (double j = 1; j < col + 1; j++) {
 			c = { j,i };
-			for (auto k : blancas) if (k->get_pos() == c) board.getTile({ j,i }).setocupada(true);
-			for (auto k : negras) if (k->get_pos() == c) board.getTile({ j,i }).setocupada(true);
+			for (auto k : blancas) if (k->get_pos() == c) board.getTile({ j,i }).setocupada(1);
+			for (auto k : negras) if (k->get_pos() == c) board.getTile({ j,i }).setocupada(0);
 		}
 	}
 }

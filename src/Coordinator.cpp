@@ -16,6 +16,7 @@ void Coordinator::Dibuja()
 	case Estado::JUEGO:
 		juego.dibujaJuego(principal.tematica);
 		juego.selecciona();
+		juego.ocuparCasillas();
 		PasaTurno();
 		if (camara.Cambiando()) juego.ClearSelec();
 

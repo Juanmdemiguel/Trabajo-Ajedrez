@@ -37,10 +37,11 @@ public:
 	virtual void getHorizontal(Punto2D pos, int reach, Board& tablero);
 	virtual void getEle(Punto2D pos, Board& tablero);
 	Punto2D get_pos() { return posicion; };
+	bool getColor() { return color; };
 
 	vector <Punto2D> getVectorPosibles() { return posibles; }
 
-	bool mueve(const Punto2D& pos_raton, vector <Punto2D> posibles);
+	bool mueve(const Punto2D& pos_raton, vector <Punto2D> posibles, Board& tablero);
 
 	void cleanVector();
 
