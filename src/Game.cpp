@@ -1,5 +1,6 @@
 #include"Game.h"
 
+
 void Game::dibujaJuego(int d) {	//Funcion dibujaJuego provisional, se añade a clase Juego/Game cuando se desarrolle
 	//Dibuja el tablero
 	board.dibuja();
@@ -46,26 +47,58 @@ void Game::inicializa(int t, int v)
 
 void Game::selecciona()
 {
-	bool aux;
+	bool aux, comp{};
+	int p = 0;
 
 	if (turno) {
 		for (auto b : blancas) {
 
 			if (b->get_pos() == Click) b->getPosibles(b->get_pos(), board);
+<<<<<<< Updated upstream
 			
 			aux = b->mueve(Click, b->getVectorPosibles(),board);
 			
 			if (aux) mov = aux;
+=======
+
+			aux = b->mueve(Click, b->getVectorPosibles(), board);
+
+			if (aux)
+			{
+				if (b->get_pos().x == 8) {
+					unsigned char key;
+					p = b->promocionar(b->get_pos());
+					comp = Promocion(p, b, 1);
+				}
+				mov = aux;
+			}
+			if (comp) break;
+
+			//cout << mov << endl;
+>>>>>>> Stashed changes
 		}
 	}
 	if (!turno) {
 		for (auto n : negras) {
-	
+			
 			if (n->get_pos() == Click) n->getPosibles(n->get_pos(), board);
 
 			aux = n->mueve(Click, n->getVectorPosibles(),board);
 
+<<<<<<< Updated upstream
 			if (aux) mov = aux;
+=======
+			if (aux)
+			{
+				if (n->get_pos().x == 1) {
+					unsigned char key;
+					p = n->promocionar(n->get_pos());
+					comp = Promocion(p, n, 1);
+				}
+				mov = aux;
+			}
+			if (comp) break;
+>>>>>>> Stashed changes
 		}
 	}
 }
@@ -77,3 +110,109 @@ void Game::ClearSelec()
 	}
 }
 
+<<<<<<< Updated upstream
+=======
+void Game::ocuparCasillas() {
+	Punto2D c;
+	for (double i = 1; i < fil + 1; i++) {
+		for (double j = 1; j < col + 1; j++) {
+			c = { j,i };
+			for (auto k : blancas) if (k->get_pos() == c) board.getTile({ j,i }).setocupada(1);
+			for (auto k : negras) if (k->get_pos() == c) board.getTile({ j,i }).setocupada(0);
+		}
+	}
+}
+
+bool Game::Promocion(int tipo, piece *pieza, int t)
+{
+
+	switch (tipo)
+	{
+	case 1:
+		if (!pieza->getColor()) 
+		{
+			negras.agregar(new Queen(pieza->get_pos() , pieza->getColor(), t));
+			negras.eliminar(pieza);
+		}
+		else
+		{
+			blancas.agregar(new Queen( pieza->get_pos() , pieza->getColor(), t));
+			blancas.eliminar(pieza);
+		}
+			return true;
+		break;
+
+	case 2:
+		if (!pieza->getColor()) 
+		{
+			negras.agregar(new Bishop({ pieza->get_pos() }, pieza->getColor(), t));
+			negras.eliminar(pieza);
+		}
+		else
+		{
+			blancas.agregar(new Bishop({ pieza->get_pos() }, pieza->getColor(), t));
+			blancas.eliminar(pieza);
+		}
+			return true;
+		break;
+
+	case 3:
+		if (!pieza->getColor())
+		{
+			negras.agregar(new Rook({ pieza->get_pos() }, pieza->getColor(), t));
+			negras.eliminar(pieza);
+		}
+		else
+		{
+			blancas.agregar(new Rook({ pieza->get_pos() }, pieza->getColor(), t));
+			blancas.eliminar(pieza);
+		}
+			return true;
+		break;
+
+	case 4:
+		if (!pieza->getColor()) 
+		{
+			negras.agregar(new Knight({ pieza->get_pos() }, pieza->getColor(), t));
+			negras.eliminar(pieza);
+		}
+		else
+		{
+			blancas.agregar(new Knight({ pieza->get_pos() }, pieza->getColor(), t));
+			blancas.eliminar(pieza);
+		}
+			return true;
+		break;
+
+	case 5:
+		if (!pieza->getColor()) 
+		{
+			negras.agregar(new Archbishop({ pieza->get_pos() }, pieza->getColor(), t));
+			negras.eliminar(pieza);
+		}
+		else
+		{
+			blancas.agregar(new Archbishop({ pieza->get_pos() }, pieza->getColor(), t));
+			blancas.eliminar(pieza);
+		}
+		return true;
+		break;
+
+	case 6:
+		if (!pieza->getColor())
+		{
+			negras.agregar(new Chancellor({ pieza->get_pos() }, pieza->getColor(), t));
+			negras.eliminar(pieza);
+			
+		}
+		else 
+		{
+			blancas.agregar(new Chancellor({ pieza->get_pos() }, pieza->getColor(), t));
+			blancas.eliminar(pieza);
+		}
+		return true;
+		break;
+	}
+	return false;
+}
+>>>>>>> Stashed changes

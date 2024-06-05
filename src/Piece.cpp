@@ -259,6 +259,14 @@ void piece::getDiagonal(Punto2D pos, int reach, Board& tablero)
 				tablero.getTile({ fila + i,columna - i }).setcomestible(true);
 		}
 
+<<<<<<< Updated upstream
+=======
+
+
+		/*for (auto p : posibles)
+			cout << p.x << ';' << p.z << endl;*/
+
+>>>>>>> Stashed changes
 	}
 }
 void piece::getHorizontal(Punto2D pos, int reach, Board& tablero)
@@ -380,7 +388,7 @@ void piece::getEle(Punto2D pos, Board& tablero)
 
 }
 
-bool piece::mueve(const Punto2D& pos_raton, vector <Punto2D> posibles, Board &tablero)
+bool piece::mueve( const Punto2D& pos_raton, vector <Punto2D> posibles, Board &tablero)
 {
 	for (auto p : posibles)
 	{

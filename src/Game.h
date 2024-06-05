@@ -7,6 +7,7 @@
 #include "cstring"
 #include <iostream>
 
+
 class Game
 {
 	Board board;
@@ -28,7 +29,7 @@ public:
 	void Listo() { turno = !turno; }
 	bool& getMov() { return mov; }
 	void setMov(bool _mov) { mov = _mov; }
-	
+	bool Promocion(int tipo, piece *pieza, int t);
 	//Amigos
 
 };

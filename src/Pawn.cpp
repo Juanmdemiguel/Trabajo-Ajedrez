@@ -71,3 +71,54 @@ void Pawn::getPosibles(Punto2D pos, Board& tablero) {
 
 }
 
+int Pawn::promocionar(Punto2D pos)
+{
+	unsigned char key;
+
+	if (pos.x == 1 || pos.x == 8)
+	{
+		promocion = TRUE;
+		if (promocion)
+		{
+			cout << "Q: queen, B: bishop, R:rook, K:knight, A:archbishop, C:chancellor" << endl;
+			cin >> key;
+
+			if (key == 'Q' || key == 'q') //Cambia peon por reina
+			{
+				promocion = FALSE;
+				return 1;
+			}
+			if (key == 'B' || key == 'b') //Cambia peon por alfil
+			{
+				promocion = FALSE;
+				return 2;
+			}
+			if (key == 'R' || key == 'r') //Cambia peon por torre
+			{
+				promocion = FALSE;
+				return 3;
+			}
+			if (key == 'K' || key == 'k') //Cambia peon por caballo
+			{
+				promocion = FALSE;
+				return 4;
+			}
+			if (key == 'A' || key == 'a') //Cambia peon por arzobispo
+			{
+				promocion = FALSE;
+				return 5;
+			}
+			if (key == 'C' || key == 'c') //Cambia peon por canciller
+			{
+				promocion = FALSE;
+				return 6;
+			}
+
+			if (key == 'N' || key == 'n') //Cambia peon por canciller
+			{
+				promocion = FALSE;
+				return 7;
+			}
+		}
+	}
+}

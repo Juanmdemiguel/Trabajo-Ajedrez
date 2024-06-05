@@ -38,11 +38,18 @@ public:
 	virtual void getEle(Punto2D pos, Board& tablero);
 	Punto2D get_pos() { return posicion; };
 	bool getColor() { return color; };
+	TIPO getTipo() { return tipo; };
 
 	vector <Punto2D> getVectorPosibles() { return posibles; }
 
 	bool mueve(const Punto2D& pos_raton, vector <Punto2D> posibles, Board& tablero);
 
 	void cleanVector();
+
+	virtual int promocionar(Punto2D pos)
+	{
+		if (tipo != PAWN)
+			return 0;
+	}
 
 };
