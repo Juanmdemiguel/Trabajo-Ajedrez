@@ -27,7 +27,7 @@ public:
 	void setBoton(const bool& valor) { boton = valor; }
 	void iniciaMenu();
 	void clickBotonesMenu();
-	void musica() { (sonido) ? ETSIDI::playMusica("resources/sounds/menu.mp3", true) : ETSIDI::stopMusica(); };
+	void musica() { (sonido) ? ETSIDI::playMusica("resources/sounds/menu2.mp3", true) : ETSIDI::stopMusica(); };
 	void Tema();
 	int getTematica() { return tematica; }
 	int getVision() { return vision; }

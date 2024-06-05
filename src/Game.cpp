@@ -86,14 +86,13 @@ void Game::selecciona(int t, int v)
 					comp = Promocion(p, b, t, v);
 				}
 				mov = aux;
+				MueveSonido();
 			}
 			if (comp) break;
 
-			//cout << mov << endl;
-
 		}
-		if (mov)cout << comprobJaque(1);
 	}
+
 	if (!turno) {
 		for (auto n : negras) {
 			if (n->get_pos() == Click) n->getPosibles(board);
@@ -115,7 +114,6 @@ void Game::selecciona(int t, int v)
 			}
 			else aux = n->mueve(Click, n->getVectorPosibles(),board);
 
-
 			if (aux)
 			{
 				if (n->get_pos().x == 1) {
@@ -124,11 +122,11 @@ void Game::selecciona(int t, int v)
 					comp = Promocion(p, n, t, v);
 				}
 				mov = aux;
+				MueveSonido();
 			}
 			if (comp) break;
 
 		}
-		if (mov)cout << comprobJaque(1);
 	}
 	comprobEnroqueCorto();
 	comprobEnroqueLargo();
@@ -265,6 +263,7 @@ bool Game::comprobEnroqueCorto()
 	if ((rookb == 1 && kingb == 1 && vaciob == 1) || (rookn == 1 && kingn == 1 && vacion == 1))return true;
 	else return false;
 }
+
 bool Game::comprobEnroqueLargo()
 {
 	//Blancas
@@ -298,7 +297,7 @@ bool Game::comprobEnroqueLargo()
 
 bool Game::comprobJaque(bool c)
 {
-	bool bit=0;
+	bool bit = 0;
 	if (c)
 	{
 		for (auto b : blancas) {
@@ -331,5 +330,20 @@ bool Game::comprobJaque(bool c)
 			}
 		}
 	}
-	
+}
+
+void Game::Comer()
+{
+	int	valor = ETSIDI::lanzaDado(5); //valor valdra entre 0 y 5 entero
+
+	switch (valor)
+	{
+	case 0: ETSIDI::play("resources/sounds/disparo/s1.wav"); valor = 10; break;
+	case 1: ETSIDI::play("resources/sounds/disparo/s2.wav"); valor = 10; break;
+	case 2: ETSIDI::play("resources/sounds/disparo/s3.wav"); valor = 10; break;
+	case 3: ETSIDI::play("resources/sounds/disparo/s4.wav"); valor = 10; break;
+	case 4: ETSIDI::play("resources/sounds/disparo/s5.wav"); valor = 10; break;
+	case 5: ETSIDI::play("resources/sounds/disparo/s6.wav"); valor = 10; break;
+		
+	}
 }

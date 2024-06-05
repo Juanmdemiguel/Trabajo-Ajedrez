@@ -54,7 +54,7 @@ int main(int argc,char* argv[])
 
 	//coord.Inicializa();
 
-	ETSIDI::playMusica("resources/sounds/menu.mp3", true);
+	ETSIDI::playMusica("resources/sounds/menu2.mp3", true);
 
 	//pasarle el control a GLUT,que llamara a los callbacks
 	glutMainLoop();	  //Bucle infinito

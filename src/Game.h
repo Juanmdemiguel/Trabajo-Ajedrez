@@ -6,6 +6,7 @@
 #include "ListaPiezas.h"
 #include "cstring"
 #include <iostream>
+#include "ETSIDI.h"
 
 
 class Game
@@ -30,9 +31,14 @@ public:
 	bool& getMov() { return mov; }
 	void setMov(bool _mov) { mov = _mov; }
 	bool Promocion(int tipo, piece *pieza, int t, int v);
+
 	bool comprobEnroqueCorto();
 	bool comprobEnroqueLargo();
 	bool comprobJaque(bool c);
+
+	void Comer();
+	void MueveSonido() { ETSIDI::play("resources/sounds/caminar/pasos1.wav"); }
+
 	//Amigos
 
 };
