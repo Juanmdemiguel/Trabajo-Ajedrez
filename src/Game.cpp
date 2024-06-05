@@ -1,11 +1,20 @@
 #include"Game.h"
 
+<<<<<<< Updated upstream
 
 void Game::dibujaJuego(int d) {	//Funcion dibujaJuego provisional, se añade a clase Juego/Game cuando se desarrolle
+=======
+void Game::dibujaJuego(int tema, int vision) {	//Funcion dibujaJuego provisional, se añade a clase Juego/Game cuando se desarrolle
+
+>>>>>>> Stashed changes
 	//Dibuja el tablero
 	board.dibuja();
-	blancas.cambiaTematica(d);
-	negras.cambiaTematica(d);
+	blancas.cambiaTematica(tema);
+	negras.cambiaTematica(tema);
+
+	blancas.cambiaVision(vision);
+	negras.cambiaVision(vision);
+
 	//Dibuja todas las piezas --> FALTA CONCRETAR EL MÉTODO
 	blancas.dibuja(board);
 	negras.dibuja(board);
@@ -16,31 +25,31 @@ void Game::dibujaJuego(int d) {	//Funcion dibujaJuego provisional, se añade a cl
 void Game::inicializa(int t, int v)
 {
 	for (double i = 1; i <= 10; ++i) {
-		blancas.agregar(new Pawn({ i,2 }, 1, t));
-		negras.agregar(new Pawn({ i,7 }, 0, t));
+		blancas.agregar(new Pawn({ i,2 }, 1, t, v));
+		negras.agregar(new Pawn({ i,7 }, 0, t, v));
 	}
 	//Blancas
-	blancas.agregar(new Rook({ 1,1 }, 1, t));
-	blancas.agregar(new Rook({ 10,1 }, 1, t));
-	blancas.agregar(new Knight({ 2,1 }, 1, t));
-	blancas.agregar(new Knight({ 9,1 }, 1, t));
-	blancas.agregar(new Archbishop({ 3,1 }, 1, t));
-	blancas.agregar(new Chancellor({ 8,1 }, 1, t));
-	blancas.agregar(new Bishop({ 4,1 }, 1, t));
-	blancas.agregar(new Bishop({ 7,1 }, 1, t));
-	blancas.agregar(new Queen({ 5,1 }, 1, t));
-	blancas.agregar(new King({ 6,1 }, 1, t));
+	blancas.agregar(new Rook({ 1,1 }, 1, t, v));
+	blancas.agregar(new Rook({ 10,1 }, 1, t, v));
+	blancas.agregar(new Knight({ 2,1 }, 1, t, v));
+	blancas.agregar(new Knight({ 9,1 }, 1, t, v));
+	blancas.agregar(new Archbishop({ 3,1 }, 1, t, v));
+	blancas.agregar(new Chancellor({ 8,1 }, 1, t, v));
+	blancas.agregar(new Bishop({ 4,1 }, 1, t, v));
+	blancas.agregar(new Bishop({ 7,1 }, 1, t, v));
+	blancas.agregar(new Queen({ 5,1 }, 1, t, v));
+	blancas.agregar(new King({ 6,1 }, 1, t, v));
 	//Negras
-	negras.agregar(new Rook({ 1,8 }, 0, t));
-	negras.agregar(new Rook({ 10,8 }, 0, t));
-	negras.agregar(new Knight({ 2,8 }, 0, t));
-	negras.agregar(new Knight({ 9,8 }, 0, t));
-	negras.agregar(new Archbishop({ 3,8 }, 0, t));
-	negras.agregar(new Chancellor({ 8,8 }, 0, t));
-	negras.agregar(new Bishop({ 4,8 }, 0, t));
-	negras.agregar(new Bishop({ 7,8 }, 0, t));
-	negras.agregar(new Queen({ 5,8 }, 0, t));
-	negras.agregar(new King({ 6,8 }, 0, t));
+	negras.agregar(new Rook({ 1,8 }, 0, t, v));
+	negras.agregar(new Rook({ 10,8 }, 0, t, v));
+	negras.agregar(new Knight({ 2,8 }, 0, t, v));
+	negras.agregar(new Knight({ 9,8 }, 0, t, v));
+	negras.agregar(new Archbishop({ 3,8 }, 0, t, v));
+	negras.agregar(new Chancellor({ 8,8 }, 0, t, v));
+	negras.agregar(new Bishop({ 4,8 }, 0, t, v));
+	negras.agregar(new Bishop({ 7,8 }, 0, t, v));
+	negras.agregar(new Queen({ 5,8 }, 0, t, v));
+	negras.agregar(new King({ 6,8 }, 0, t, v));
 
 }
 

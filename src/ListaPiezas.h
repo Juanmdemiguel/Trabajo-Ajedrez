@@ -20,6 +20,7 @@ public:
 	void agregar(piece* p) { lista.push_back(p); }
 	void dibuja(Board& tablero) { for (auto b : lista) b->dibuja1Pieza(tablero); }
 	void cambiaTematica(int  d) { for (auto b : lista) b->cambiaTematica(d); }
+	void cambiaVision(int  d) { for (auto b : lista) b->cambiaVision(d); }
 	auto begin() { return lista.begin(); }
 	auto end() { return lista.end(); }
 	int size() { return static_cast<int>(lista.size()); }

@@ -14,7 +14,7 @@ void Coordinator::Dibuja()
 		principal.iniciaMenu();
 		break;
 	case Estado::JUEGO:
-		juego.dibujaJuego(principal.tematica);
+		juego.dibujaJuego(principal.tematica, principal.vision);
 		juego.selecciona();
 		PasaTurno();
 

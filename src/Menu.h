@@ -9,7 +9,7 @@ class Menu
 	bool menu = true, sonido = true, tope = false;
 	bool boton{};
 	enum VENTANA { INICIO = 0, TEMATICA, VISION, COMENZAR } ventana{ INICIO };
-	enum TEMATICA { SW=0, ETSIDI } tematica{ SW };
+	enum TEMATICA { SW = 0, ETSIDI } tematica{ SW };
 	enum VISION { _2D = 0, _3D } vision{ _3D };
 	Comentario comentario1, comentario2, comentario3, comentario4, comentario5, comentario6, comentario7;
 	Punto2D r;		//Guarda coordenadas del ratón

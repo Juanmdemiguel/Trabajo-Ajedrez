@@ -10,12 +10,13 @@ class piece
 protected:
 	vector <Punto2D> posibles{};	//Almacena posiciones posibles ¡BORRAR POSICIONES TRAS SET DE POSICION!
 	Punto2D posicion;
+
 	//Se define el color de las piezas. 0 para negro y 1 para blanco.
 	bool color;
-	int tematica; //Star Wars ETSIDI...         Selecciona el como visualizar la pieza
+	int tematica{}; //Temática del juego, por defecto StarWars (SW a 0 y ETSIDI a 1)
+	int vision = 1; //Por defecto visión 3D (para 2D es 0)
 	enum TIPO { PAWN, ROOK, BISHOP, KNIGHT, KING, QUEEN, ARCHBISHOP, CHANCELLOR } tipo;
 	
-
 	inline static Model King{ "resources/model/King.obj" };
 	inline static Model Queen{ "resources/model/Queen.obj" };
 	inline static Model Bishop{ "resources/model/Bishop.obj" };
@@ -23,23 +24,32 @@ protected:
 	inline static Model Knight{ "resources/model/Knight.obj" };
 	inline static Model Pawn{ "resources/model/Pawn.obj" };
 
-
 public:
+
 	//Constructor para dar posición genérica y color a la pieza correspondiente
-	piece(Punto2D pos, bool c, int d) { posicion = pos, color = c; tematica = d; }
+	piece(Punto2D pos, bool c, int t, int v) { posicion = pos, color = c; tematica = t; vision = v; }
+
 	//Métodos
 	void dibuja1Pieza(Board& tablero);
-	void cambiaTematica(int d) { tematica = d; }
+
+	void cambiaTematica(int t) { tematica = t; }
+	void cambiaVision(int v) { vision = v; }
+
 	void dibujaSprite(Board& tablero);
 	void dibujaModelo(Board& tablero) const;
+
 	virtual void getPosibles(Punto2D pos, Board& tablero) = 0;
 	virtual void getDiagonal(Punto2D pos, int reach,  Board& tablero);
 	virtual void getHorizontal(Punto2D pos, int reach, Board& tablero);
 	virtual void getEle(Punto2D pos, Board& tablero);
+
 	Punto2D get_pos() { return posicion; };
 	bool getColor() { return color; };
+<<<<<<< Updated upstream
 	TIPO getTipo() { return tipo; };
 
+=======
+>>>>>>> Stashed changes
 	vector <Punto2D> getVectorPosibles() { return posibles; }
 
 	bool mueve(const Punto2D& pos_raton, vector <Punto2D> posibles, Board& tablero);

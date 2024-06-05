@@ -21,7 +21,7 @@ public:
 	//Métodos
 	Board& getboard() { return board; };
 	void musica(bool sonido, char tema[]) { (sonido == true) ? ETSIDI::playMusica(tema, true) : ETSIDI::stopMusica(); };
-	void dibujaJuego(int d);
+	void dibujaJuego(int tema, int vision);
 	void inicializa(int t, int v);
 	void SetClick(Punto2D C) { Click = C; };
 	void selecciona();

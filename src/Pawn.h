@@ -7,7 +7,7 @@ class Pawn : public piece
 
 public:
 	//Constructor
-	Pawn(Punto2D pos, bool c, int d) : piece(pos, c, d) { tipo = PAWN; }
+	Pawn(Punto2D pos, bool c, int t, int v) : piece(pos, c, t, v) { tipo = PAWN; }
 	void getPosibles(Punto2D pos, Board& tablero);
 	int promocionar(Punto2D pos) override;
 

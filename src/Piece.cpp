@@ -2,20 +2,20 @@
 
 void piece::dibuja1Pieza(Board& tablero)
 {
-	switch (tematica)
+	switch (vision)
 	{
 	case 0:
-		dibujaModelo(tablero);
-		break;
-	case 1:
 		dibujaSprite(tablero);
 		break;
+	case 1:
+		dibujaModelo(tablero);
+		break;
+	
 	}
 }
 
 void piece::dibujaSprite(Board& tablero)
 {
-	int tematica = 0;
 	glEnable(GL_TEXTURE_2D);
 
 	switch (tipo) {
@@ -99,7 +99,7 @@ void piece::dibujaSprite(Board& tablero)
 			break;
 		case 1:
 			if (color)
-				glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/2DUPM/DELEGACIONES//ETSIDI.png").id);
+				glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/2D/UPM/DELEGACIONES/ETSIDI.png").id);
 			else
 				glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/2D/UPM/ESCUELAS/rey.png").id);
 			break;
@@ -150,9 +150,9 @@ void piece::dibujaSprite(Board& tablero)
 			break;
 		case 1:
 			if (color)
-				glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/2D/ETSIAE.png").id);
+				glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/2D/UPM/DELEGACIONES/ETSIAE.png").id);
 			else
-				glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/2D/arzobispo.png").id);
+				glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/2D/UPM/ESCUELAS/arzobispo.png").id);
 			break;
 		}
 		break;
