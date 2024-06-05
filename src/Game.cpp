@@ -92,6 +92,7 @@ void Game::selecciona(int t, int v)
 			//cout << mov << endl;
 
 		}
+		if (mov)cout << comprobJaque(1);
 	}
 	if (!turno) {
 		for (auto n : negras) {
@@ -127,6 +128,7 @@ void Game::selecciona(int t, int v)
 			if (comp) break;
 
 		}
+		if (mov)cout << comprobJaque(1);
 	}
 	comprobEnroqueCorto();
 	comprobEnroqueLargo();
@@ -294,3 +296,40 @@ bool Game::comprobEnroqueLargo()
 	else return false;
 }
 
+bool Game::comprobJaque(bool c)
+{
+	bool bit=0;
+	if (c)
+	{
+		for (auto b : blancas) {
+			if (b->getTipo() == 4) {
+				for (auto n : negras) {
+					n->getPosibles(board);
+					for (int i = 0; i < n->getVectorPosibles().size(); i++)
+						if (b->get_pos() == n->getVectorPosibles()[i]) bit = 1;
+					n->cleanVector();
+					ClearSelec();
+					if (bit) return 1;
+				}
+				return 0;
+			}
+		}
+	}
+	if (!c)
+	{
+		for (auto n : negras) {
+			if (n->getTipo() == 4) {
+				for (auto b : blancas) {
+					b->getPosibles(board);
+					for (int i = 0; i < b->getVectorPosibles().size(); i++)
+						if (n->get_pos() == b->getVectorPosibles()[i]) bit = 1;
+					b->cleanVector();
+					ClearSelec();
+					if (bit)return 1;
+				}
+				return 0;
+			}
+		}
+	}
+	
+}

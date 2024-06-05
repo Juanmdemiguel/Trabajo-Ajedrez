@@ -32,6 +32,7 @@ public:
 	bool Promocion(int tipo, piece *pieza, int t, int v);
 	bool comprobEnroqueCorto();
 	bool comprobEnroqueLargo();
+	bool comprobJaque(bool c);
 	//Amigos
 
 };
