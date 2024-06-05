@@ -26,7 +26,6 @@ public:
 	void selecciona();
 	void ClearSelec();
 	void Listo() { turno = !turno; }
-	void ocuparCasillas();
 	bool& getMov() { return mov; }
 	void setMov(bool _mov) { mov = _mov; }
 	

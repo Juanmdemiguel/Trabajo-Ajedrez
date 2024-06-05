@@ -41,8 +41,6 @@ void Game::inicializa(int t, int v)
 	negras.agregar(new Queen({ 5,8 }, 0, t));
 	negras.agregar(new King({ 6,8 }, 0, t));
 
-
-	ocuparCasillas();
 }
 
 
@@ -58,8 +56,6 @@ void Game::selecciona()
 			aux = b->mueve(Click, b->getVectorPosibles(),board);
 			
 			if (aux) mov = aux;
-
-			//cout << mov << endl;
 		}
 	}
 	if (!turno) {
@@ -70,8 +66,6 @@ void Game::selecciona()
 			aux = n->mueve(Click, n->getVectorPosibles(),board);
 
 			if (aux) mov = aux;
-
-			//cout << mov << endl;
 		}
 	}
 }
@@ -79,17 +73,7 @@ void Game::selecciona()
 void Game::ClearSelec()
 {
 	for (double i = 1; i <= fil; i++) {
-		for (double j = 1; j <= col; j++) board.getTile({ j,i }).setposible(false);
+		for (double j = 1; j <= col; j++) board.getTile({ j,i }).setposible(false), board.getTile({ j,i }).setcomestible(false);
 	}
 }
 
-void Game::ocuparCasillas() {
-	Punto2D c;
-	for (double i = 1; i < fil + 1; i++) {
-		for (double j = 1; j < col + 1; j++) {
-			c = { j,i };
-			for (auto k : blancas) if (k->get_pos() == c) board.getTile({ j,i }).setocupada(1);
-			for (auto k : negras) if (k->get_pos() == c) board.getTile({ j,i }).setocupada(0);
-		}
-	}
-}

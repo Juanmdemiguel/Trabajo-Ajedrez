@@ -10,6 +10,11 @@ Board::Board()
 			//Además el criterio [filas][columnas] es contrario al [eje x][eje z], así que se invierten
 			board[i][j].setPos(j+1, i+1);
 			(j + i) % 2 == 0 ? board[i][j].color = true : board[i][j].color = false; //Recorre la matriz del tablero. Establece su color según la suma de sus coordenadas
+
+			if (i == 0 || i == 1) 
+				board[i][j].setocupada(1);
+			else if (i==7|| i==6)
+				board[i][j].setocupada(0);
 		}
 	}
 }

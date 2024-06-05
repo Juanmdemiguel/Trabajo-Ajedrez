@@ -259,11 +259,6 @@ void piece::getDiagonal(Punto2D pos, int reach, Board& tablero)
 				tablero.getTile({ fila + i,columna - i }).setcomestible(true);
 		}
 
-
-
-		for (auto p : posibles)
-			cout << p.x << ';' << p.z << endl;
-
 	}
 }
 void piece::getHorizontal(Punto2D pos, int reach, Board& tablero)
@@ -304,8 +299,7 @@ void piece::getHorizontal(Punto2D pos, int reach, Board& tablero)
 			
 	}
 
-	/*for (auto i : posibles)
-		cout << i.x << i.z;*/
+	
 }
 void piece::getEle(Punto2D pos, Board& tablero)
 {
@@ -393,6 +387,7 @@ bool piece::mueve(const Punto2D& pos_raton, vector <Punto2D> posibles, Board &ta
 		if (pos_raton == p)	// Si posición del ratón es igual a la de una de las posibles
 		{
 			tablero.getTile(posicion).setocupada(2); //Donde estaba antes la pieza ahora está libre (2)
+			tablero.getTile(p).setocupada(int(color)); //La casilla a donde se mueve la pieza adquiere su color
 			posicion.x = p.x;	//Cambia posición de la pieza
 			posicion.z = p.z;
 			cleanVector();
@@ -401,8 +396,7 @@ bool piece::mueve(const Punto2D& pos_raton, vector <Punto2D> posibles, Board &ta
 
 		if (posicion != pos_raton) cleanVector();
 
-		//cout << p.x << ',' << p.z << endl;
-		//cout << pos_raton.x <<','<< pos_raton.z << endl;
+		
 
 	
 	}
