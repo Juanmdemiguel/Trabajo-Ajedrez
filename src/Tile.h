@@ -10,6 +10,7 @@
 class Tile
 {
 	bool color;
+	int tematica{};
 	int ocupada = 2; //informa si no hay ninguna pieza (2), si hay una negra (0) o si hay una blanca (1) 
 	bool apuntada = false; //informa si el ratón la está apuntando
 	bool posible = false; //informa si es un posible movimiento de una pieza

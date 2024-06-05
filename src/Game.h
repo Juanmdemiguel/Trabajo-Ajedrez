@@ -30,6 +30,7 @@ public:
 	void Listo() { turno = !turno; }
 	bool& getMov() { return mov; }
 	void setMov(bool _mov) { mov = _mov; }
+
 	bool Promocion(int tipo, piece *pieza, int t, int v);
 
 	bool comprobEnroqueCorto();
@@ -38,6 +39,9 @@ public:
 
 	void Comer();
 	void MueveSonido() { ETSIDI::play("resources/sounds/caminar/pasos1.wav"); }
+
+	//Método de comer
+	void comer(ListaPiezas& negras, piece* blancas);
 
 	//Amigos
 

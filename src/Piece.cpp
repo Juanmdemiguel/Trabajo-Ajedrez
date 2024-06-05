@@ -238,25 +238,25 @@ void piece::getDiagonal(int reach, Board& tablero)
 
 			//Si la casilla es posible y además hay una pieza del otro color, entonces la pone como comestible
 			if (tablero.getTile({ fila + i,columna + i }).getposible() && tablero.getTile({ fila + i,columna + i }).getocupada() != int(color) && tablero.getTile({ fila + i,columna + i }).getocupada() != 2)
-				tablero.getTile({ fila + i,columna + i }).setcomestible(true);
+				tablero.getTile({ fila + i,columna + i }).setcomestible(true), d1 = true; //d1 en true para que solo una pieza sea comestible
 		}
 		if ((fila - i) >= 1 && (columna - i) >= 1 && !d2){
 			if (int(color) == tablero.getTile({ fila - i,columna - i }).getocupada()) { d2 = true; }
 			if (d2 == false) tablero.getTile({ fila - i,columna - i }).setposible(true), posibles.push_back({ fila - i,columna - i });
 			if (tablero.getTile({ fila - i,columna - i }).getposible() && tablero.getTile({ fila - i,columna - i }).getocupada() != int(color) && tablero.getTile({ fila - i,columna - i }).getocupada() != 2)
-				tablero.getTile({ fila - i,columna - i }).setcomestible(true);
+				tablero.getTile({ fila - i,columna - i }).setcomestible(true), d2=true;
 		}
 		if ((fila - i) >= 1 && (columna + i) <= 8 && !d3) { //col
 			if (int(color) == tablero.getTile({ fila - i,columna + i }).getocupada()) { d3 = true; }
 			if (d3 == false) tablero.getTile({ fila - i,columna + i }).setposible(true), posibles.push_back({ fila - i,columna + i });
 			if (tablero.getTile({ fila - i,columna + i }).getposible() && tablero.getTile({ fila - i,columna + i }).getocupada() != int(color) && tablero.getTile({ fila - i,columna + i }).getocupada() != 2)
-				tablero.getTile({ fila - i,columna + i }).setcomestible(true);
+				tablero.getTile({ fila - i,columna + i }).setcomestible(true), d3=true;
 		}
 		if ((fila + i) <= 10 && (columna - i) >= 1 && !d4) {
 			if (int(color) == tablero.getTile({ fila + i,columna - i }).getocupada()) { d4 = true; }
 			if (d4 == false) tablero.getTile({ fila + i,columna - i }).setposible(true), posibles.push_back({ fila + i,columna - i });
 			if (tablero.getTile({ fila + i,columna - i }).getposible() && tablero.getTile({ fila + i,columna - i }).getocupada() != int(color) && tablero.getTile({ fila + i,columna - i }).getocupada() != 2)
-				tablero.getTile({ fila + i,columna - i }).setcomestible(true);
+				tablero.getTile({ fila + i,columna - i }).setcomestible(true), d4=true;
 		}
 
 	}
@@ -274,27 +274,28 @@ void piece::getHorizontal(int reach, Board& tablero)
 			if (int(color) == tablero.getTile({ fila + i,columna }).getocupada()) { d1 = true; }
 			if (d1 == false) tablero.getTile({ fila + i,columna }).setposible(true), posibles.push_back({ fila + i,columna }); //fil
 			if (tablero.getTile({ fila + i,columna }).getposible() && tablero.getTile({ fila + i,columna }).getocupada() != int(color) && tablero.getTile({ fila + i,columna }).getocupada() != 2)
-				tablero.getTile({ fila + i,columna }).setcomestible(true);
+				tablero.getTile({ fila + i,columna }).setcomestible(true), d1=true;   //d1 en true para que solo ponga una pieza negra en comestible
+			
 		} 
 		if ((fila - i) >= 1 && !d2) {
 			if (int(color) == tablero.getTile({ fila - i,columna }).getocupada()) { d2 = true; }
 			if (d2 == false) tablero.getTile({ fila - i,columna }).setposible(true), posibles.push_back({ fila - i,columna });
 			if (tablero.getTile({ fila - i,columna }).getposible() && tablero.getTile({ fila - i,columna }).getocupada() != int(color) && tablero.getTile({ fila - i,columna }).getocupada() != 2)
-				tablero.getTile({ fila - i,columna }).setcomestible(true);
+				tablero.getTile({ fila - i,columna }).setcomestible(true), d2=true;
 		}
 			
 		if ((columna + i) <= 8 && !d3) {
 			if (int(color) == tablero.getTile({ fila,columna + i }).getocupada()) { d3 = true; }
 			if (d3 == false) tablero.getTile({ fila,columna + i }).setposible(true), posibles.push_back({ fila,columna + i });//col
 			if (tablero.getTile({ fila ,columna + i }).getposible() && tablero.getTile({ fila ,columna + i }).getocupada() != int(color) && tablero.getTile({ fila ,columna + i }).getocupada() != 2)
-				tablero.getTile({ fila ,columna + i }).setcomestible(true);
+				tablero.getTile({ fila ,columna + i }).setcomestible(true), d3=true;
 		}
 		
 		if ((columna - i) >= 1 && !d4) {
 			if (int(color) == tablero.getTile({ fila,columna - i }).getocupada()) { d4 = true; }
 			if (d4 == false) tablero.getTile({ fila,columna - i }).setposible(true), posibles.push_back({ fila,columna - i });
 			if (tablero.getTile({ fila ,columna - i }).getposible() && tablero.getTile({ fila ,columna - i }).getocupada() != int(color) && tablero.getTile({ fila ,columna - i }).getocupada() != 2)
-				tablero.getTile({ fila ,columna - i }).setcomestible(true);
+				tablero.getTile({ fila ,columna - i }).setcomestible(true), d4=true;
 		} 
 			
 	}
@@ -391,15 +392,17 @@ bool piece::mueve( const Punto2D& pos_raton, vector <Punto2D> posibles, Board &t
 			tablero.getTile(p).setocupada(int(color)); //La casilla a donde se mueve la pieza adquiere su color
 			posicion.x = p.x;	//Cambia posición de la pieza
 			posicion.z = p.z;
+
 			cleanVector();
+
 			return true;
 		}
 
-		if (posicion != pos_raton) cleanVector();
-
+		if (posicion != pos_raton)
+		{
+			cleanVector();
+		}
 		
-
-	
 	}
 	return false;
 
@@ -408,6 +411,9 @@ bool piece::mueve( const Punto2D& pos_raton, vector <Punto2D> posibles, Board &t
 void piece::cleanVector()
 {
 	int num = posibles.size();
-	for (int contador = 0; contador < num; contador++) { posibles.pop_back(); }
+	for (int contador = 0; contador < num; contador++) 
+	{ 
+		posibles.pop_back(); 
+	}
 
 }

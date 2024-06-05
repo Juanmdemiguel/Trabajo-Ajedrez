@@ -5,17 +5,16 @@ void Game::dibujaJuego(int tema, int vision) {	//Funcion dibujaJuego provisional
 
 	//Dibuja el tablero
 	board.dibuja(tema);
+
+	//Dibuja las piezas según la temática y modo de visualización
 	blancas.cambiaTematica(tema);
 	negras.cambiaTematica(tema);
-
 	blancas.cambiaVision(vision);
 	negras.cambiaVision(vision);
 
-	//Dibuja todas las piezas --> FALTA CONCRETAR EL MÉTODO
+	//Dibuja piezas en el tablero
 	blancas.dibuja(board);
 	negras.dibuja(board);
-	
-
 }
 
 void Game::inicializa(int t, int v)
@@ -81,10 +80,12 @@ void Game::selecciona(int t, int v, bool cambio)
 			if (aux)
 			{
 				if (b->get_pos().x == 8) {
-					unsigned char key;
 					p = b->promocionar(b->get_pos());
 					comp = Promocion(p, b, t, v);
 				}
+				
+				// Se realiza el método de comer una vez se ha movido comprobando las piezas blancas
+				comer(negras, b);
 				mov = aux;
 				MueveSonido();
 			}
@@ -117,15 +118,17 @@ void Game::selecciona(int t, int v, bool cambio)
 			if (aux)
 			{
 				if (n->get_pos().x == 1) {
-					unsigned char key;
 					p = n->promocionar(n->get_pos());
 					comp = Promocion(p, n, t, v);
 				}
+
+				//Se realiza el método de comer una vez se ha movido comprobando las piezas negras
+				comer(blancas, n);
+
 				mov = aux;
 				MueveSonido();
 			}
 			if (comp) break;
-
 		}
 	}
 	comprobEnroqueCorto();
@@ -134,11 +137,11 @@ void Game::selecciona(int t, int v, bool cambio)
 
 void Game::ClearSelec()
 {
+	//Se limpian todas las casillas que eran posibles o comestibles
 	for (double i = 1; i <= fil; i++) {
 		for (double j = 1; j <= col; j++) board.getTile({ j,i }).setposible(false), board.getTile({ j,i }).setcomestible(false);
 	}
 }
-
 
 bool Game::Promocion(int tipo, piece *pieza, int t, int v)
 {
@@ -347,3 +350,18 @@ void Game::Comer()
 		
 	}
 }
+
+//IMPLEMENTACIÓN DE COMER LAS PIEZAS. SI LA POSICIÓN DE LA PIEZA QUE SE HA MOVIDO ES LA MISMA QUE LA CONTRARIA, SE ELIMINA LA CONTRARIA
+
+void Game::comer(ListaPiezas& p1, piece* p2)
+{
+	for (auto n : p1)
+	{
+		if (n->get_pos() == p2->get_pos())
+		{
+			p1.eliminar(n);
+			break;
+		}
+	}
+}
+

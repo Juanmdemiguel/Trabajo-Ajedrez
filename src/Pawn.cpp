@@ -7,12 +7,14 @@ void Pawn::getPosibles(Board& tablero) {
 	double columna = (int)posicion.x;     //Traduce el punto 2D a posiciones matriciales
 	double fila = (int)posicion.z;
 
+	//IMPLEMENTACIÓN DEL MOVIMIENTO (NO SE PUEDE EMPLEAR LA GENERAL DE PIECE YA QUE ES PROPIA DEL PEÓN Y DEPENDE DEL COLOR Y DE SU POSICIÓN INICIAL)
+
 	if (color) {
 		posicion.x == 2 ? reach = 2 : reach = 1;
 		for (int i = 1; i <= reach; i++) {
 			
-			//Pone a posible las casillas que tiene de frente, pero no a comestibles
-			if ((columna + i) <= 8 && int(color) != tablero.getTile({ fila ,columna + i }).getocupada())
+			//Pone a posible las casillas que tiene solamente de frente, pero no a comestibles
+			if ((columna + i) <= 8 && tablero.getTile({ fila ,columna + i }).getocupada()==2)
 			{
 				tablero.getTile({ fila,columna + i }).setposible(true);
 				posibles.push_back({ fila,columna + i });//col
@@ -23,8 +25,8 @@ void Pawn::getPosibles(Board& tablero) {
 		posicion.x == 7 ? reach = 2 : reach = 1;
 		for (int i = 1; i <= reach; i++) {
 
-			//Pone a posible las casillas que tiene de frente, pero no a comestibles
-			if ((columna - i) >= 0 && int(color) != tablero.getTile({ fila ,columna - i }).getocupada())
+			//Pone a posible las casillas que tiene solamente de frente, pero no a comestibles
+			if ((columna - i) >= 0 && tablero.getTile({ fila ,columna - i }).getocupada() == 2)
 			{
 				tablero.getTile({ fila,columna - i }).setposible(true);
 				posibles.push_back({ fila,columna - i });//col
@@ -33,7 +35,8 @@ void Pawn::getPosibles(Board& tablero) {
 	}
 
 
-	//Implementación de comer las piezas
+	//IMPLEMENTACIÓN DE COMER LAS PIEZAS (NO SE PUEDE EMPLEAR LA GENERAL DE PIECE YA QUE ES PROPIA DEL PEÓN)
+
 	if (color) {
 		//Diagonal superior derecha vista desde blanco
 		if ((fila + 1) <= 10 && (columna + 1) <= 8) { //fil col

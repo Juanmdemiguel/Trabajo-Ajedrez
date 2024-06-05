@@ -28,3 +28,12 @@ piece* ListaPiezas::operator[](int index) {
 	//Accede desde la clase vector, que tiene definido []
 	return lista[index];
 }
+
+piece* ListaPiezas::getPieza(Punto2D posicion)
+{
+	for (auto i : lista)
+	{
+		if (i->get_pos() == posicion)
+			return i;
+	}
+}

@@ -28,6 +28,7 @@ public:
 	void eliminar(piece* p);
 	piece* operator[](int index);
 	void destruir_contenido() { for (auto p : lista) delete p; lista.clear(); }
+	piece* getPieza(Punto2D posicion);
 
 //Amigos
 };

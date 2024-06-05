@@ -16,7 +16,6 @@ void Coordinator::Dibuja()
 		break;
 	case Estado::JUEGO:
 		juego.dibujaJuego(principal.getTematica(), principal.getVision());
-		juego.selecciona(principal.getTematica(), principal.getVision(), camara.Cambiando());
 		PasaTurno();
 
 		if (camara.Cambiando()) juego.ClearSelec();
@@ -56,6 +55,7 @@ void Coordinator::Click(int _button, int state, int _x, int _y)
 			raton.seleccion(juego, _button, state);
 			MouseToGame();
 			juego.ClearSelec();
+			juego.selecciona(principal.getTematica(), principal.getVision(), camara.Cambiando());
 		}
 
 	}
