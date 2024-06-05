@@ -45,11 +45,8 @@ public:
 
 	Punto2D get_pos() { return posicion; };
 	bool getColor() { return color; };
-<<<<<<< Updated upstream
 	TIPO getTipo() { return tipo; };
 
-=======
->>>>>>> Stashed changes
 	vector <Punto2D> getVectorPosibles() { return posibles; }
 
 	bool mueve(const Punto2D& pos_raton, vector <Punto2D> posibles, Board& tablero);

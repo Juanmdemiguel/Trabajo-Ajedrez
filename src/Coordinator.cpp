@@ -15,7 +15,7 @@ void Coordinator::Dibuja()
 		break;
 	case Estado::JUEGO:
 		juego.dibujaJuego(principal.tematica, principal.vision);
-		juego.selecciona();
+		juego.selecciona(principal.tematica, principal.vision);
 		PasaTurno();
 
 		if (camara.Cambiando()) juego.ClearSelec();

@@ -1,12 +1,8 @@
 #include"Game.h"
 
-<<<<<<< Updated upstream
 
-void Game::dibujaJuego(int d) {	//Funcion dibujaJuego provisional, se añade a clase Juego/Game cuando se desarrolle
-=======
 void Game::dibujaJuego(int tema, int vision) {	//Funcion dibujaJuego provisional, se añade a clase Juego/Game cuando se desarrolle
 
->>>>>>> Stashed changes
 	//Dibuja el tablero
 	board.dibuja();
 	blancas.cambiaTematica(tema);
@@ -54,7 +50,7 @@ void Game::inicializa(int t, int v)
 }
 
 
-void Game::selecciona()
+void Game::selecciona(int t, int v)
 {
 	bool aux, comp{};
 	int p = 0;
@@ -74,7 +70,7 @@ void Game::selecciona()
 				if (b->get_pos().x == 8) {
 					unsigned char key;
 					p = b->promocionar(b->get_pos());
-					comp = Promocion(p, b, 1);
+					comp = Promocion(p, b, t, v);
 				}
 				mov = aux;
 			}
@@ -99,7 +95,7 @@ void Game::selecciona()
 				if (n->get_pos().x == 1) {
 					unsigned char key;
 					p = n->promocionar(n->get_pos());
-					comp = Promocion(p, n, 1);
+					comp = Promocion(p, n, t, v);
 				}
 				mov = aux;
 			}
@@ -117,7 +113,7 @@ void Game::ClearSelec()
 }
 
 
-bool Game::Promocion(int tipo, piece *pieza, int t)
+bool Game::Promocion(int tipo, piece *pieza, int t, int v)
 {
 
 	switch (tipo)
@@ -125,12 +121,12 @@ bool Game::Promocion(int tipo, piece *pieza, int t)
 	case 1:
 		if (!pieza->getColor()) 
 		{
-			negras.agregar(new Queen(pieza->get_pos() , pieza->getColor(), t));
+			negras.agregar(new Queen(pieza->get_pos() , pieza->getColor(), t, v));
 			negras.eliminar(pieza);
 		}
 		else
 		{
-			blancas.agregar(new Queen( pieza->get_pos() , pieza->getColor(), t));
+			blancas.agregar(new Queen( pieza->get_pos() , pieza->getColor(), t, v));
 			blancas.eliminar(pieza);
 		}
 			return true;
@@ -139,12 +135,12 @@ bool Game::Promocion(int tipo, piece *pieza, int t)
 	case 2:
 		if (!pieza->getColor()) 
 		{
-			negras.agregar(new Bishop({ pieza->get_pos() }, pieza->getColor(), t));
+			negras.agregar(new Bishop({ pieza->get_pos() }, pieza->getColor(), t, v));
 			negras.eliminar(pieza);
 		}
 		else
 		{
-			blancas.agregar(new Bishop({ pieza->get_pos() }, pieza->getColor(), t));
+			blancas.agregar(new Bishop({ pieza->get_pos() }, pieza->getColor(), t, v));
 			blancas.eliminar(pieza);
 		}
 			return true;
@@ -153,12 +149,12 @@ bool Game::Promocion(int tipo, piece *pieza, int t)
 	case 3:
 		if (!pieza->getColor())
 		{
-			negras.agregar(new Rook({ pieza->get_pos() }, pieza->getColor(), t));
+			negras.agregar(new Rook({ pieza->get_pos() }, pieza->getColor(), t, v));
 			negras.eliminar(pieza);
 		}
 		else
 		{
-			blancas.agregar(new Rook({ pieza->get_pos() }, pieza->getColor(), t));
+			blancas.agregar(new Rook({ pieza->get_pos() }, pieza->getColor(), t, v));
 			blancas.eliminar(pieza);
 		}
 			return true;
@@ -167,12 +163,12 @@ bool Game::Promocion(int tipo, piece *pieza, int t)
 	case 4:
 		if (!pieza->getColor()) 
 		{
-			negras.agregar(new Knight({ pieza->get_pos() }, pieza->getColor(), t));
+			negras.agregar(new Knight({ pieza->get_pos() }, pieza->getColor(), t, v));
 			negras.eliminar(pieza);
 		}
 		else
 		{
-			blancas.agregar(new Knight({ pieza->get_pos() }, pieza->getColor(), t));
+			blancas.agregar(new Knight({ pieza->get_pos() }, pieza->getColor(), t, v));
 			blancas.eliminar(pieza);
 		}
 			return true;
@@ -181,12 +177,12 @@ bool Game::Promocion(int tipo, piece *pieza, int t)
 	case 5:
 		if (!pieza->getColor()) 
 		{
-			negras.agregar(new Archbishop({ pieza->get_pos() }, pieza->getColor(), t));
+			negras.agregar(new Archbishop({ pieza->get_pos() }, pieza->getColor(), t, v));
 			negras.eliminar(pieza);
 		}
 		else
 		{
-			blancas.agregar(new Archbishop({ pieza->get_pos() }, pieza->getColor(), t));
+			blancas.agregar(new Archbishop({ pieza->get_pos() }, pieza->getColor(), t, v));
 			blancas.eliminar(pieza);
 		}
 		return true;
@@ -195,13 +191,13 @@ bool Game::Promocion(int tipo, piece *pieza, int t)
 	case 6:
 		if (!pieza->getColor())
 		{
-			negras.agregar(new Chancellor({ pieza->get_pos() }, pieza->getColor(), t));
+			negras.agregar(new Chancellor({ pieza->get_pos() }, pieza->getColor(), t, v));
 			negras.eliminar(pieza);
 			
 		}
 		else 
 		{
-			blancas.agregar(new Chancellor({ pieza->get_pos() }, pieza->getColor(), t));
+			blancas.agregar(new Chancellor({ pieza->get_pos() }, pieza->getColor(), t, v));
 			blancas.eliminar(pieza);
 		}
 		return true;

@@ -24,12 +24,12 @@ public:
 	void dibujaJuego(int tema, int vision);
 	void inicializa(int t, int v);
 	void SetClick(Punto2D C) { Click = C; };
-	void selecciona();
+	void selecciona(int t, int v);
 	void ClearSelec();
 	void Listo() { turno = !turno; }
 	bool& getMov() { return mov; }
 	void setMov(bool _mov) { mov = _mov; }
-	bool Promocion(int tipo, piece *pieza, int t);
+	bool Promocion(int tipo, piece *pieza, int t, int v);
 	//Amigos
 
 };
