@@ -95,6 +95,8 @@ void Game::selecciona(int t, int v, bool cambio)
 			}
 			if (comp) break;
 		}
+		if (mov)cout << comprobJaque(0);
+		if (mov)cout << comprobJaqueMate(0);
 	}
 
 	if (!turno && !cambio) {
@@ -138,6 +140,9 @@ void Game::selecciona(int t, int v, bool cambio)
 			}
 			if (comp) break;
 		}
+
+		if (mov)cout << comprobJaque(1);
+		if (mov)cout << comprobJaqueMate(1);
 	}
 
 	//Comprueba el enroque
@@ -372,6 +377,65 @@ void Game::comer(ListaPiezas& p1, piece* p2)
 		{
 			p1.eliminar(n);
 			break;
+		}
+	}
+}
+
+	
+
+bool Game::comprobJaqueMate(bool c)
+{
+	bool bit = 0;
+
+	if (comprobJaque(1) && c) {
+		for (auto b : blancas) {
+			if (b->getTipo() == 4) {
+				b->getPosibles(board);
+				for (auto r = 0; r < b->getVectorPosibles().size(); ++r) {
+					for (auto n : negras) {
+
+						n->getPosibles(board);
+						for (int i = 0; i < n->getVectorPosibles().size(); i++) {
+							if (b->getVectorPosibles()[r] == n->getVectorPosibles()[i]) bit = 1;
+							n->cleanVector();
+							ClearSelec();
+						}
+					}
+					if (bit == 0) return 0;
+
+				}
+				b->cleanVector();
+				ClearSelec();
+			}
+
+			return 1;
+
+		}
+	}
+
+	if (comprobJaque(1) && !c) {
+		for (auto n : negras) {
+			if (n->getTipo() == 4) {
+				n->getPosibles(board);
+				for (auto r = 0; r < n->getVectorPosibles().size(); ++r) {
+					for (auto b : blancas) {
+
+						b->getPosibles(board);
+						for (int i = 0; i < b->getVectorPosibles().size(); i++) {
+							if (n->getVectorPosibles()[r] == b->getVectorPosibles()[i]) bit = 1;
+							b->cleanVector();
+							ClearSelec();
+						}
+					}
+					if (bit == 0) return 0;
+
+				}
+				n->cleanVector();
+				ClearSelec();
+			}
+
+			return 1;
+		
 		}
 	}
 }

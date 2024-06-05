@@ -43,6 +43,8 @@ public:
 	//Método de comer
 	void comer(ListaPiezas& negras, piece* blancas);
 
+	bool comprobJaqueMate(bool c);
+
 	//Amigos
 
 };
