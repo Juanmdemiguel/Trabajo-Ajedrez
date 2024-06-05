@@ -19,11 +19,13 @@ void Game::dibujaJuego(int tema, int vision) {	//Funcion dibujaJuego provisional
 
 void Game::inicializa(int t, int v)
 {
+	//Agrega los peones de los dos colores
 	for (double i = 1; i <= 10; ++i) {
 		blancas.agregar(new Pawn({ i,2 }, 1, t, v));
 		negras.agregar(new Pawn({ i,7 }, 0, t, v));
 	}
-	//Blancas
+
+	//Agrega las piezas blancas
 	blancas.agregar(new Rook({ 1,1 }, 1, t, v));
 	blancas.agregar(new Rook({ 10,1 }, 1, t, v));
 	blancas.agregar(new Knight({ 2,1 }, 1, t, v));
@@ -34,7 +36,8 @@ void Game::inicializa(int t, int v)
 	blancas.agregar(new Bishop({ 7,1 }, 1, t, v));
 	blancas.agregar(new Queen({ 5,1 }, 1, t, v));
 	blancas.agregar(new King({ 6,1 }, 1, t, v));
-	//Negras
+
+	//Agrega las piezas negras
 	negras.agregar(new Rook({ 1,8 }, 0, t, v));
 	negras.agregar(new Rook({ 10,8 }, 0, t, v));
 	negras.agregar(new Knight({ 2,8 }, 0, t, v));
@@ -79,13 +82,14 @@ void Game::selecciona(int t, int v, bool cambio)
 
 			if (aux)
 			{
+				// Se realiza el método de comer una vez se ha movido comprobando las piezas blancas
+				comer(negras, b);
+
 				if (b->get_pos().x == 8) {
 					p = b->promocionar(b->get_pos());
 					comp = Promocion(p, b, t, v);
 				}
 				
-				// Se realiza el método de comer una vez se ha movido comprobando las piezas blancas
-				comer(negras, b);
 				mov = aux;
 				MueveSonido();
 			}
@@ -97,6 +101,8 @@ void Game::selecciona(int t, int v, bool cambio)
 
 		for (auto n : negras) {
 			if (n->get_pos() == Click) n->getPosibles(board);
+
+			//Realiza el enroque
 			if (Click == Punto2D({ 2,8 }) && n->getTipo() == 4 && comprobEnroqueLargo() && n->mueve(Click, n->getVectorPosibles(), board)) {
 				for (auto a : negras) {
 					if (a->getTipo() == 1 && a->get_pos() == Punto2D({ 1,8 })) {
@@ -105,6 +111,8 @@ void Game::selecciona(int t, int v, bool cambio)
 				}
 				mov = true;
 			}
+
+			//Realiza el enroque
 			if (Click == Punto2D({ 9, 8 }) && n->getTipo() == 4 && comprobEnroqueCorto() && n->mueve(Click, n->getVectorPosibles(), board)) {
 				for (auto a : negras) {
 					if (a->getTipo() == 1 && a->get_pos() == Punto2D({ 10,8 })) {
@@ -117,13 +125,13 @@ void Game::selecciona(int t, int v, bool cambio)
 
 			if (aux)
 			{
+				//Se realiza el método de comer una vez se ha movido comprobando las piezas negras
+				comer(blancas, n);
+
 				if (n->get_pos().x == 1) {
 					p = n->promocionar(n->get_pos());
 					comp = Promocion(p, n, t, v);
 				}
-
-				//Se realiza el método de comer una vez se ha movido comprobando las piezas negras
-				comer(blancas, n);
 
 				mov = aux;
 				MueveSonido();
@@ -131,6 +139,8 @@ void Game::selecciona(int t, int v, bool cambio)
 			if (comp) break;
 		}
 	}
+
+	//Comprueba el enroque
 	comprobEnroqueCorto();
 	comprobEnroqueLargo();
 }
@@ -143,6 +153,7 @@ void Game::ClearSelec()
 	}
 }
 
+//Realiza la promoción del peón para todo el tipo de piezas
 bool Game::Promocion(int tipo, piece *pieza, int t, int v)
 {
 
