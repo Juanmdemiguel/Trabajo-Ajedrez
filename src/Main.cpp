@@ -52,7 +52,9 @@ int main(int argc,char* argv[])
 	glutMotionFunc(mouseMove); // Movimiento del ratón
 	glutPassiveMotionFunc(mouseMove); // Movimiento pasivo del ratón (sin botón presionado)
 
-	coord.Inicializa();
+	//coord.Inicializa();
+
+	ETSIDI::playMusica("resources/sounds/menu.mp3", true);
 
 	//pasarle el control a GLUT,que llamara a los callbacks
 	glutMainLoop();	  //Bucle infinito

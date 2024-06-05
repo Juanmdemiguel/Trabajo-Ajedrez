@@ -17,6 +17,7 @@ void Coordinator::Dibuja()
 		juego.dibujaJuego(principal.tematica);
 		juego.selecciona();
 		PasaTurno();
+
 		if (camara.Cambiando()) juego.ClearSelec();
 
 		break;
@@ -40,10 +41,14 @@ void Coordinator::Click(int _button, int state, int _x, int _y)
 			if ((raton.getCoordenadaZ() > (5 - 1.5)) && (raton.getCoordenadaZ() < 5) && (raton.getCoordenadaX() > (10 - 4)) && (raton.getCoordenadaX() < 10) && principal.ventana == 0)
 				principal.musica();
 		}
-		static int i= 0;			//Se crea para que se inicialice solo una vez a 0, para comprobar lo siguiente
-		if(!principal.getMenu() && i == 0 ) juego.musica(principal.getSonido(), music), i++;
 		
-
+		static int i= 0;			//Se crea para que se inicialice solo una vez a 0, para comprobar lo siguiente
+		if (!principal.getMenu() && i == 0)
+		{
+			CompruebaMusica();
+			juego.musica(principal.getSonido(), music), i++;
+		}
+			
 		if (_button == GLUT_LEFT_BUTTON && estado == JUEGO) //Solo si se pulsa el botón izquierdo del ratón
 		{
 			//Seleccion de la casilla
@@ -55,15 +60,6 @@ void Coordinator::Click(int _button, int state, int _x, int _y)
 	}
 }
 
-void Coordinator::Inicializa() 
-{
-	ETSIDI::playMusica("resources/sounds/menu.mp3", true);
-	//Switch de modo de juego
-	char cancion[] = "resources/sounds/marchav2.mp3";
-	//Fin de switch
-	strcpy_s(music, cancion);
-
-}
 
 void Coordinator::Teclado(unsigned char key, int x_t, int y_t)
 {
@@ -71,6 +67,27 @@ void Coordinator::Teclado(unsigned char key, int x_t, int y_t)
 	camara.vertical(principal, key);
 	camara.cambio_modo_libre(principal, key);
 
+}
+
+void Coordinator::CompruebaMusica()
+{
+	switch (principal.getTematica())
+	{
+	case 0:
+	{
+		char cancion1[] = "resources/sounds/marchav2.mp3";
+		strcpy_s(music, cancion1);
+		break;
+	}
+		
+	case 1:
+	{
+		char cancion2[] = "resources/sounds/TunaIndustrialesUPM.mp3";
+		strcpy_s(music, cancion2);
+		break;
+	}
+		
+	}
 }
 
 void Coordinator::MouseToGame()

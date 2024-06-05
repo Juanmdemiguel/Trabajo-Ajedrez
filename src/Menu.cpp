@@ -11,13 +11,19 @@ void Menu::iniciaMenu()
 
 		comentario1.setEsquina({ 5, 10 }); //ArI
 		comentario1.dibuja(sonido, ventana, 1);
+
 		comentario2.setEsquina({ 5,5 }); //ArD
 		comentario2.dibuja(sonido, ventana, 2);
+
+		if (ventana == 0)
+		{
 		comentario3.setEsquina({ 3, 10 }); //AbI
 		comentario3.dibuja(sonido, ventana, 3);
+		}
+
 		comentario4.setEsquina({ 3,5 }); //AbD
 		comentario4.dibuja(sonido, ventana, 4);
-
+		
 		glEnable(GL_LIGHTING);
 		glDisable(GL_TEXTURE_2D);
 
@@ -28,8 +34,10 @@ void Menu::iniciaMenu()
 
 		comentario5.setEsquina({ 9, 8 }); //Ar
 		comentario5.dibuja(sonido, ventana, 1);
+
 		comentario6.setEsquina({ 6,8 }); //Medio
 		comentario6.dibuja(sonido, ventana, 2);
+
 		comentario7.setEsquina({ 3,8 }); //Ab
 		comentario7.dibuja(sonido, ventana, 3);
 
@@ -61,8 +69,7 @@ void Menu::dibujaFondo()
 	glDisable(GL_TEXTURE_2D);
 }
 
-void Menu::clickBotonesMenu() // Función primitiva, futuras iteraciones mirar creación de cuadros de texto
-// sobre la imagen para tener las coordenadas según cuadro creado
+void Menu::clickBotonesMenu() 
 {
 	if (ventana == 0 || ventana == 1)
 	{
@@ -74,11 +81,13 @@ void Menu::clickBotonesMenu() // Función primitiva, futuras iteraciones mirar cr
 	
 		if ((r.x > (5 - 1.5)) && (r.x < 5) && (r.z > (5 - 4)) && (r.z < 5))								//ArD(Temática)
 		{
-			(ventana == 1) ? tematica = T2: ventana = TEMATICA;
+			(ventana == 1) ? tematica = ETSIDI: ventana = TEMATICA;	//Tarda en cargar por primera vez la foto de ETSIDI por la naturaleza
+																	//de carga de imágenes. Una vez cargada el cambio es instantáneo
 		}
 		if ((r.x > (3 - 1.5)) && (r.x < 3) && (r.z > (10 - 4)) && (r.z < 10))							//AbI(Visión)
 		{
-			(ventana == 1) ? tematica = T3: ventana = VISION;
+			if (ventana == 0) ventana = VISION;
+			//(ventana == 1) ? tematica = ETSIDI: ventana = VISION;
 		}
 		if ((r.x > (3 - 1.5)) && (r.x < 3) && (r.z > (5 - 4)) && (r.z < 5))								//AbD
 		{
@@ -93,8 +102,8 @@ void Menu::clickBotonesMenu() // Función primitiva, futuras iteraciones mirar cr
 
 	if (ventana == 2)
 	{
-		if ((r.x > (9 - 1.5)) && (r.x < 9) && (r.z > (8 - 4)) && (r.z < 8))vision = _2D;			//Ar
-		if ((r.x > (6 - 1.5)) && (r.x < 6) && (r.z > (8 - 4)) && (r.z < 8))vision = _3D;			//Med
+		if ((r.x > (9 - 1.5)) && (r.x < 9) && (r.z > (8 - 4)) && (r.z < 8)) vision = _2D;			//Ar
+		if ((r.x > (6 - 1.5)) && (r.x < 6) && (r.z > (8 - 4)) && (r.z < 8)) vision = _3D;			//Med
 		if ((r.x > (3 - 1.5)) && (r.x < 3) && (r.z > (8 - 4)) && (r.z < 8)) ventana = INICIO;		//Ab
 	}
 	
@@ -104,8 +113,7 @@ void Menu::Tema()
 {
 	switch (tematica)
 	{
-	case 0: glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/MenuPpal.png").id); break;
-	case 1: glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/Arturito.png").id); break;
-	case 2: glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/BlackTileSW.png").id); break;
+	case 0: glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/MenuSW.png").id); break;
+	case 1: glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/MenuETSIDI.png").id); break;
 	}
 }

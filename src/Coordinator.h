@@ -24,8 +24,8 @@ public:
 	void Dibuja(); 
 	void Click(int _button, int state, int _x, int _y);
 	void Teclado(unsigned char key, int x_t, int y_t);
-	void Inicializa();
 	void MouseToGame();
 	void PasaTurno();
+	void CompruebaMusica();
 };
 
