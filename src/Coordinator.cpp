@@ -14,13 +14,47 @@ void Coordinator::Dibuja()
 		else
 		principal.iniciaMenu();
 		break;
+
 	case Estado::JUEGO:
 		juego.dibujaJuego(principal.getTematica(), principal.getVision());
 		PasaTurno();
-
 		if (camara.Cambiando()) juego.ClearSelec();
 
+		//La partida finaliza al realizar jaque mate al jugador contrario, que activa el booleano finPartida. Descomentar cuando esté implementado.
+		//if (juego.finPartida()) estado = FIN;
 		break;
+
+	case Estado::FIN:
+		
+		//Insertar música de fin (Créditos Star Wars)
+
+		//Gestionar ubicación del comentario Volver a menú
+		Punto2D volverMenu{};
+
+		//CAMBIAR LA POSICIÓN DE LA CÁMARA E IMAGEN
+		camara.set_pos(12.0 + 32 * cos(3.1416), 40.0, 15.0 + 32 * sin(3.1416));
+		
+		glEnable(GL_TEXTURE_2D);
+
+		//Cambiar imagen a los créditos
+		glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/MenuSW.png").id);
+		glDisable(GL_LIGHTING);
+		glBegin(GL_POLYGON);
+		glColor3f(1, 1, 1);
+
+		glTexCoord2d(1, 1);    glVertex3f(0, 0, -0.1);
+		glTexCoord2d(0, 1);    glVertex3f(0, 16, -0.1);
+		glTexCoord2d(0, 0);    glVertex3f(12, 16, -0.1);
+		glTexCoord2d(1, 0);    glVertex3f(12, 0, -0.1);
+		glEnd();
+
+		glEnable(GL_LIGHTING);
+		glDisable(GL_TEXTURE_2D);
+
+		//Para cuando se hace click a "Volver a menú"
+		raton.getClick() == volverMenu ? estado = MENU : estado = FIN;
+		break;
+
 	}
 }
 
@@ -66,6 +100,11 @@ void Coordinator::Teclado(unsigned char key, int x_t, int y_t)
 {
 	camara.zoom(principal, key);
 	camara.vertical(principal, key);
+
+	if (estado == FIN)
+	{
+		if (key == ' ') principal.setMenu(true), estado = MENU;
+	}
 
 }
 

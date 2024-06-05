@@ -18,6 +18,9 @@ class Game
 	bool turno = true; 
 	bool mov{}; //Solo pasa de turno si ya has movido. No puedes mover si ya has movido. DEBERIA EMPEZAR EN FALSE, ESTA EN TRUE PARA PODER PASAR 
 	//TERMINAR DE IMPLEMENTAR CUANDO SE HAGA EL MOVIMIENTO. Y BORRAR ESTO AL IMPLEMENTAR 
+
+	bool comida = false;  //Para comprobar si funciona el fin. QUITAR CUANDO SE COMPLETE EL JAQUE MATE
+
 public:
 	//Métodos
 	Board& getboard() { return board; };
@@ -37,11 +40,14 @@ public:
 	bool comprobEnroqueLargo();
 	bool comprobJaque(bool c);
 
-	void Comer();
+	void SonidoComer();
 	void MueveSonido() { ETSIDI::play("resources/sounds/caminar/pasos1.wav"); }
 
 	//Método de comer
-	void comer(ListaPiezas& negras, piece* blancas);
+	bool comer(ListaPiezas& negras, piece* blancas);
+
+	//Implementa el final de la partida
+	bool finPartida();
 
 	bool comprobJaqueMate(bool c);
 

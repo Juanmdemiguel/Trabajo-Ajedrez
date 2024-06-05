@@ -82,8 +82,8 @@ void Game::selecciona(int t, int v, bool cambio)
 
 			if (aux)
 			{
-				// Se realiza el método de comer una vez se ha movido comprobando las piezas blancas
-				comer(negras, b);
+				//Se realiza el método de comer una vez se ha movido comprobando las piezas blancas, y si se ha comido se gestiona el sonido al comer
+				if (comer(negras, b)) SonidoComer();
 
 				if (b->get_pos().x == 8) {
 					p = b->promocionar(b->get_pos());
@@ -127,8 +127,8 @@ void Game::selecciona(int t, int v, bool cambio)
 
 			if (aux)
 			{
-				//Se realiza el método de comer una vez se ha movido comprobando las piezas negras
-				comer(blancas, n);
+				//Se realiza el método de comer una vez se ha movido comprobando las piezas negras, y si se ha comido se gestiona el sonido al comer
+				if (comer(blancas, n)) SonidoComer();
 
 				if (n->get_pos().x == 1) {
 					p = n->promocionar(n->get_pos());
@@ -351,7 +351,7 @@ bool Game::comprobJaque(bool c)
 	}
 }
 
-void Game::Comer()
+void Game::SonidoComer()
 {
 	int	valor = ETSIDI::lanzaDado(5); //valor valdra entre 0 y 5 entero
 
@@ -369,16 +369,19 @@ void Game::Comer()
 
 //IMPLEMENTACIÓN DE COMER LAS PIEZAS. SI LA POSICIÓN DE LA PIEZA QUE SE HA MOVIDO ES LA MISMA QUE LA CONTRARIA, SE ELIMINA LA CONTRARIA
 
-void Game::comer(ListaPiezas& p1, piece* p2)
+bool Game::comer(ListaPiezas& p1, piece* p2)
 {
 	for (auto n : p1)
 	{
 		if (n->get_pos() == p2->get_pos())
 		{
 			p1.eliminar(n);
+			comida = true;
+			return 1;
 			break;
 		}
 	}
+	return 0;
 }
 
 	
@@ -440,3 +443,8 @@ bool Game::comprobJaqueMate(bool c)
 	}
 }
 
+bool Game::finPartida()
+{
+	if (comida) return 1;
+	else return 0;
+}

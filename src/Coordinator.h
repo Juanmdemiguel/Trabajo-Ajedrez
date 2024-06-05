@@ -5,10 +5,10 @@
 #include "camara.h"
 #include "Piece.h"
 #include "Mouse.h"
-
+#include "freeglut.h"
 class Coordinator
 {
-	enum Estado { MENU, JUEGO} estado{MENU};
+	enum Estado { MENU, JUEGO, FIN} estado{MENU};
 
 public:
 	Menu principal; 
