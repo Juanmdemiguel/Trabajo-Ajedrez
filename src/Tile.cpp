@@ -1,14 +1,21 @@
 #include "Tile.h"
 
-void Tile::Dibuja(int i, int j)
+void Tile::Dibuja(int i, int j, bool tematica)
 {
 	glEnable(GL_TEXTURE_2D);
 
-	//Primero la dibuja como psible. Si no es, pregunta si la estás apuntado cn el ratón. Si no, la fibuja según color. 
-	apuntada ? (glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/Arturito.png").id)) : (
+	//Primero la dibuja como posible. Si no es, pregunta si la estás apuntado cn el ratón. Si no, la dibuja según color. 
+	apuntada ? (
+		tematica ? 
+			(glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/UPM_tile.png").id)):
+			(glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/Arturito.png").id))) : (
 		comestible ? (glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/Comer.png").id)) : (
-			posible ? (glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/Selected.png").id)) : (
-				color ? glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/WhiteTileSW.png").id) : glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/BlackTileSW.png").id))));
+		posible ? (glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/Selected.png").id)) : (
+		tematica ? 
+			(color ? glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/etsidi_tile2.png").id) : glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/ETSIDI_tile.png").id)) :
+			(color ? glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/WhiteTileSW.png").id) : glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/BlackTileSW.png").id)))));
+
+	
 
 	glDisable(GL_LIGHTING);
 	glBegin(GL_POLYGON);

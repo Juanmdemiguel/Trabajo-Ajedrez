@@ -7,71 +7,35 @@
 //Establece posiciones iniciales de la camara tanto en el menu como al iniciar la partida
 void Camara::dibuja(Menu& principal)
 {
+    
+
     if (principal.getMenu()){
         gluLookAt(6, 8, 16,  // posicion del ojo
             6, 8, 0,      // hacia que punto mira  (0,0,0)
            1.0, 0.0, 0.0);      // definimos hacia arriba (eje Y)
     }
-    else{
+    else {
         gluLookAt(posx, posy, posz,  // posicion del ojo
             mirax, miray, miraz,      // hacia que punto mira  (0,0,0) 
             0.0, 1.0, 0.0);      // definimos hacia arriba (eje Y)*/  
     }
+    
 }
 
-//Permite cambiar al modo en el que se mueven las piezas, que no admite movimientos de camara adicionales y regresar
-void Camara::cambio_modo_libre(Menu& principal, unsigned char key)
-{
-    if (!principal.getMenu() && estatico)
-    {
-        //Al pulsar l se entra en el modo y se vuelve a la posición de la camara original segun juege un color u otro
-        if (key == 'l' && modolibre == FALSE)
-        {
-            modolibre = TRUE;
-            if (!cambionegro)
-                posx = -20.0;
-            if (cambionegro)
-                posx = 44.0;
-            posy = 40.0;
-            posz = 15.0;
-            zoomin = 0;
-            zoomout = 0;
-            arriba = 0;
-            abajo = 0;
-        }
-        //Al volver a pulsar l se sale del modo manteniendo la posición original segun juegue un color u otro
-        else if (key == 'l' && modolibre == TRUE)
-        {
-            modolibre = FALSE;
-            if (!cambionegro)
-                posx = -20.0;
-            if (cambionegro)
-                posx = 44.0;
-            posy = 40.0;
-            posz = 15.0;
-            zoomin = 0;
-            zoomout = 0;
-            arriba = 0;
-            abajo = 0;
-        }
-    }
-}
 
 //Permite la rotación al cambiar de turno (provisionalmente se acciona al pulsar el espacio)
 void Camara::actuador(Menu& principal, bool& _rotate)
 {
     if (!principal.getMenu()) {
-    
         rotar = _rotate;
         _rotate = false;
-
     }
 }
 
 //Permite acercar la camara al tablero al pulsar '+' y alejarla al pulsar '-'
 void Camara::zoom(Menu& principal, unsigned char key)
 {
-    if (!principal.getMenu() && modolibre && estatico)
+    if (!principal.getMenu()  && estatico)
     {
         double zoom = 0.5; // Ajusta el factor de zoom según sea necesario
 
@@ -113,7 +77,7 @@ void Camara::zoom(Menu& principal, unsigned char key)
 //Permite ver el tablero desde arriba al pulsar 'w' y de forma frontal al pulsar 's' independientemente del color que tenga el turno
 void Camara::vertical(Menu& principal, unsigned char key)
 {
-    if (!principal.getMenu() && modolibre && estatico)
+    if (!principal.getMenu()  && estatico)
     {
         float d = sqrt((posx - mirax) * (posx - mirax) + (posy - miray) * (posy - miray));
         double theta = atan2((posy - miray), (posx - mirax));
@@ -139,7 +103,6 @@ void Camara::vertical(Menu& principal, unsigned char key)
 
             }
         }
-        //Si se cambia de turno se invierten los comandos
         if (!cambionegro)
         {
             if ((key == 's' || key == 'S') && abajo < 18)
@@ -190,11 +153,10 @@ void Camara::rota(Menu& principal)
             if (theta >= 0 && theta != (atan2((15.0 - 15.0), (-20.0 - 12.0)) + 0.0291) && cambionegro == FALSE)
                 theta = 0;
             if (theta <= 0 && cambionegro == TRUE)
-                theta = 3.1416;
-
+                theta = 3.1416;;
             posx = mirax + d * cos(theta);
             posz = miraz + d * sin(theta);
-
+           
             //Cuando se llega a los 180º, cambia de turno y al volver a pulsar el espacio gira otra vez.
             if (theta == 0)
             {

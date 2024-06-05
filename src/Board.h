@@ -6,13 +6,14 @@
 class Board
 {
 	Tile board[fil][col];
+	int tematica{};
 
 public:
 //Constructor
 	Board();
 //Métodos
 	Tile& getTile(Punto2D pos);
-	void dibuja();
+	void dibuja(bool tematica);
 	void detectpieza(Punto2D esfera);
 //Amigos
 };

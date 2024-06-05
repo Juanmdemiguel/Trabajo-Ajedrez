@@ -25,7 +25,7 @@ public:
 	void dibujaJuego(int tema, int vision);
 	void inicializa(int t, int v);
 	void SetClick(Punto2D C) { Click = C; };
-	void selecciona(int t, int v);
+	void selecciona(int t, int v, bool cambio);
 	void ClearSelec();
 	void Listo() { turno = !turno; }
 	bool& getMov() { return mov; }

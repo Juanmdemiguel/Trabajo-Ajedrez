@@ -4,7 +4,7 @@
 void Game::dibujaJuego(int tema, int vision) {	//Funcion dibujaJuego provisional, se añade a clase Juego/Game cuando se desarrolle
 
 	//Dibuja el tablero
-	board.dibuja();
+	board.dibuja(tema);
 	blancas.cambiaTematica(tema);
 	negras.cambiaTematica(tema);
 
@@ -50,12 +50,12 @@ void Game::inicializa(int t, int v)
 }
 
 
-void Game::selecciona(int t, int v)
+void Game::selecciona(int t, int v, bool cambio)
 {
 	bool aux, comp{};
 	int p = 0;
 
-	if (turno) {
+	if (turno && !cambio) {
 		for (auto b : blancas) {
 			if (b->get_pos() == Click) b->getPosibles(board);
 
@@ -89,11 +89,11 @@ void Game::selecciona(int t, int v)
 				MueveSonido();
 			}
 			if (comp) break;
-
 		}
 	}
 
-	if (!turno) {
+	if (!turno && !cambio) {
+
 		for (auto n : negras) {
 			if (n->get_pos() == Click) n->getPosibles(board);
 			if (Click == Punto2D({ 2,8 }) && n->getTipo() == 4 && comprobEnroqueLargo() && n->mueve(Click, n->getVectorPosibles(), board)) {
@@ -102,7 +102,7 @@ void Game::selecciona(int t, int v)
 						a->setPos({ 3,8 });
 					}
 				}
-				mov = 1;
+				mov = true;
 			}
 			if (Click == Punto2D({ 9, 8 }) && n->getTipo() == 4 && comprobEnroqueCorto() && n->mueve(Click, n->getVectorPosibles(), board)) {
 				for (auto a : negras) {

@@ -19,7 +19,7 @@ class Tile
 
 public:
 	//Métodos
-	void Dibuja(int i, int j); //Dibuja la casilla. Recibe las coordenadas como argumento
+	void Dibuja(int i, int j, bool tematica); //Dibuja la casilla. Recibe las coordenadas como argumento
 	void setPos(const int& col, const int& row) { this->posicion = { (double)col,(double)row }; };
 	Punto2D getCenter();
 	int getocupada() { return ocupada; };

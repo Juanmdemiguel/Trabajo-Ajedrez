@@ -10,7 +10,6 @@ Board::Board()
 			//Además el criterio [filas][columnas] es contrario al [eje x][eje z], así que se invierten
 			board[i][j].setPos(j+1, i+1);
 			(j + i) % 2 == 0 ? board[i][j].color = true : board[i][j].color = false; //Recorre la matriz del tablero. Establece su color según la suma de sus coordenadas
-
 			if (i == 0 || i == 1) 
 				board[i][j].setocupada(1);
 			else if (i==7|| i==6)
@@ -19,7 +18,7 @@ Board::Board()
 	}
 }
 
-void Board::dibuja()
+void Board::dibuja(bool tematica)
 {
 	//Dibujo de la base del tablero
 	glDisable(GL_LIGHTING);
@@ -38,10 +37,8 @@ void Board::dibuja()
 
 	//Dibujo superpuesto de las casillas
     for (int i = 0; i < fil; i++) {
-		for (int j = 0; j < col; j++) {
-			board[i][j].Dibuja(i, j);
-		}
-			
+		for (int j = 0; j < col; j++) 
+			board[i][j].Dibuja(i, j, tematica);
     }
 }
 

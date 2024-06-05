@@ -7,15 +7,16 @@ void Coordinator::Dibuja()
 	{
 	case Estado::MENU:
 		if (!principal.getMenu()) {
-			juego.inicializa(principal.tematica, principal.vision);
+			juego.inicializa(principal.getTematica(), principal.getVision());
+			principal.getVision() ? camara.set_pos(12.0 + 32* cos(3.1416) , 40.0, 15.0 + 32 * sin(3.1416)) : camara.set_pos(11.9, 35.0, 14.9992); //Selecciona la posición de la camara según la visión
 			estado = JUEGO;
 		}
 		else
 		principal.iniciaMenu();
 		break;
 	case Estado::JUEGO:
-		juego.dibujaJuego(principal.tematica, principal.vision);
-		juego.selecciona(principal.tematica, principal.vision);
+		juego.dibujaJuego(principal.getTematica(), principal.getVision());
+		juego.selecciona(principal.getTematica(), principal.getVision(), camara.Cambiando());
 		PasaTurno();
 
 		if (camara.Cambiando()) juego.ClearSelec();
@@ -38,7 +39,7 @@ void Coordinator::Click(int _button, int state, int _x, int _y)
 
 			principal.clickBotonesMenu();
 			
-			if ((raton.getCoordenadaZ() > (5 - 1.5)) && (raton.getCoordenadaZ() < 5) && (raton.getCoordenadaX() > (10 - 4)) && (raton.getCoordenadaX() < 10) && principal.ventana == 0)
+			if ((raton.getCoordenadaZ() > (5 - 1.5)) && (raton.getCoordenadaZ() < 5) && (raton.getCoordenadaX() > (10 - 4)) && (raton.getCoordenadaX() < 10) && principal.getVentana() == 0)
 				principal.musica();
 		}
 		
@@ -65,7 +66,6 @@ void Coordinator::Teclado(unsigned char key, int x_t, int y_t)
 {
 	camara.zoom(principal, key);
 	camara.vertical(principal, key);
-	camara.cambio_modo_libre(principal, key);
 
 }
 

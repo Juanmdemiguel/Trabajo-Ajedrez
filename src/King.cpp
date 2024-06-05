@@ -6,8 +6,6 @@ void King::getPosibles(Board& tablero) {
 	
 	piece::getDiagonal(reach,tablero);
 	piece::getHorizontal(reach,tablero);
-	cout << enroqueCorto;
-	cout << enroqueLargo;
 	if (color) {
 		if (enroqueCorto)tablero.getTile({ 9,1 }).setposible(true), posibles.push_back({ 9,1 });
 		if (enroqueLargo)tablero.getTile({ 2,1 }).setposible(true), posibles.push_back({ 2,1 });

@@ -31,8 +31,9 @@ public:
 	void Tema();
 	int getTematica() { return tematica; }
 	int getVision() { return vision; }
+	int getVentana() { return ventana; }
 
 //Amigos
-	friend class Coordinator;
+	//friend class Coordinator;
 
 };

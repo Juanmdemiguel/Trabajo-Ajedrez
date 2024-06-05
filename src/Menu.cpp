@@ -87,7 +87,6 @@ void Menu::clickBotonesMenu()
 		if ((r.x > (3 - 1.5)) && (r.x < 3) && (r.z > (10 - 4)) && (r.z < 10))							//AbI(Visión)
 		{
 			if (ventana == 0) ventana = VISION;
-			//(ventana == 1) ? tematica = ETSIDI: ventana = VISION;
 		}
 		if ((r.x > (3 - 1.5)) && (r.x < 3) && (r.z > (5 - 4)) && (r.z < 5))								//AbD
 		{
@@ -102,9 +101,9 @@ void Menu::clickBotonesMenu()
 
 	if (ventana == 2)
 	{
-		if ((r.x > (9 - 1.5)) && (r.x < 9) && (r.z > (8 - 4)) && (r.z < 8)) vision = _2D;			//Ar
-		if ((r.x > (6 - 1.5)) && (r.x < 6) && (r.z > (8 - 4)) && (r.z < 8)) vision = _3D;			//Med
-		if ((r.x > (3 - 1.5)) && (r.x < 3) && (r.z > (8 - 4)) && (r.z < 8)) ventana = INICIO;		//Ab
+		if ((r.x > (9 - 1.5)) && (r.x < 9) && (r.z > (8 - 4)) && (r.z < 8)) vision = _2D, ventana = INICIO;			//Ar
+		if ((r.x > (6 - 1.5)) && (r.x < 6) && (r.z > (8 - 4)) && (r.z < 8)) vision = _3D, ventana = INICIO;			//Med
+		if ((r.x > (3 - 1.5)) && (r.x < 3) && (r.z > (8 - 4)) && (r.z < 8)) ventana = INICIO;						//Ab
 	}
 	
 }
