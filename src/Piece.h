@@ -12,6 +12,7 @@ protected:
 	Punto2D posicion;
 
 	//Se define el color de las piezas. 0 para negro y 1 para blanco.
+	bool mov1 = 0; //Si se ha realizado algun movimiento mov1 = 1
 	bool color;
 	int tematica{}; //Temática del juego, por defecto StarWars (SW a 0 y ETSIDI a 1)
 	int vision = 1; //Por defecto visión 3D (para 2D es 0)
@@ -37,15 +38,17 @@ public:
 
 	void dibujaSprite(Board& tablero);
 	void dibujaModelo(Board& tablero) const;
-
-	virtual void getPosibles(Punto2D pos, Board& tablero) = 0;
-	virtual void getDiagonal(Punto2D pos, int reach,  Board& tablero);
-	virtual void getHorizontal(Punto2D pos, int reach, Board& tablero);
-	virtual void getEle(Punto2D pos, Board& tablero);
-
+	virtual void getPosibles(Board& tablero) = 0;
+	virtual void getDiagonal(int reach,  Board& tablero);
+	virtual void getHorizontal(int reach, Board& tablero);
+	virtual void getEle(Board& tablero);
 	Punto2D get_pos() { return posicion; };
 	bool getColor() { return color; };
 	TIPO getTipo() { return tipo; };
+	virtual bool getMov1() { return 0; };
+	virtual void set_EnroqueCorto(bool c) {};
+	virtual void set_EnroqueLargo(bool c) {};
+	void setPos(Punto2D p) { posicion = p; };
 
 	vector <Punto2D> getVectorPosibles() { return posibles; }
 

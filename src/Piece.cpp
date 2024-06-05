@@ -222,11 +222,11 @@ void piece::dibujaModelo(Board& tablero) const
 	glPopMatrix();
 }
 
-void piece::getDiagonal(Punto2D pos, int reach, Board& tablero)
+void piece::getDiagonal(int reach, Board& tablero)
 {
 	bool d1=false, d2=false, d3=false, d4=false;
-	double columna = (int)pos.x;     //Traduce el punto 2D a posiciones matriciales
-	double fila = (int)pos.z;
+	double columna = (int)posicion.x;     //Traduce el punto 2D a posiciones matriciales
+	double fila = (int)posicion.z;
 
 	//Para comer a otras piezas
 	for (int i = 1; i <= reach; i++) { //asigna a las matrices en la diagonal el estatus de posible
@@ -259,19 +259,13 @@ void piece::getDiagonal(Punto2D pos, int reach, Board& tablero)
 				tablero.getTile({ fila + i,columna - i }).setcomestible(true);
 		}
 
-
-
-		/*for (auto p : posibles)
-			cout << p.x << ';' << p.z << endl;*/
-
-
 	}
 }
-void piece::getHorizontal(Punto2D pos, int reach, Board& tablero)
+void piece::getHorizontal(int reach, Board& tablero)
 {
 	bool d1 = false, d2 = false, d3 = false, d4 = false;
-	double columna = (int)pos.x;     //Traduce el punto 2D a posiciones matriciales
-	double fila = (int)pos.z;
+	double columna = (int)posicion.x;     //Traduce el punto 2D a posiciones matriciales
+	double fila = (int)posicion.z;
 
 	for (int i = 1; i <= reach; i++) { //asigna posible a las casillas en horizontal y vertical
 
@@ -307,10 +301,10 @@ void piece::getHorizontal(Punto2D pos, int reach, Board& tablero)
 
 	
 }
-void piece::getEle(Punto2D pos, Board& tablero)
+void piece::getEle(Board& tablero)
 {
-	double columna = (int)pos.x;     //Traduce el punto 2D a posiciones matriciales
-	double fila = (int)pos.z;
+	double columna = (int)posicion.x;     //Traduce el punto 2D a posiciones matriciales
+	double fila = (int)posicion.z;
 
 	if (fila + 2 < 11 && columna + 1 < 9 && int(color) != tablero.getTile({ fila + 2,columna + 1 }).getocupada())
 	{
@@ -392,6 +386,7 @@ bool piece::mueve( const Punto2D& pos_raton, vector <Punto2D> posibles, Board &t
 	{
 		if (pos_raton == p)	// Si posición del ratón es igual a la de una de las posibles
 		{
+			mov1 = 1;
 			tablero.getTile(posicion).setocupada(2); //Donde estaba antes la pieza ahora está libre (2)
 			tablero.getTile(p).setocupada(int(color)); //La casilla a donde se mueve la pieza adquiere su color
 			posicion.x = p.x;	//Cambia posición de la pieza

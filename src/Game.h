@@ -30,6 +30,8 @@ public:
 	bool& getMov() { return mov; }
 	void setMov(bool _mov) { mov = _mov; }
 	bool Promocion(int tipo, piece *pieza, int t, int v);
+	bool comprobEnroqueCorto();
+	bool comprobEnroqueLargo();
 	//Amigos
 
 };

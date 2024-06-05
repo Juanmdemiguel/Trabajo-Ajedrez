@@ -7,5 +7,5 @@ class Knight: public piece
 public:
 //Constructor
 	Knight(Punto2D pos, bool c, int t, int v) : piece(pos, c, t, v) { tipo = KNIGHT; }
-	void getPosibles(Punto2D pos, Board& tablero);
+	void getPosibles(Board& tablero);
 };

@@ -1,15 +1,14 @@
 #include "Pawn.h"
 
-void Pawn::getPosibles(Punto2D pos, Board& tablero) {
+void Pawn::getPosibles(Board& tablero) {
 
 
 	int reach = 10;
-	double columna = (int)pos.x;     //Traduce el punto 2D a posiciones matriciales
-	double fila = (int)pos.z;
-	bool d1 = false, d2 = false, d3 = false, d4 = false;
+	double columna = (int)posicion.x;     //Traduce el punto 2D a posiciones matriciales
+	double fila = (int)posicion.z;
 
 	if (color) {
-		pos.x == 2 ? reach = 2 : reach = 1;
+		posicion.x == 2 ? reach = 2 : reach = 1;
 		for (int i = 1; i <= reach; i++) {
 			
 			//Pone a posible las casillas que tiene de frente, pero no a comestibles
@@ -21,7 +20,7 @@ void Pawn::getPosibles(Punto2D pos, Board& tablero) {
 		}
 	}
 	if (!color) {
-		pos.x == 7 ? reach = 2 : reach = 1;
+		posicion.x == 7 ? reach = 2 : reach = 1;
 		for (int i = 1; i <= reach; i++) {
 
 			//Pone a posible las casillas que tiene de frente, pero no a comestibles

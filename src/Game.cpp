@@ -57,13 +57,26 @@ void Game::selecciona(int t, int v)
 
 	if (turno) {
 		for (auto b : blancas) {
+			if (b->get_pos() == Click) b->getPosibles(board);
 
-			if (b->get_pos() == Click) b->getPosibles(b->get_pos(), board);
+			if (Click == Punto2D({ 2,1 }) && b->getTipo() == 4 && comprobEnroqueLargo() && b->mueve(Click, b->getVectorPosibles(), board)) {
+				for (auto a : blancas) {
+					if (a->getTipo() == 1 && a->get_pos() == Punto2D({ 1,1 })) {
+						a->setPos({3,1});
+					}
+				}
+				mov = 1;
+			}
+			if (Click == Punto2D({ 9, 1}) && b->getTipo() == 4 && comprobEnroqueCorto() && b->mueve(Click, b->getVectorPosibles(), board)) {
+				for (auto a : blancas) {
+					if (a->getTipo() == 1 && a->get_pos() == Punto2D({10,1}) ) {
+						a->setPos({ 8,1 });
+					}
+				}
+				mov = 1;
+			}
 
-			aux = b->mueve(Click, b->getVectorPosibles(), board);
-
-
-			if (aux) mov = aux;
+			else aux = b->mueve(Click, b->getVectorPosibles(), board);
 
 			if (aux)
 			{
@@ -82,13 +95,25 @@ void Game::selecciona(int t, int v)
 	}
 	if (!turno) {
 		for (auto n : negras) {
-			
-			if (n->get_pos() == Click) n->getPosibles(n->get_pos(), board);
+			if (n->get_pos() == Click) n->getPosibles(board);
+			if (Click == Punto2D({ 2,8 }) && n->getTipo() == 4 && comprobEnroqueLargo() && n->mueve(Click, n->getVectorPosibles(), board)) {
+				for (auto a : negras) {
+					if (a->getTipo() == 1 && a->get_pos() == Punto2D({ 1,8 })) {
+						a->setPos({ 3,8 });
+					}
+				}
+				mov = 1;
+			}
+			if (Click == Punto2D({ 9, 8 }) && n->getTipo() == 4 && comprobEnroqueCorto() && n->mueve(Click, n->getVectorPosibles(), board)) {
+				for (auto a : negras) {
+					if (a->getTipo() == 1 && a->get_pos() == Punto2D({ 10,8 })) {
+						a->setPos({ 8,8 });
+					}
+				}
+				mov = 1;
+			}
+			else aux = n->mueve(Click, n->getVectorPosibles(),board);
 
-			aux = n->mueve(Click, n->getVectorPosibles(),board);
-
-
-			if (aux) mov = aux;
 
 			if (aux)
 			{
@@ -103,6 +128,8 @@ void Game::selecciona(int t, int v)
 
 		}
 	}
+	comprobEnroqueCorto();
+	comprobEnroqueLargo();
 }
 
 void Game::ClearSelec()
@@ -204,5 +231,66 @@ bool Game::Promocion(int tipo, piece *pieza, int t, int v)
 		break;
 	}
 	return false;
+}
+
+bool Game::comprobEnroqueCorto()
+{
+	//Blancas
+	bool rookb = 0, kingb = 0, vaciob = 1; //Condiciones a tener en cuenta
+	Punto2D c1b = { 7,1 }, c2b = { 8,1 }, c3b = { 9,1 }; //Coordenadas que deben estar vacias
+	//Negras
+	bool rookn = 0, kingn = 0, vacion = 1; //Condiciones a tener en cuenta
+	Punto2D c1n = { 7,8 }, c2n = { 8,8 }, c3n = { 9,8 }; //Coordenadas que deben estar vacias
+
+	for (auto k : blancas) {
+		if (k->getTipo() == 1 && !k->getMov1() && k->get_pos().z == 10) rookb = 1; //Torre * No movida * TorreEnrroqueCorto
+		if (k->getTipo() == 4 && !k->getMov1()) kingb = 1;
+		if (vaciob == 1) k->get_pos() == c1b ? vaciob = 0 : (k->get_pos() == c2b ? vaciob = 0 : (k->get_pos() == c3b ? vaciob = 0 : vaciob = 1));
+		if (vacion == 1) k->get_pos() == c1n ? vacion = 0: (k->get_pos() == c2n ? vacion = 0 : (k->get_pos() == c3n ? vacion = 0 : vacion = 1));
+	}
+	for (auto k : negras) {
+		if (k->getTipo() == 1 && !k->getMov1() && k->get_pos().z == 10) rookn = 1; //Torre * No movida * TorreEnrroqueCorto
+		if (k->getTipo() == 4 && !k->getMov1()) kingn = 1;
+		if (vaciob == 1) k->get_pos() == c1b ? vaciob = 0 : (k->get_pos() == c2b ? vaciob = 0 : (k->get_pos() == c3b ? vaciob = 0 : vaciob = 1));
+		if (vacion == 1) k->get_pos() == c1n ? vacion = 0 : (k->get_pos() == c2n ? vacion = 0 : (k->get_pos() == c3n ? vacion = 0 : vacion = 1));
+	}
+
+	if (rookb == 1 && kingb == 1 && vaciob == 1) { for (auto k : blancas) if (k->getTipo() == 4) k->set_EnroqueCorto(true);}
+	else { for (auto k : blancas) if (k->getTipo() == 4) k->set_EnroqueCorto(false);}
+	if (rookn == 1 && kingn == 1 && vacion == 1) { for (auto k : negras) if (k->getTipo() == 4) k->set_EnroqueCorto(true);}
+	else { for (auto k : negras) if (k->getTipo() == 4) k->set_EnroqueCorto(false);}
+
+	if ((rookb == 1 && kingb == 1 && vaciob == 1) || (rookn == 1 && kingn == 1 && vacion == 1))return true;
+	else return false;
+}
+bool Game::comprobEnroqueLargo()
+{
+	//Blancas
+	bool rookb = 0, kingb = 0, vaciob = 1; //Condiciones a tener en cuenta
+	Punto2D c1b = { 5,1 }, c2b = { 4,1 }, c3b = { 3,1 }, c4b = { 2,1 }; //Coordenadas que deben estar vacias
+	//Negras
+	bool rookn = 0, kingn = 0, vacion = 1; //Condiciones a tener en cuenta
+	Punto2D c1n = { 5,8 }, c2n = { 4,8 }, c3n = { 3,8 }, c4n = { 2,8 }; //Coordenadas que deben estar vacias
+
+	for (auto k : blancas) {
+		if (k->getTipo() == 1 && !k->getMov1() && k->get_pos().z == 1) rookb = 1; //Torre * No movida * TorreEnrroqueLargo
+		if (k->getTipo() == 4 && !k->getMov1()) kingb = 1;
+		if (vaciob == 1) k->get_pos() == c1b ? vaciob = 0 : (k->get_pos() == c2b ? vaciob = 0 : (k->get_pos() == c3b ? vaciob = 0 : (k->get_pos() == c4b ? vaciob = 0 : vaciob = 1)));
+		if (vacion == 1) k->get_pos() == c1n ? vacion = 0 : (k->get_pos() == c2n ? vacion = 0 : (k->get_pos() == c3n ? vacion = 0 : (k->get_pos() == c4n ? vacion = 0 : vacion = 1)));
+	}
+	for (auto k : negras) {
+		if (k->getTipo() == 1 && !k->getMov1() && k->get_pos().z == 1) rookn = 1; //Torre * No movida * TorreEnrroqueLargo
+		if (k->getTipo() == 4 && !k->getMov1()) kingn = 1;
+		if (vaciob == 1) k->get_pos() == c1b ? vaciob = 0 : (k->get_pos() == c2b ? vaciob = 0 : (k->get_pos() == c3b ? vaciob = 0 : (k->get_pos() == c4b ? vaciob = 0 : vaciob = 1)));
+		if (vacion == 1) k->get_pos() == c1n ? vacion = 0 : (k->get_pos() == c2n ? vacion = 0 : (k->get_pos() == c3n ? vacion = 0 : (k->get_pos() == c4n ? vacion = 0 : vacion = 1)));
+	}
+
+	if (rookb == 1 && kingb == 1 && vaciob == 1) { for (auto k : blancas) if (k->getTipo() == 4) k->set_EnroqueLargo(true); }
+	else { for (auto k : blancas) if (k->getTipo() == 4) k->set_EnroqueLargo(false); }
+	if (rookn == 1 && kingn == 1 && vacion == 1) { for (auto k : negras) if (k->getTipo() == 4) k->set_EnroqueLargo(true); }
+	else { for (auto k : negras) if (k->getTipo() == 4) k->set_EnroqueLargo(false); }
+
+	if ((rookb == 1 && kingb == 1 && vaciob == 1) || (rookn == 1 && kingn == 1 && vacion == 1))return true;
+	else return false;
 }
 
