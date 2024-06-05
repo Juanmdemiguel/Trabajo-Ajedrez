@@ -259,14 +259,12 @@ void piece::getDiagonal(Punto2D pos, int reach, Board& tablero)
 				tablero.getTile({ fila + i,columna - i }).setcomestible(true);
 		}
 
-<<<<<<< Updated upstream
-=======
 
 
 		/*for (auto p : posibles)
 			cout << p.x << ';' << p.z << endl;*/
 
->>>>>>> Stashed changes
+
 	}
 }
 void piece::getHorizontal(Punto2D pos, int reach, Board& tablero)

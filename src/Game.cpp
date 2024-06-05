@@ -54,14 +54,11 @@ void Game::selecciona()
 		for (auto b : blancas) {
 
 			if (b->get_pos() == Click) b->getPosibles(b->get_pos(), board);
-<<<<<<< Updated upstream
-			
-			aux = b->mueve(Click, b->getVectorPosibles(),board);
-			
-			if (aux) mov = aux;
-=======
 
 			aux = b->mueve(Click, b->getVectorPosibles(), board);
+
+
+			if (aux) mov = aux;
 
 			if (aux)
 			{
@@ -75,7 +72,7 @@ void Game::selecciona()
 			if (comp) break;
 
 			//cout << mov << endl;
->>>>>>> Stashed changes
+
 		}
 	}
 	if (!turno) {
@@ -85,9 +82,9 @@ void Game::selecciona()
 
 			aux = n->mueve(Click, n->getVectorPosibles(),board);
 
-<<<<<<< Updated upstream
+
 			if (aux) mov = aux;
-=======
+
 			if (aux)
 			{
 				if (n->get_pos().x == 1) {
@@ -98,7 +95,7 @@ void Game::selecciona()
 				mov = aux;
 			}
 			if (comp) break;
->>>>>>> Stashed changes
+
 		}
 	}
 }
@@ -110,18 +107,6 @@ void Game::ClearSelec()
 	}
 }
 
-<<<<<<< Updated upstream
-=======
-void Game::ocuparCasillas() {
-	Punto2D c;
-	for (double i = 1; i < fil + 1; i++) {
-		for (double j = 1; j < col + 1; j++) {
-			c = { j,i };
-			for (auto k : blancas) if (k->get_pos() == c) board.getTile({ j,i }).setocupada(1);
-			for (auto k : negras) if (k->get_pos() == c) board.getTile({ j,i }).setocupada(0);
-		}
-	}
-}
 
 bool Game::Promocion(int tipo, piece *pieza, int t)
 {
@@ -215,4 +200,4 @@ bool Game::Promocion(int tipo, piece *pieza, int t)
 	}
 	return false;
 }
->>>>>>> Stashed changes
+
