@@ -7,6 +7,8 @@
 #include "Mouse.h"
 #include "freeglut.h"
 #include <string>
+#include <fstream>
+#include <filesystem>
 
 class Coordinator
 {
@@ -30,5 +32,6 @@ public:
 	void PasaTurno();
 	void CompruebaMusica();
 	void Puntuaciones();
+	int CreaFicheroPuntuaciones();
 };
 

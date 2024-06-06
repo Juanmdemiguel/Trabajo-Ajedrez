@@ -181,3 +181,32 @@ void Coordinator::Puntuaciones()
 	ETSIDI::printxy("JUGADOR 2:", 5, 7);
 	ETSIDI::printxy(cadena2, 8, 7);
 }
+
+int Coordinator::CreaFicheroPuntuaciones()	// Crea el fichero donde se guardan las puntuaciones
+{
+	std::string nombre = "ResultadoPartidas.txt";
+
+	bool escribeLineaInicial = false; //Booleano para conocer si el archivo ya existe
+
+	if (!std::filesystem::exists(nombre) || std::filesystem::file_size(nombre) == 0) {
+		escribeLineaInicial = true;
+	}
+	
+	std::ofstream archivo(nombre, std::ios::app); // Abrir el archivo sin sobrescribir el contenido
+
+	if (archivo.is_open()) 
+	{
+		if (escribeLineaInicial) archivo << " Jugador 1 || Jugador 2 " << endl;
+
+		archivo << juego.PuntosJ1() << "||" << juego.PuntosJ2() << endl;
+		archivo.close();
+
+		//cout << "Puntuacion final guardada" << endl;
+	}
+	else {
+		cerr << "No se pudo abrir el archivo para escribir" << endl;
+		return -1;
+	}
+
+	return 0;
+}
