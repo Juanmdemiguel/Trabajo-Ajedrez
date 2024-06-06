@@ -18,7 +18,7 @@ class Camara
 	bool modolibre = FALSE;
 	bool estatico = TRUE;
 	bool vistaPuntuaciones{};
-
+	bool fin = false; //Para gestionar el fin del juego
 
 public:
 //Constructor
@@ -33,6 +33,8 @@ public:
 	bool Cambiando() { return !estatico; }
 	bool getPuntuaciones() { return vistaPuntuaciones; }
 
+	void setfin(const bool& f) { fin = f; };
+	bool getfin() { return fin; };
 //Amigos
 
 };

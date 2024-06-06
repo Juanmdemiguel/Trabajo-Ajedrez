@@ -14,7 +14,7 @@ void Camara::dibuja(Menu& principal)
             6, 8, 0,      // hacia que punto mira  (0,0,0)
            1.0, 0.0, 0.0);      // definimos visión hacia arriba (eje X)
     }
-    else if (!vistaPuntuaciones)
+    else if (!vistaPuntuaciones && !fin)
     {
         gluLookAt(posx, posy, posz,  // posicion del ojo
             mirax, miray, miraz,      // hacia que punto mira  (0,0,0) 

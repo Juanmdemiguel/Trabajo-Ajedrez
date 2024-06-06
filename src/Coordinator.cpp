@@ -27,23 +27,14 @@ void Coordinator::Dibuja()
 		if (camara.getPuntuaciones()) Puntuaciones();
 
 		//La partida finaliza al realizar jaque mate al jugador contrario, que activa el booleano finPartida. Descomentar cuando esté implementado.
-		//if (juego.finPartida()) estado = FIN;
+		//if (juego.finPartida()) estado = FIN, camara.setfin(true);
 		break;
 
 	case Estado::FIN:
-		
-		//Insertar música de fin (Créditos Star Wars)
-
-		//Gestionar ubicación del comentario Volver a menú
-		Punto2D volverMenu{};
-
-		//CAMBIAR LA POSICIÓN DE LA CÁMARA E IMAGEN
-		camara.set_pos(12.0 + 32 * cos(3.1416), 40.0, 15.0 + 32 * sin(3.1416));
-		
 		glEnable(GL_TEXTURE_2D);
 
-		//Cambiar imagen a los créditos
-		glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/MenuSW.png").id);
+		glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/Puntuaciones.png").id);
+
 		glDisable(GL_LIGHTING);
 		glBegin(GL_POLYGON);
 		glColor3f(1, 1, 1);
@@ -57,8 +48,14 @@ void Coordinator::Dibuja()
 		glEnable(GL_LIGHTING);
 		glDisable(GL_TEXTURE_2D);
 
-		//Para cuando se hace click a "Volver a menú"
-		raton.getClick() == volverMenu ? estado = MENU : estado = FIN;
+		ETSIDI::setTextColor(0, 0, 1);
+		ETSIDI::setFont("resources/fuentes/Bitwise.ttf", 20);
+		ETSIDI::printxy("FIN DEL JUEGO", 6, 9);
+		
+		//(turno) ? ETSIDI::printxy("GANAN LAS BLANCAS", 7, 8) : ETSIDI::printxy("GANAN LAS NEGRAS", 5, 8);
+
+		ETSIDI::printxy("PRESIONE EL ESPACIO PARA VOLVER AL MENU", 4, 7);
+
 		break;
 
 	}
@@ -109,7 +106,7 @@ void Coordinator::Teclado(unsigned char key, int x_t, int y_t)
 
 	if (estado == FIN)
 	{
-		if (key == ' ') principal.setMenu(true), estado = MENU;
+		if (key == ' ') principal.setMenu(true), estado = MENU, camara.setfin(false);
 	}
 
 }
