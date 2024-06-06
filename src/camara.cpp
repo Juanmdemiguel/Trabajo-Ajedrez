@@ -8,15 +8,22 @@
 void Camara::dibuja(Menu& principal)
 {
     
-
-    if (principal.getMenu()){
+    if (principal.getMenu())
+    {
         gluLookAt(6, 8, 16,  // posicion del ojo
             6, 8, 0,      // hacia que punto mira  (0,0,0)
-           1.0, 0.0, 0.0);      // definimos hacia arriba (eje Y)
+           1.0, 0.0, 0.0);      // definimos visión hacia arriba (eje X)
     }
-    else {
+    else if (!vistaPuntuaciones)
+    {
         gluLookAt(posx, posy, posz,  // posicion del ojo
             mirax, miray, miraz,      // hacia que punto mira  (0,0,0) 
+            0.0, 1.0, 0.0);      // definimos hacia arriba (eje Y)*/  
+    }
+    else 
+    {
+        gluLookAt(7.5, 8, 8,  // posicion del ojo   10
+            7.5, 8, 0,      // hacia que punto mira  (0,0,0) 
             0.0, 1.0, 0.0);      // definimos hacia arriba (eje Y)*/  
     }
     
@@ -49,7 +56,6 @@ void Camara::zoom(Menu& principal, unsigned char key)
         double unitariodiry = diry / modulodir;
         double unitariodirz = dirz / modulodir;
 
-
         if (key == '+' && zoomin < 30)
         {
             // Mueve el punto de mira en la dirección opuesta al vector de dirección de la cámara
@@ -60,8 +66,6 @@ void Camara::zoom(Menu& principal, unsigned char key)
             zoomout = zoomout - 1;
         }
 
-
-
         else if (key == '-' && zoomout < 20)
         {
             // Mueve el punto de mira en la dirección del vector de dirección de la cámara
@@ -71,6 +75,10 @@ void Camara::zoom(Menu& principal, unsigned char key)
             zoomin = zoomin - 1;
             zoomout = zoomout + 1;
         }
+
+        else if (key == 'p' || key == 'P')  vistaPuntuaciones = true;
+
+        else if (key == 'j' || key == 'J') vistaPuntuaciones = false;
     }
 }
 

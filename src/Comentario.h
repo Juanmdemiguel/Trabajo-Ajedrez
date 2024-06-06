@@ -2,6 +2,7 @@
 #include "ETSIDI.h"
 #include"Punto2D.h"
 
+
 class Comentario
 {
 	Punto2D p1{};		//Esquina superior derecha
@@ -16,6 +17,7 @@ public:
 	void dibuja(bool sonido, int ventana, int n_com) { creaComentario(sonido, ventana, n_com); };
 	void creaComentario(bool sonido, int ventana, int n_com);
 	void cargaTextura(int ventana, int n_com, bool sonido);
+	
 	//void dibujaTexto(int menu, int numCuad);
 //Amigos
 };

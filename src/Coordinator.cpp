@@ -1,8 +1,10 @@
 #include "Coordinator.h"
 
+
 void Coordinator::Dibuja()
 {
 	camara.dibuja(principal);
+
 	switch (estado) 
 	{
 	case Estado::MENU:
@@ -16,9 +18,13 @@ void Coordinator::Dibuja()
 		break;
 
 	case Estado::JUEGO:
+
 		juego.dibujaJuego(principal.getTematica(), principal.getVision());
 		PasaTurno();
+
 		if (camara.Cambiando()) juego.ClearSelec();
+
+		if (camara.getPuntuaciones()) Puntuaciones();
 
 		//La partida finaliza al realizar jaque mate al jugador contrario, que activa el booleano finPartida. Descomentar cuando esté implementado.
 		//if (juego.finPartida()) estado = FIN;
@@ -142,4 +148,37 @@ void Coordinator::PasaTurno()
 		camara.actuador(principal, juego.getMov());
 		juego.setMov(false);
 	}
+}
+
+void Coordinator::Puntuaciones()
+{
+	glEnable(GL_TEXTURE_2D);
+
+	glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/Puntuaciones.png").id);
+
+	glDisable(GL_LIGHTING);
+	glBegin(GL_POLYGON);
+	glColor3f(1, 1, 1);
+
+	glTexCoord2d(1, 1);    glVertex3f(0, 0, -0.1);
+	glTexCoord2d(0, 1);    glVertex3f(0, 16, -0.1);
+	glTexCoord2d(0, 0);    glVertex3f(12, 16, -0.1);
+	glTexCoord2d(1, 0);    glVertex3f(12, 0, -0.1);
+	glEnd();
+
+	glEnable(GL_LIGHTING);
+	glDisable(GL_TEXTURE_2D);
+
+	ETSIDI::setTextColor(1, 1, 1);
+	ETSIDI::setFont("resources/fuentes/Bitwise.ttf", 20);
+	char cadena1[50];
+	sprintf_s(cadena1, "%d", juego.PuntosJ1());
+	ETSIDI::printxy("JUGADOR 1:", 5, 9);
+	ETSIDI::printxy(cadena1, 8, 9);
+
+	char cadena2[50];
+	sprintf_s(cadena2, "%d", juego.PuntosJ2());
+	ETSIDI::setTextColor(1, 1, 1);
+	ETSIDI::printxy("JUGADOR 2:", 5, 7);
+	ETSIDI::printxy(cadena2, 8, 7);
 }

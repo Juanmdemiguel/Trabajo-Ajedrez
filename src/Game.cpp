@@ -19,6 +19,9 @@ void Game::dibujaJuego(int tema, int vision) {	//Funcion dibujaJuego provisional
 
 void Game::inicializa(int t, int v)
 {
+	double tiempo; //No necesario almacenar el tiempo 0, se crea esta variable auxiliar que se destruye al final de inicializa
+	tiempo = cronometro(0);
+
 	//Agrega los peones de los dos colores
 	for (double i = 1; i <= 10; ++i) {
 		blancas.agregar(new Pawn({ i,2 }, 1, t, v));
@@ -54,7 +57,7 @@ void Game::inicializa(int t, int v)
 
 void Game::selecciona(int t, int v, bool cambio)
 {
-	bool aux, comp{};
+	bool aux{}, comp{};
 	int p = 0;
 
 	if (turno && !cambio) {
@@ -89,14 +92,14 @@ void Game::selecciona(int t, int v, bool cambio)
 					p = b->promocionar(b->get_pos());
 					comp = Promocion(p, b, t, v);
 				}
-				
+
 				mov = aux;
 				MueveSonido();
 			}
 			if (comp) break;
 		}
-		if (mov)cout << comprobJaque(0);
-		if (mov)cout << comprobJaqueMate(0);
+		//if (mov)cout << comprobJaque(0);
+		//if (mov)cout << comprobJaqueMate(0);
 	}
 
 	if (!turno && !cambio) {
@@ -141,8 +144,8 @@ void Game::selecciona(int t, int v, bool cambio)
 			if (comp) break;
 		}
 
-		if (mov)cout << comprobJaque(1);
-		if (mov)cout << comprobJaqueMate(1);
+		//if (mov)cout << comprobJaque(1);
+		//if (mov)cout << comprobJaqueMate(1);
 	}
 
 	//Comprueba el enroque
@@ -369,14 +372,21 @@ void Game::SonidoComer()
 
 //IMPLEMENTACIÓN DE COMER LAS PIEZAS. SI LA POSICIÓN DE LA PIEZA QUE SE HA MOVIDO ES LA MISMA QUE LA CONTRARIA, SE ELIMINA LA CONTRARIA
 
-bool Game::comer(ListaPiezas& p1, piece* p2)
+bool Game::comer(ListaPiezas& p1, piece* p2)	//Comida y la que come
 {
+	double tiempo{};
+
 	for (auto n : p1)
 	{
 		if (n->get_pos() == p2->get_pos())
 		{
+			tiempo = cronometro(1);
+			if (p2->getColor()) jugador1 = jugador1 + asignaPuntos(n->getTipo(), tiempo);
+			else jugador2 = jugador2 + asignaPuntos(n->getTipo(), tiempo);
+
 			p1.eliminar(n);
 			comida = true;
+
 			return 1;
 			break;
 		}
@@ -447,4 +457,20 @@ bool Game::finPartida()
 {
 	if (comida) return 1;
 	else return 0;
+}
+
+int Game::asignaPuntos(int pieza_comida, double tiempo)
+{
+	//Se implementa el tiempo para que las acciones de comer antes de 10 minutos puntúen más que pasado este tiempo
+	switch (pieza_comida)
+	{
+	case 0:	return (tiempo >= 600) ? 5 : 10;		//peón
+	case 1:	return (tiempo >= 600) ? 15 : 30;		//torre
+	case 2:	return (tiempo >= 600) ? 15 : 30;		//alfil
+	case 3:	return (tiempo >= 600) ? 15 : 30;		//caballo
+	case 4:	break;									//rey no se come
+	case 5:	return (tiempo >= 600) ? 35 : 70;		//reina
+	case 6:	return (tiempo >= 600) ? 25 : 50;		//arzobispo
+	case 7:	return (tiempo >= 600) ? 25 : 50;		//canciller
+	}
 }

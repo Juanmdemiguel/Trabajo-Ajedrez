@@ -19,6 +19,8 @@ class Game
 	bool mov{}; //Solo pasa de turno si ya has movido. No puedes mover si ya has movido. DEBERIA EMPEZAR EN FALSE, ESTA EN TRUE PARA PODER PASAR 
 	//TERMINAR DE IMPLEMENTAR CUANDO SE HAGA EL MOVIMIENTO. Y BORRAR ESTO AL IMPLEMENTAR 
 
+	long jugador1{}, jugador2{};	//long ints de jugadores
+
 	bool comida = false;  //Para comprobar si funciona el fin. QUITAR CUANDO SE COMPLETE EL JAQUE MATE
 
 public:
@@ -50,6 +52,11 @@ public:
 	bool finPartida();
 
 	bool comprobJaqueMate(bool c);
+
+	int asignaPuntos(int pieza, double tiempo);
+
+	long PuntosJ1() { return jugador1; }
+	long PuntosJ2() { return jugador2; }
 
 	//Amigos
 

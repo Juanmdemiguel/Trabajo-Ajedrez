@@ -17,6 +17,7 @@ class Camara
 	bool cambionegro = FALSE;
 	bool modolibre = FALSE;
 	bool estatico = TRUE;
+	bool vistaPuntuaciones{};
 
 
 public:
@@ -30,6 +31,8 @@ public:
 	void zoom(Menu& principal, unsigned char key);
 	void vertical(Menu& principal, unsigned char key);
 	bool Cambiando() { return !estatico; }
+	bool getPuntuaciones() { return vistaPuntuaciones; }
+
 //Amigos
 
 };

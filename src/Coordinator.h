@@ -6,6 +6,8 @@
 #include "Piece.h"
 #include "Mouse.h"
 #include "freeglut.h"
+#include <string>
+
 class Coordinator
 {
 	enum Estado { MENU, JUEGO, FIN} estado{MENU};
@@ -27,5 +29,6 @@ public:
 	void MouseToGame();
 	void PasaTurno();
 	void CompruebaMusica();
+	void Puntuaciones();
 };
 
