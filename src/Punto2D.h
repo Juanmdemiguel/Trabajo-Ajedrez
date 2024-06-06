@@ -8,7 +8,7 @@ class Punto2D
 public:
 	double z, x;
 	bool operator==(Punto2D p) { return (z == p.z && x == p.x) ? true : false ; };
-	
+	void operator=(Punto2D p) { z = p.z; x = p.x; };
 };
 
 

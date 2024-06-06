@@ -62,7 +62,11 @@ void Game::selecciona(int t, int v, bool cambio)
 
 	if (turno && !cambio) {
 		for (auto b : blancas) {
-			if (b->get_pos() == Click) b->getPosibles(board);
+			if (b->get_pos() == Click) {
+				b->cleanVector();
+				b->getPosibles(board);
+			}
+			Limitador(1);
 
 			if (Click == Punto2D({ 2,1 }) && b->getTipo() == 4 && comprobEnroqueLargo() && b->mueve(Click, b->getVectorPosibles(), board)) {
 				for (auto a : blancas) {
@@ -106,7 +110,11 @@ void Game::selecciona(int t, int v, bool cambio)
 	if (!turno && !cambio) {
 
 		for (auto n : negras) {
-			if (n->get_pos() == Click) n->getPosibles(board);
+			if (n->get_pos() == Click) {
+				n->cleanVector();
+				n->getPosibles(board);
+			}
+			Limitador(0);
 
 			//Realiza el enroque
 			if (Click == Punto2D({ 2,8 }) && n->getTipo() == 4 && comprobEnroqueLargo() && n->mueve(Click, n->getVectorPosibles(), board)) {
@@ -537,5 +545,86 @@ int Game::asignaPuntos(int pieza_comida, double tiempo)
 	case 5:	return (tiempo >= 600) ? 35 : 70;		//reina
 	case 6:	return (tiempo >= 600) ? 25 : 50;		//arzobispo
 	case 7:	return (tiempo >= 600) ? 25 : 50;		//canciller
+	}
+}
+void Game::Limitador(bool c)
+{
+	Punto2D maton{ 0,0 };//Variables inutiles
+	bool dobleamenaza;
+	if (c) {
+		for (auto b : blancas) {
+			if (b->get_pos() == Click) {
+				b->cleanVector();
+				b->getPosibles(board);
+				if (b->getVectorPosibles().size() >= 1 && b->getTipo() == 4) {
+					Punto2D origen = b->get_pos();
+					board.getTile(origen).setocupada(2);
+					//ClearSelec(); //Borro visualmente las posibles del rey
+					for (int r = 0; r < b->getVectorPosibles().size(); r++) {
+						b->setPos(b->getVectorPosibles()[r]);
+						if (board.getTile(b->get_pos()).getocupada() == 0) {
+							board.getTile(b->get_pos()).setocupada(1);
+							if (comprobJaque(1, dobleamenaza, maton)) {
+								b->cleanCasillaVector(b->getVectorPosibles()[r]);
+								r--;
+							}
+							board.getTile(b->get_pos()).setocupada(0);
+						}
+						else {
+							board.getTile(b->get_pos()).setocupada(1);
+							if (comprobJaque(1, dobleamenaza, maton)) {
+								b->cleanCasillaVector(b->getVectorPosibles()[r]);
+								r--;
+							}
+							board.getTile(b->get_pos()).setocupada(2);
+						}
+					}
+					b->setPos(origen);
+					board.getTile(origen).setocupada(1);
+					ClearSelec();//Borra visualmente las posibles de las negras
+					for (int i = 0; i < b->getVectorPosibles().size(); ++i)
+						board.getTile(b->getVectorPosibles()[i]).setposible(true); //Activo visualmente las posibles del rey
+				}
+			}
+		}
+
+	}
+	if (!c) {
+		for (auto n : negras) {
+			if (n->get_pos() == Click) {
+				n->cleanVector();
+				n->getPosibles(board);
+				if (n->getVectorPosibles().size() >= 1 && n->getTipo() == 4) {
+					Punto2D origen = n->get_pos();
+					board.getTile(origen).setocupada(2);
+					//ClearSelec(); //Borro visualmente las posibles del rey
+					for (int r = 0; r < n->getVectorPosibles().size(); r++) {
+						n->setPos(n->getVectorPosibles()[r]);
+						if (board.getTile(n->get_pos()).getocupada() == 1) {
+							board.getTile(n->get_pos()).setocupada(0);
+							if (comprobJaque(0, dobleamenaza, maton)) {
+								n->cleanCasillaVector(n->getVectorPosibles()[r]);
+								r--;
+							}
+							board.getTile(n->get_pos()).setocupada(1);
+						}
+						else {
+							board.getTile(n->get_pos()).setocupada(0);
+							if (comprobJaque(0, dobleamenaza, maton)) {
+								n->cleanCasillaVector(n->getVectorPosibles()[r]);
+								r--;
+							}
+							board.getTile(n->get_pos()).setocupada(2);
+						}
+					}
+					n->setPos(origen);
+					board.getTile(origen).setocupada(0);
+					ClearSelec();//Borra visualmente las posibles de las negras
+					for (int i = 0; i < n->getVectorPosibles().size(); ++i)
+						board.getTile(n->getVectorPosibles()[i]).setposible(true); //Activo visualmente las posibles del rey
+				}
+			}
+		}
+
 	}
 }

@@ -417,3 +417,13 @@ void piece::cleanVector()
 	}
 
 }
+void piece::cleanCasillaVector(Punto2D p)
+{
+	int a = posibles.size();
+	for (auto c = 0; c < a; c++) {
+		if (posibles[c] == p) {
+			posibles[c] = posibles.back();
+		}
+	}
+	posibles.pop_back();
+}

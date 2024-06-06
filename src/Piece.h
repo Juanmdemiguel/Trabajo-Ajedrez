@@ -52,7 +52,7 @@ public:
 	vector <Punto2D> getVectorPosibles() { return posibles; }
 	bool mueve(const Punto2D& pos_raton, vector <Punto2D> posibles, Board& tablero);
 	void cleanVector();
-
+	void cleanCasillaVector(Punto2D p);
 	virtual int promocionar(Punto2D pos)
 	{
 		if (tipo != PAWN)

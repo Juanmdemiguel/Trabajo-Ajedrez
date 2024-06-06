@@ -41,6 +41,7 @@ public:
 	bool comprobEnroqueCorto();
 	bool comprobEnroqueLargo();
 	bool comprobJaque(bool c, bool& DobleAmenaza, Punto2D& Maton);
+	void Limitador(bool c);
 
 	void SonidoComer();
 	void MueveSonido() { ETSIDI::play("resources/sounds/caminar/pasos1.wav"); }
