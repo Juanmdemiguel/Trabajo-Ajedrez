@@ -98,8 +98,9 @@ void Game::selecciona(int t, int v, bool cambio)
 			}
 			if (comp) break;
 		}
-		//if (mov)cout << comprobJaque(0);
-		//if (mov)cout << comprobJaqueMate(0);
+
+		if (mov)cout << comprobJaqueMate(0);
+
 	}
 
 	if (!turno && !cambio) {
@@ -137,15 +138,13 @@ void Game::selecciona(int t, int v, bool cambio)
 					p = n->promocionar(n->get_pos());
 					comp = Promocion(p, n, t, v);
 				}
-
 				mov = aux;
 				MueveSonido();
 			}
 			if (comp) break;
 		}
+		if (mov)cout << comprobJaqueMate(1);
 
-		//if (mov)cout << comprobJaque(1);
-		//if (mov)cout << comprobJaqueMate(1);
 	}
 
 	//Comprueba el enroque
@@ -317,9 +316,10 @@ bool Game::comprobEnroqueLargo()
 	else return false;
 }
 
-bool Game::comprobJaque(bool c)
+bool Game::comprobJaque(bool c, bool& DobleAmenaza, Punto2D& Maton)
 {
-	bool bit = 0;
+	bool bit = 0, once = false;
+	vector <piece*> amenazas;
 	if (c)
 	{
 		for (auto b : blancas) {
@@ -327,15 +327,20 @@ bool Game::comprobJaque(bool c)
 				for (auto n : negras) {
 					n->getPosibles(board);
 					for (int i = 0; i < n->getVectorPosibles().size(); i++)
-						if (b->get_pos() == n->getVectorPosibles()[i]) bit = 1;
+						if (b->get_pos() == n->getVectorPosibles()[i]) { 
+							bit = 1;
+							if(!once) amenazas.push_back(n), once = true;
+						}
 					n->cleanVector();
 					ClearSelec();
-					if (bit) return 1;
 				}
-				return 0;
+				if (amenazas.size() > 1) DobleAmenaza = true;
+				if (bit) return 1;
+				else return 0;
 			}
 		}
 	}
+
 	if (!c)
 	{
 		for (auto n : negras) {
@@ -343,12 +348,22 @@ bool Game::comprobJaque(bool c)
 				for (auto b : blancas) {
 					b->getPosibles(board);
 					for (int i = 0; i < b->getVectorPosibles().size(); i++)
-						if (n->get_pos() == b->getVectorPosibles()[i]) bit = 1;
+						if (n->get_pos() == b->getVectorPosibles()[i]) {
+							bit = 1;
+							if (!once) amenazas.push_back(n), once = true;
+						}
 					b->cleanVector();
 					ClearSelec();
-					if (bit)return 1;
 				}
-				return 0;
+				//Si esta doble amenazado no te puedes salvar por comerte a uno
+				if (amenazas.size() > 1) DobleAmenaza = true;
+				else if (amenazas.size() == 1) { //Si solo te amenaza uno puedes guardar su posición para su gestión en el jaque mate
+					Maton.z = amenazas[0]->get_pos().z;
+					Maton.x = amenazas[0]->get_pos().x;
+				}
+
+				if (bit)return 1;
+				else return 0;
 			}
 		}
 	}
@@ -398,58 +413,108 @@ bool Game::comer(ListaPiezas& p1, piece* p2)	//Comida y la que come
 
 bool Game::comprobJaqueMate(bool c)
 {
-	bool bit = 0;
+	bool bit = 0, DobleAmenaza = 0;
+	Punto2D Maton;
 
-	if (comprobJaque(1) && c) {
+	if (comprobJaque(1, DobleAmenaza, Maton) && c) {
+		cout << "Hay jaque rey blanco" << endl;
 		for (auto b : blancas) {
 			if (b->getTipo() == 4) {
 				b->getPosibles(board);
 				for (auto r = 0; r < b->getVectorPosibles().size(); ++r) {
+					bit = 0;
 					for (auto n : negras) {
-
+						bool once = false;
 						n->getPosibles(board);
 						for (int i = 0; i < n->getVectorPosibles().size(); i++) {
-							if (b->getVectorPosibles()[r] == n->getVectorPosibles()[i]) bit = 1;
-							n->cleanVector();
-							ClearSelec();
+							if (b->getVectorPosibles()[r] == n->getVectorPosibles()[i]) bit = 1; 
 						}
+						n->cleanVector();
+						ClearSelec();
 					}
 					if (bit == 0) return 0;
-
 				}
 				b->cleanVector();
 				ClearSelec();
 			}
-
+		}
+		if (DobleAmenaza) { //Si te amenazan dos no te puedes salvar
+			cout << "Hay jaque mate rey negro" << endl;
 			return 1;
-
+		}
+		else { //Si te amenaza solo uno, igual puedes matar al matón
+			if (MataMaton(Maton, c))
+				return false; //Si lo matas no es jaque mate
+			else
+				return true; //Si no lo puedes matar es jaque mate
 		}
 	}
 
-	if (comprobJaque(1) && !c) {
+	if (comprobJaque(0, DobleAmenaza, Maton) && !c) {
+		cout << "Hay jaque rey negro" << endl;
 		for (auto n : negras) {
 			if (n->getTipo() == 4) {
 				n->getPosibles(board);
 				for (auto r = 0; r < n->getVectorPosibles().size(); ++r) {
+					bit = 0;
 					for (auto b : blancas) {
-
 						b->getPosibles(board);
 						for (int i = 0; i < b->getVectorPosibles().size(); i++) {
 							if (n->getVectorPosibles()[r] == b->getVectorPosibles()[i]) bit = 1;
-							b->cleanVector();
-							ClearSelec();
 						}
+						b->cleanVector();
+						ClearSelec();
 					}
+					//El rey puede moverse a una casilla segura
 					if (bit == 0) return 0;
-
 				}
 				n->cleanVector();
 				ClearSelec();
 			}
-
-			return 1;
-		
 		}
+		//En este punto todas las casillas de alrededor del rey están para comer
+		if (DobleAmenaza) { //Si te amenazan dos no te puedes salvar
+			cout << "Hay jaque mate rey negro" << endl;
+			return 1;
+		}
+		else { //Si te amenaza solo uno, igual puedes matar al matón
+			if (MataMaton(Maton, c))
+				return false; //Si lo matas no es jaque mate
+			else
+				return true; //Si no lo puedes matar es jaque mate
+		}
+		
+		
+	}
+	//No hay jaque
+	return 0;
+}
+bool Game::MataMaton(Punto2D Maton, bool color) {
+
+	bool bit = 0;
+	if (color)
+	{
+		for (auto b : blancas) {
+			b->getPosibles(board);
+			for (int i = 0; i < b->getVectorPosibles().size(); i++)
+				if (Maton == b->getVectorPosibles()[i]) bit = 1;
+					b->cleanVector();
+					ClearSelec();
+					if (bit) return 1;
+				}
+				 return 0;
+	}
+	if (!color)
+	{
+		for (auto n : negras) {
+			n->getPosibles(board);
+			for (int i = 0; i < n->getVectorPosibles().size(); i++)
+				if (Maton == n->getVectorPosibles()[i]) bit = 1;
+			n->cleanVector();
+			ClearSelec();
+			if (bit) return 1;
+		}
+		return 0;
 	}
 }
 

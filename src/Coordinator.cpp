@@ -131,7 +131,6 @@ void Coordinator::CompruebaMusica()
 		strcpy_s(music, cancion2);
 		break;
 	}
-		
 	}
 }
 
