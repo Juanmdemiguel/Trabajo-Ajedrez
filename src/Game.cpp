@@ -341,7 +341,15 @@ bool Game::comprobJaque(bool c, bool& DobleAmenaza, Punto2D& Maton)
 						}
 					n->cleanVector();
 					ClearSelec();
+
 				}
+				//Si esta doble amenazado no te puedes salvar por comerte a uno
+				if (amenazas.size() > 1) DobleAmenaza = true;
+				else if (amenazas.size() == 1) { //Si solo te amenaza uno puedes guardar su posición para su gestión en el jaque mate
+					Maton.z = amenazas[0]->get_pos().z;
+					Maton.x = amenazas[0]->get_pos().x;
+				}
+				if (amenazas.size() == 0) Maton = { 0.0,0.0 };
 				if (amenazas.size() > 1) DobleAmenaza = true;
 				if (bit)
 				{
@@ -370,15 +378,19 @@ bool Game::comprobJaque(bool c, bool& DobleAmenaza, Punto2D& Maton)
 				//Si esta doble amenazado no te puedes salvar por comerte a uno
 				if (amenazas.size() > 1) DobleAmenaza = true;
 				else if (amenazas.size() == 1) { //Si solo te amenaza uno puedes guardar su posición para su gestión en el jaque mate
+
 					Maton.z = amenazas[0]->get_pos().z;
 					Maton.x = amenazas[0]->get_pos().x;
 				}
 
+
+				if (amenazas.size() == 0) Maton = { 0.0,0.0 };
 				if (bit)
 				{
 					ETSIDI::play("resources/sounds/jaque/violin.wav");
 					return 1;
 				}
+
 
 				else return 0;
 			}
@@ -430,82 +442,39 @@ bool Game::comer(ListaPiezas& p1, piece* p2)	//Comida y la que come
 
 bool Game::comprobJaqueMate(bool c)
 {
-	bool bit = 0, DobleAmenaza = 0;
+	bool bit = 0, DobleAmenaza = 0, limit{};
 	Punto2D Maton;
 
 	if (comprobJaque(1, DobleAmenaza, Maton) && c) {
-		cout << "Hay jaque rey blanco" << endl;
-		for (auto b : blancas) {
-			if (b->getTipo() == 4) {
-				b->getPosibles(board);
-				for (auto r = 0; r < b->getVectorPosibles().size(); ++r) {
-					bit = 0;
-					for (auto n : negras) {
-						bool once = false;
-						n->getPosibles(board);
-						for (int i = 0; i < n->getVectorPosibles().size(); i++) {
-							if (b->getVectorPosibles()[r] == n->getVectorPosibles()[i]) bit = 1; 
-						}
-						n->cleanVector();
-						ClearSelec();
-					}
-					if (bit == 0) return 0;
-				}
-				b->cleanVector();
-				ClearSelec();
-			}
-		}
-		if (DobleAmenaza) { //Si te amenazan dos no te puedes salvar
-			cout << "Hay jaque mate rey negro" << endl;
-			return 1;
-		}
-		else { //Si te amenaza solo uno, igual puedes matar al matón
-			if (MataMaton(Maton, c))
-				return false; //Si lo matas no es jaque mate
+		limit = Limitador(c);
+		if (!limit) return 0;
+		else
+		{
+			if (MataMaton(Maton, c)) return false;
 			else
-				return true; //Si no lo puedes matar es jaque mate
+			{
+				if (RompeRuta(Maton, c)) return false;
+				else return true;
+			}
 		}
 	}
 
 	if (comprobJaque(0, DobleAmenaza, Maton) && !c) {
-		cout << "Hay jaque rey negro" << endl;
-		for (auto n : negras) {
-			if (n->getTipo() == 4) {
-				n->getPosibles(board);
-				for (auto r = 0; r < n->getVectorPosibles().size(); ++r) {
-					bit = 0;
-					for (auto b : blancas) {
-						b->getPosibles(board);
-						for (int i = 0; i < b->getVectorPosibles().size(); i++) {
-							if (n->getVectorPosibles()[r] == b->getVectorPosibles()[i]) bit = 1;
-						}
-						b->cleanVector();
-						ClearSelec();
-					}
-					//El rey puede moverse a una casilla segura
-					if (bit == 0) return 0;
-				}
-				n->cleanVector();
-				ClearSelec();
+		limit = Limitador(c);
+		if (!limit) return 0;
+		else
+		{
+			if (MataMaton(Maton, c)) return false;
+			else
+			{
+				if (RompeRuta(Maton, c)) return false;
+				else return true;
+				
 			}
 		}
-		//En este punto todas las casillas de alrededor del rey están para comer
-		if (DobleAmenaza) { //Si te amenazan dos no te puedes salvar
-			cout << "Hay jaque mate rey negro" << endl;
-			return 1;
-		}
-		else { //Si te amenaza solo uno, igual puedes matar al matón
-			if (MataMaton(Maton, c))
-				return false; //Si lo matas no es jaque mate
-			else
-				return true; //Si no lo puedes matar es jaque mate
-		}
-		
-		
 	}
-	//No hay jaque
-	return 0;
 }
+
 bool Game::MataMaton(Punto2D Maton, bool color) {
 
 	bool bit = 0;
@@ -514,10 +483,10 @@ bool Game::MataMaton(Punto2D Maton, bool color) {
 		for (auto b : blancas) {
 			b->getPosibles(board);
 			for (int i = 0; i < b->getVectorPosibles().size(); i++)
-				if (Maton == b->getVectorPosibles()[i]) bit = 1;
-					b->cleanVector();
-					ClearSelec();
-					if (bit) return 1;
+				if (Maton == b->getVectorPosibles()[i]) bit = 1, cout << "Comematon" << endl;
+				b->cleanVector();
+				ClearSelec();
+				if (bit) return 1;
 				}
 				 return 0;
 	}
@@ -556,10 +525,11 @@ int Game::asignaPuntos(int pieza_comida, double tiempo)
 	case 7:	return (tiempo >= 600) ? 25 : 50;		//canciller
 	}
 }
-void Game::Limitador(bool c)
+
+ bool Game::Limitador(bool c)
 {
 	Punto2D maton{ 0,0 };//Variables inutiles
-	bool dobleamenaza;
+	bool dobleamenaza, retorno = true;
 	if (c) {
 		for (auto b : blancas) {
 			if (b->get_pos() == Click) {
@@ -576,6 +546,7 @@ void Game::Limitador(bool c)
 								b->cleanCasillaVector(b->getVectorPosibles()[r]);
 								r--;
 							}
+							else retorno = false;
 							board.getTile(b->get_pos()).setocupada(0);
 						}
 						else { //Caso en el que la casilla a la que se mueve está vacia
@@ -584,6 +555,7 @@ void Game::Limitador(bool c)
 								b->cleanCasillaVector(b->getVectorPosibles()[r]);
 								r--;
 							}
+							else retorno = false;
 							board.getTile(b->get_pos()).setocupada(2);
 						}
 					}
@@ -613,6 +585,7 @@ void Game::Limitador(bool c)
 								n->cleanCasillaVector(n->getVectorPosibles()[r]);
 								r--;
 							}
+							else retorno = false;
 							board.getTile(n->get_pos()).setocupada(1);
 						}
 						else {
@@ -621,6 +594,7 @@ void Game::Limitador(bool c)
 								n->cleanCasillaVector(n->getVectorPosibles()[r]);
 								r--;
 							}
+							else retorno = false;
 							board.getTile(n->get_pos()).setocupada(2);
 						}
 					}
@@ -633,5 +607,120 @@ void Game::Limitador(bool c)
 			}
 		}
 
+	}
+	return retorno;
+}
+
+vector <Punto2D> Game::RutaMaton(Punto2D maton, bool color)
+{
+	vector<Punto2D> conexion;
+	if (color)
+	{
+		for (auto b : blancas)
+		{
+			if (b->getTipo() == 4)
+			{
+				if (b->get_pos().z == maton.z) //Reconoce que el maton y el rey estan alineaados horizontalmente
+				{
+					if (b->get_pos().x > maton.x)
+					{
+						for (auto i = maton.x + 1; i < b->get_pos().x; ++i)
+							conexion.push_back({ maton.z, i });
+					}
+					if (b->get_pos().x < maton.x)
+					{
+						for (auto i = b->get_pos().x + 1; i < maton.x; ++i)
+							conexion.push_back({ maton.z ,i});
+					}
+				}
+				else if (b->get_pos().x == maton.x) //Reconoce que el maton y el rey estan alineaados verticalmente
+				{
+					if (b->get_pos().z > maton.z)
+					{
+						for (auto i = maton.z + 1; i < b->get_pos().z; ++i)
+							conexion.push_back({ i, maton.x });
+					}
+					if (b->get_pos().z < maton.z)
+					{
+						for (auto i = b->get_pos().z + 1; i < maton.z; ++i)
+							conexion.push_back({ i, maton.x });
+					}
+				}
+				else {
+					if (maton.z < b->get_pos().z && maton.x > b->get_pos().x)
+					{
+						for (auto i = maton.z + 1; i < b->get_pos().z; i++)
+							conexion.push_back({ i, maton.x - (i - maton.z) });
+					}
+
+					if (maton.z > b->get_pos().z && maton.x > b->get_pos().x)
+					{
+						for (auto i = b->get_pos().z + 1; i < maton.z; i++)
+							conexion.push_back({ i, b->get_pos().x + (i - b->get_pos().z) });
+					}
+
+					if (maton.z > b->get_pos().z && maton.x < b->get_pos().x)
+					{
+						for (auto i = b->get_pos().z + 1; i < maton.z; i++)
+							conexion.push_back({ i, b->get_pos().x - (i - b->get_pos().z) });
+					}
+					if (maton.z < b->get_pos().z && maton.x < b->get_pos().x)
+					{
+						for (auto i = maton.z + 1; i < b->get_pos().z; i++)
+							conexion.push_back({ i, maton.x + (i - maton.z) });
+					}
+				}
+
+
+			}
+
+		}
+	}
+	for (auto i : conexion)
+		cout << i.z << " " << i.x << endl;
+	return conexion;
+}
+
+bool Game::RompeRuta(Punto2D maton, bool color)
+{
+	vector<Punto2D> ruta = RutaMaton(maton, color);
+
+	if (color)
+	{
+		for (auto b : blancas)
+		{
+			b->getPosibles(board);
+			for (int i = 0; i < b->getVectorPosibles().size(); i++)
+			{
+				for (int j = 0; j < ruta.size(); ++j)
+				{
+					if (ruta[j] == b->getVectorPosibles()[i])
+						return 1;
+				}
+			}
+
+			b->cleanVector();
+			ClearSelec();
+		}
+		return 0;
+	}
+	if (!color)
+	{
+		for (auto n : negras)
+		{
+			n->getPosibles(board);
+			for (int i = 0; i < n->getVectorPosibles().size(); i++)
+			{
+				for (int j = 0; j < ruta.size(); ++j)
+				{
+					if (ruta[j] == n->getVectorPosibles()[i])
+						return 1;
+				}
+			}
+
+			n->cleanVector();
+			ClearSelec();
+		}
+		return 0;
 	}
 }

@@ -41,7 +41,7 @@ public:
 	bool comprobEnroqueCorto();
 	bool comprobEnroqueLargo();
 	bool comprobJaque(bool c, bool& DobleAmenaza, Punto2D& Maton);
-	void Limitador(bool c);
+	bool Limitador(bool c);
 
 	void SonidoComer();
 	void MueveSonido() { ETSIDI::play("resources/sounds/caminar/pasos1.wav"); }
@@ -54,6 +54,8 @@ public:
 
 	bool comprobJaqueMate(bool c);
 	bool MataMaton(Punto2D Maton, bool color);
+	vector <Punto2D> RutaMaton(Punto2D maton, bool color);
+	bool RompeRuta(Punto2D maton, bool color);
 
 	int asignaPuntos(int pieza, double tiempo);
 
