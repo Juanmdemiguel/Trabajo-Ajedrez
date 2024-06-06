@@ -556,21 +556,20 @@ void Game::Limitador(bool c)
 			if (b->get_pos() == Click) {
 				b->cleanVector();
 				b->getPosibles(board);
-				if (b->getVectorPosibles().size() >= 1 && b->getTipo() == 4) {
-					Punto2D origen = b->get_pos();
-					board.getTile(origen).setocupada(2);
-					//ClearSelec(); //Borro visualmente las posibles del rey
+				if (b->getVectorPosibles().size() >= 1 && b->getTipo() == 4) { //Condiciones de funcionamiento
+					Punto2D origen = b->get_pos(); //Guarda la posición del rey
+					board.getTile(origen).setocupada(2); //Vacio la casilla del rey
 					for (int r = 0; r < b->getVectorPosibles().size(); r++) {
-						b->setPos(b->getVectorPosibles()[r]);
-						if (board.getTile(b->get_pos()).getocupada() == 0) {
+						b->setPos(b->getVectorPosibles()[r]);  //Cambia la posicion del rey a una de sus posibles
+						if (board.getTile(b->get_pos()).getocupada() == 0) {//Funcionamiento distinto si es una casilla vacia o enemiga
 							board.getTile(b->get_pos()).setocupada(1);
-							if (comprobJaque(1, dobleamenaza, maton)) {
+							if (comprobJaque(1, dobleamenaza, maton)) { //Si el rey estuviera en posicion de peligro, elimina esa posibilidad
 								b->cleanCasillaVector(b->getVectorPosibles()[r]);
 								r--;
 							}
 							board.getTile(b->get_pos()).setocupada(0);
 						}
-						else {
+						else { //Caso en el que la casilla a la que se mueve está vacia
 							board.getTile(b->get_pos()).setocupada(1);
 							if (comprobJaque(1, dobleamenaza, maton)) {
 								b->cleanCasillaVector(b->getVectorPosibles()[r]);
@@ -579,7 +578,7 @@ void Game::Limitador(bool c)
 							board.getTile(b->get_pos()).setocupada(2);
 						}
 					}
-					b->setPos(origen);
+					b->setPos(origen); //Reubico al rey a donde se encontraba antes
 					board.getTile(origen).setocupada(1);
 					ClearSelec();//Borra visualmente las posibles de las negras
 					for (int i = 0; i < b->getVectorPosibles().size(); ++i)
@@ -597,7 +596,6 @@ void Game::Limitador(bool c)
 				if (n->getVectorPosibles().size() >= 1 && n->getTipo() == 4) {
 					Punto2D origen = n->get_pos();
 					board.getTile(origen).setocupada(2);
-					//ClearSelec(); //Borro visualmente las posibles del rey
 					for (int r = 0; r < n->getVectorPosibles().size(); r++) {
 						n->setPos(n->getVectorPosibles()[r]);
 						if (board.getTile(n->get_pos()).getocupada() == 1) {
