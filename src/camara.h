@@ -33,8 +33,9 @@ public:
 	bool Cambiando() { return !estatico; }
 	bool getPuntuaciones() { return vistaPuntuaciones; }
 
-	void setfin(const bool& f) { fin = f; };
-	bool getfin() { return fin; };
+	void setfin(const bool& f) { fin = f; }
+	bool getfin() { return fin; }
+
 //Amigos
 
 };

@@ -32,6 +32,6 @@ public:
 	void PasaTurno();
 	void CompruebaMusica();
 	void Puntuaciones();
-	int CreaFicheroPuntuaciones();
+	void CreaFicheroPuntuaciones();
 };
 

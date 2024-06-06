@@ -31,6 +31,15 @@ void Coordinator::Dibuja()
 		break;
 
 	case Estado::FIN:
+		
+		static bool fichero=true;
+
+		//Gestionar ubicación del comentario Volver a menú
+		Punto2D volverMenu{};
+
+		//CAMBIAR LA POSICIÓN DE LA CÁMARA E IMAGEN
+		camara.set_pos(12.0 + 32 * cos(3.1416), 40.0, 15.0 + 32 * sin(3.1416));
+		
 		glEnable(GL_TEXTURE_2D);
 
 		glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/Puntuaciones.png").id);
@@ -55,6 +64,11 @@ void Coordinator::Dibuja()
 		//(turno) ? ETSIDI::printxy("GANAN LAS BLANCAS", 7, 8) : ETSIDI::printxy("GANAN LAS NEGRAS", 5, 8);
 
 		ETSIDI::printxy("PRESIONE EL ESPACIO PARA VOLVER AL MENU", 4, 7);
+
+		if (fichero) CreaFicheroPuntuaciones(), fichero = false; //Se guardan las puntuaciones de los jugadores en un fichero
+
+		//Para cuando se hace click a "Volver a menú"
+		raton.getClick() == volverMenu ? estado = MENU : estado = FIN;
 
 		break;
 
@@ -179,7 +193,7 @@ void Coordinator::Puntuaciones()
 	ETSIDI::printxy(cadena2, 8, 7);
 }
 
-int Coordinator::CreaFicheroPuntuaciones()	// Crea el fichero donde se guardan las puntuaciones
+void Coordinator::CreaFicheroPuntuaciones()	// Crea el fichero donde se guardan las puntuaciones
 {
 	std::string nombre = "ResultadoPartidas.txt";
 
@@ -202,8 +216,5 @@ int Coordinator::CreaFicheroPuntuaciones()	// Crea el fichero donde se guardan l
 	}
 	else {
 		cerr << "No se pudo abrir el archivo para escribir" << endl;
-		return -1;
 	}
-
-	return 0;
 }

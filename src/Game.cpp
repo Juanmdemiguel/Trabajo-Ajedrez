@@ -343,7 +343,11 @@ bool Game::comprobJaque(bool c, bool& DobleAmenaza, Punto2D& Maton)
 					ClearSelec();
 				}
 				if (amenazas.size() > 1) DobleAmenaza = true;
-				if (bit) return 1;
+				if (bit)
+				{
+					ETSIDI::play("resources/sounds/jaque/violin.wav");
+					return 1;
+				}
 				else return 0;
 			}
 		}
@@ -370,7 +374,12 @@ bool Game::comprobJaque(bool c, bool& DobleAmenaza, Punto2D& Maton)
 					Maton.x = amenazas[0]->get_pos().x;
 				}
 
-				if (bit)return 1;
+				if (bit)
+				{
+					ETSIDI::play("resources/sounds/jaque/violin.wav");
+					return 1;
+				}
+
 				else return 0;
 			}
 		}
