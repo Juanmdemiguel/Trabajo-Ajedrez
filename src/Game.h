@@ -28,7 +28,9 @@ class Game
 	bool promocionRealizada = false;
 
 public:
+
 	//Métodos
+
 	Board& getboard() { return board; };
 	void musica(bool sonido, char tema[]) { (sonido == true) ? ETSIDI::playMusica(tema, true) : ETSIDI::stopMusica(); };
 	void dibujaJuego(int tema, int vision);
@@ -44,7 +46,7 @@ public:
 
 	bool comprobEnroqueCorto();
 	bool comprobEnroqueLargo();
-	bool comprobJaque(bool c, bool& DobleAmenaza, Punto2D& Maton);
+	bool comprobJaque(bool c, bool& DAmenaza, Punto2D& Maton);
 	bool Limitador(bool c);
 
 	void SonidoComer();
@@ -66,8 +68,10 @@ public:
 
 	long PuntosJ1() { return jugador1; }
 	long PuntosJ2() { return jugador2; }
-	void setPuntuacion() { jugador1 = 0, jugador2 = 0; }
 
+	void setPuntuacion() { jugador1 = 0, jugador2 = 0; }
+	void sumaJ1(int valor) { jugador1 += valor; }
+	void sumaJ2(int valor) { jugador2 += valor; }
 
 	bool Ganador() { return QuienGana; };
 

@@ -391,7 +391,7 @@ bool Game::comprobEnroqueLargo()
 	else return false;
 }
 
-bool Game::comprobJaque(bool c, bool& DobleAmenaza, Punto2D& Maton)
+bool Game::comprobJaque(bool c, bool& DAmenaza, Punto2D& Maton)
 {
 	bool bit = 0, once = false;
 	vector <piece*> amenazas;
@@ -410,14 +410,12 @@ bool Game::comprobJaque(bool c, bool& DobleAmenaza, Punto2D& Maton)
 					ClearSelec();
 
 				}
-				//Si esta doble amenazado no te puedes salvar por comerte a uno
-				if (amenazas.size() > 1) DobleAmenaza = true;
-				else if (amenazas.size() == 1) { //Si solo te amenaza uno puedes guardar su posición para su gestión en el jaque mate
+				if (amenazas.size() == 1) { //Si te amenaza uno puedes guardar su posición para su gestión en el jaque mate
 					Maton.z = amenazas[0]->get_pos().z;
 					Maton.x = amenazas[0]->get_pos().x;
 				}
 				if (amenazas.size() == 0) Maton = { 0.0,0.0 };
-				if (amenazas.size() > 1) DobleAmenaza = true;
+				
 				if (bit)
 				{
 					bool coincidente{};
@@ -442,14 +440,12 @@ bool Game::comprobJaque(bool c, bool& DobleAmenaza, Punto2D& Maton)
 					for (int i = 0; i < b->getVectorPosibles().size(); i++)
 						if (n->get_pos() == b->getVectorPosibles()[i]) {
 							bit = 1;
-							if (!once) amenazas.push_back(n), once = true;
+							if (!once) amenazas.push_back(b), once = true;
 						}
 					b->cleanVector();
 					ClearSelec();
 				}
-				//Si esta doble amenazado no te puedes salvar por comerte a uno
-				if (amenazas.size() > 1) DobleAmenaza = true;
-				else if (amenazas.size() == 1) { //Si solo te amenaza uno puedes guardar su posición para su gestión en el jaque mate
+				if (amenazas.size() == 1) { //Si te amenaza uno puedes guardar su posición para su gestión en el jaque mate
 
 					Maton.z = amenazas[0]->get_pos().z;
 					Maton.x = amenazas[0]->get_pos().x;

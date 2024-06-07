@@ -75,7 +75,7 @@ void Coordinator::Dibuja()
 		ETSIDI::setFont("resources/fuentes/Bitwise.ttf", 20);
 		ETSIDI::printxy("FIN DEL JUEGO", 6, 9);
 		
-		(juego.Ganador()) ? ETSIDI::printxy("GANA EL JUGADOR 1", 6, 8) : ETSIDI::printxy("GANA EL JUGADOR 2", 6, 8);
+		(juego.Ganador()) ? (ETSIDI::printxy("GANA EL JUGADOR 1", 6, 8), juego.sumaJ1(500)) : (ETSIDI::printxy("GANA EL JUGADOR 2", 6, 8), juego.sumaJ2(500));
 
 		ETSIDI::printxy("PRESIONE EL ESPACIO PARA VOLVER AL MENU", 4, 7);
 
