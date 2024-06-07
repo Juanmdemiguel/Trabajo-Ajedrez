@@ -11,20 +11,20 @@ void Camara::dibuja(Menu& principal)
     if (principal.getMenu())
     {
         gluLookAt(6, 8, 16,  // posicion del ojo
-            6, 8, 0,      // hacia que punto mira  (0,0,0)
+            6, 8, 0,      // hacia que punto mira  
            1.0, 0.0, 0.0);      // definimos visión hacia arriba (eje X)
     }
     else if (!vistaPuntuaciones && !fin)
     {
         gluLookAt(posx, posy, posz,  // posicion del ojo
-            mirax, miray, miraz,      // hacia que punto mira  (0,0,0) 
-            0.0, 1.0, 0.0);      // definimos hacia arriba (eje Y)*/  
+            mirax, miray, miraz,      // hacia que punto mira  
+            0.0, 1.0, 0.0);      // definimos hacia arriba (eje Y)  
     }
     else 
     {
-        gluLookAt(7.5, 8, 8,  // posicion del ojo   10
-            7.5, 8, 0,      // hacia que punto mira  (0,0,0) 
-            0.0, 1.0, 0.0);      // definimos hacia arriba (eje Y)*/  
+        gluLookAt(7.5, 8, 8,  // posicion del ojo   
+            7.5, 8, 0,      // hacia que punto mira   
+            0.0, 1.0, 0.0);      // definimos hacia arriba  
     }
     
 }

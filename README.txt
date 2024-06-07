@@ -1,17 +1,12 @@
-ETSIDI-PRÁCTICAS
+Trabajo final de informática industrial y comunicaciones - Trabajo de ajedrez
 
-Información sobre FreeGlut
+Trabajo sobre el modo de ajedrez Capablanca, que añade a la versión tradicional dos piezas nuevas, el canciller y el arzobispo. Además cambia el tamaño del tablero. 
 
-Para poder usar esta librería se han realizado los siguientes pasos:
+Implementado con OpenGL a través de freeglut, utilizando la libería ETSIDI.lib
 
-1.-Se ha descargado el código fuente y compilado por medio de CMAKE la librería dinámica para 64 bits en modo Release
+Controles
+- Combo de teclas “W S" para seleccionar la perspectiva según el gusto de quien juega (Introduciendo estos valores    por teclado en minúscula se procede igualmente).
 
-2.-Se han copiado el .lib y .dll correspondientes 
+- Teclas “+” y “-” para realizar zoom in o zoom out del tablero.
 
-3.-Se ha copiado el freeglut_std.h
-
-4.-Se ha comentado la linea 94 de dicho include para que el #pragma incluya la librería release también en modo debug, por lo que se ha agregado a continuación la línea:
-
-   #pragma comment (lib, "freeglut.lib")
-
-5.-Se ha cambiado el nombre del fichero a freeglut.h
+- Tecla “P” para visualizar las puntuaciones de cada jugador, estas dependientes del número y tipo de fichas comidas al contrincante, y la tecla “J” para retornar al juego desde el menú de puntuaciones ya mencionado (Introduciendo estos valores por teclado en minúscula se procede igualmente).
