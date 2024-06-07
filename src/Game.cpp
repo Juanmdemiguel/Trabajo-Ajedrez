@@ -72,17 +72,23 @@ void Game::selecciona(int t, int v, bool cambio)
 				for (auto a : blancas) {
 					if (a->getTipo() == 1 && a->get_pos() == Punto2D({ 1,1 })) {
 						a->setPos({3,1});
+						board.getTile({1,1}).setocupada(2);
+						board.getTile({3,1}).setocupada(1);
 					}
 				}
 				mov = 1;
+				MueveSonido();
 			}
 			if (Click == Punto2D({ 9, 1}) && b->getTipo() == 4 && comprobEnroqueCorto() && b->mueve(Click, b->getVectorPosibles(), board)) {
 				for (auto a : blancas) {
 					if (a->getTipo() == 1 && a->get_pos() == Punto2D({10,1}) ) {
 						a->setPos({ 8,1 });
+						board.getTile({ 10,1 }).setocupada(2);
+						board.getTile({ 8,1 }).setocupada(1);
 					}
 				}
 				mov = 1;
+				MueveSonido();
 			}
 
 			else aux = b->mueve(Click, b->getVectorPosibles(), board);
@@ -121,9 +127,12 @@ void Game::selecciona(int t, int v, bool cambio)
 				for (auto a : negras) {
 					if (a->getTipo() == 1 && a->get_pos() == Punto2D({ 1,8 })) {
 						a->setPos({ 3,8 });
+						board.getTile({ 1,8 }).setocupada(2);
+						board.getTile({ 3,8 }).setocupada(0);
 					}
 				}
-				mov = true;
+				mov = 1;
+				MueveSonido();
 			}
 
 			//Realiza el enroque
@@ -131,9 +140,12 @@ void Game::selecciona(int t, int v, bool cambio)
 				for (auto a : negras) {
 					if (a->getTipo() == 1 && a->get_pos() == Punto2D({ 10,8 })) {
 						a->setPos({ 8,8 });
+						board.getTile({ 10,8 }).setocupada(2);
+						board.getTile({ 8,8 }).setocupada(0);
 					}
 				}
 				mov = 1;
+				MueveSonido();
 			}
 			else aux = n->mueve(Click, n->getVectorPosibles(),board);
 
