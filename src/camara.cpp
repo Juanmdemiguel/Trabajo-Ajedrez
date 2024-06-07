@@ -42,7 +42,7 @@ void Camara::actuador(Menu& principal, bool& _rotate)
 //Permite acercar la camara al tablero al pulsar '+' y alejarla al pulsar '-'
 void Camara::zoom(Menu& principal, unsigned char key)
 {
-    if (!principal.getMenu()  && estatico)
+    if (!principal.getMenu()  && estatico && principal.getVision())
     {
         double zoom = 0.5; // Ajusta el factor de zoom según sea necesario
 
@@ -85,7 +85,7 @@ void Camara::zoom(Menu& principal, unsigned char key)
 //Permite ver el tablero desde arriba al pulsar 'w' y de forma frontal al pulsar 's' independientemente del color que tenga el turno
 void Camara::vertical(Menu& principal, unsigned char key)
 {
-    if (!principal.getMenu()  && estatico)
+    if (!principal.getMenu()  && estatico &&principal.getVision())
     {
         float d = sqrt((posx - mirax) * (posx - mirax) + (posy - miray) * (posy - miray));
         double theta = atan2((posy - miray), (posx - mirax));
@@ -93,7 +93,6 @@ void Camara::vertical(Menu& principal, unsigned char key)
         {
             if ((key == 'w' || key == 'W') && arriba < 10)
             {
-                
                 theta = theta + 0.05;
                 posx = mirax + d * cos(theta);
                 posy = miray + d * sin(theta);

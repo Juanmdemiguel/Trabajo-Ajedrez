@@ -236,7 +236,6 @@ void Game::Promocion(int t, int v, unsigned char key)
 				blancas.eliminar(b);
 				promocionRealizada = true;
 				promocionActivada = false;
-				cout << "salgo";
 				break;
 
 			case 'B':case 'b':
@@ -421,8 +420,13 @@ bool Game::comprobJaque(bool c, bool& DobleAmenaza, Punto2D& Maton)
 				if (amenazas.size() > 1) DobleAmenaza = true;
 				if (bit)
 				{
-					ETSIDI::play("resources/sounds/jaque/violin.wav");
-					return 1;
+					bool coincidente{};
+					for (auto b : blancas)
+						if (b->get_pos() == Maton) coincidente = true;
+					if (coincidente) return false;
+					else {
+						return 1;
+					}
 				}
 				else return 0;
 			}
@@ -455,8 +459,14 @@ bool Game::comprobJaque(bool c, bool& DobleAmenaza, Punto2D& Maton)
 				if (amenazas.size() == 0) Maton = { 0.0,0.0 };
 				if (bit)
 				{
-					ETSIDI::play("resources/sounds/jaque/violin.wav");
-					return 1;
+					bool coincidente{};
+					for (auto n : negras)
+						if (n->get_pos() == Maton) coincidente = true;
+					if (coincidente) return false;
+					else {
+						return 1;
+					}
+					
 				}
 
 
@@ -513,6 +523,7 @@ bool Game::comprobJaqueMate(bool c)
 	Punto2D Maton;
 
 	if (comprobJaque(1, DobleAmenaza, Maton) && c) {
+		ETSIDI::play("resources/sounds/jaque/violin.wav");
 		limit = Limitador(c);
 		if (!limit) return 0;
 		else
@@ -527,6 +538,7 @@ bool Game::comprobJaqueMate(bool c)
 	}
 
 	if (comprobJaque(0, DobleAmenaza, Maton) && !c) {
+		ETSIDI::play("resources/sounds/jaque/violin.wav");
 		limit = Limitador(c);
 		if (!limit) return 0;
 		else
@@ -597,7 +609,7 @@ int Game::asignaPuntos(int pieza_comida, double tiempo)
 			if (b->get_pos() == Click) {
 				b->cleanVector();
 				b->getPosibles(board);
-				if (b->getVectorPosibles().size() >= 1 && b->getTipo() == 4) { //Condiciones de funcionamiento
+				if (b->getVectorPosibles().size() >= 1) { //Condiciones de funcionamiento
 					Punto2D origen = b->get_pos(); //Guarda la posición del rey
 					board.getTile(origen).setocupada(2); //Vacio la casilla del rey
 					for (int r = 0; r < b->getVectorPosibles().size(); r++) {
@@ -624,8 +636,11 @@ int Game::asignaPuntos(int pieza_comida, double tiempo)
 					b->setPos(origen); //Reubico al rey a donde se encontraba antes
 					board.getTile(origen).setocupada(1);
 					ClearSelec();//Borra visualmente las posibles de las negras
-					for (int i = 0; i < b->getVectorPosibles().size(); ++i)
-						board.getTile(b->getVectorPosibles()[i]).setposible(true); //Activo visualmente las posibles del rey
+					for (int i = 0; i < b->getVectorPosibles().size(); ++i) {
+						if (board.getTile(b->getVectorPosibles()[i]).getocupada() == 2) board.getTile(b->getVectorPosibles()[i]).setposible(true); //Activo visualmente las posibles
+						else board.getTile(b->getVectorPosibles()[i]).setcomestible(true);
+					}
+						
 				}
 			}
 		}
@@ -636,7 +651,7 @@ int Game::asignaPuntos(int pieza_comida, double tiempo)
 			if (n->get_pos() == Click) {
 				n->cleanVector();
 				n->getPosibles(board);
-				if (n->getVectorPosibles().size() >= 1 && n->getTipo() == 4) {
+				if (n->getVectorPosibles().size() >= 1) {
 					Punto2D origen = n->get_pos();
 					board.getTile(origen).setocupada(2);
 					for (int r = 0; r < n->getVectorPosibles().size(); r++) {
@@ -663,8 +678,11 @@ int Game::asignaPuntos(int pieza_comida, double tiempo)
 					n->setPos(origen);
 					board.getTile(origen).setocupada(0);
 					ClearSelec();//Borra visualmente las posibles de las negras
-					for (int i = 0; i < n->getVectorPosibles().size(); ++i)
-						board.getTile(n->getVectorPosibles()[i]).setposible(true); //Activo visualmente las posibles del rey
+					for (int i = 0; i < n->getVectorPosibles().size(); ++i) {
+						if (board.getTile(n->getVectorPosibles()[i]).getocupada() == 2) board.getTile(n->getVectorPosibles()[i]).setposible(true); //Activo visualmente las posibles
+						else board.getTile(n->getVectorPosibles()[i]).setcomestible(true);
+					}
+						
 				}
 			}
 		}
@@ -749,6 +767,7 @@ bool Game::RompeRuta(Punto2D maton, bool color)
 	{
 		for (auto b : blancas)
 		{
+			if (b->getTipo() != 4) {
 			b->getPosibles(board);
 			for (int i = 0; i < b->getVectorPosibles().size(); i++)
 			{
@@ -761,6 +780,7 @@ bool Game::RompeRuta(Punto2D maton, bool color)
 
 			b->cleanVector();
 			ClearSelec();
+			}
 		}
 		return 0;
 	}

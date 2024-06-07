@@ -16,7 +16,6 @@ void Coordinator::Dibuja()
 		else
 		principal.iniciaMenu();
 		break;
-
 	case Estado::JUEGO:
 
 		fichero = true;

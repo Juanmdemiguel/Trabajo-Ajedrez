@@ -30,7 +30,7 @@ int main(int argc,char* argv[])
 	glutInit(&argc, argv);
 	glutInitWindowSize(width,height);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
-	glutCreateWindow("MiJuego");
+	glutCreateWindow("Ches++: Capablanca");
 	
 
 	//habilitar luces y definir perspectiva
