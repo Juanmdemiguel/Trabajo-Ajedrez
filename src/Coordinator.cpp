@@ -175,6 +175,7 @@ void Coordinator::PasaTurno()
 		camara.actuador(principal, juego.getMov());
 		juego.setMov(false);
 	}
+
 }
 
 void Coordinator::Puntuaciones()
