@@ -26,8 +26,23 @@ void Coordinator::Dibuja()
 
 		if (camara.getPuntuaciones()) Puntuaciones();
 
+		//Si se promociona va a su estado
+		if (juego.getPromocion()) estado = PROMOCION;
+
 		//La partida finaliza al realizar jaque mate al jugador contrario, que activa el booleano finPartida. Descomentar cuando esté implementado.
 		//if (juego.finPartida()) estado = FIN, camara.setfin(true);
+		break;
+
+	case Estado::PROMOCION:
+
+		camara.setVistaPuntuaciones(true);
+		MenuPromocion();
+
+		if (juego.getPromocionRealiz() == 1) {
+			estado = JUEGO;
+			juego.setPromocionRealiz(false);
+			camara.setVistaPuntuaciones(false);
+		}
 		break;
 
 	case Estado::FIN:
@@ -122,7 +137,10 @@ void Coordinator::Teclado(unsigned char key, int x_t, int y_t)
 	{
 		if (key == ' ') principal.setMenu(true), estado = MENU, camara.setfin(false);
 	}
-
+	if (estado == PROMOCION)
+	{
+		juego.Promocion(principal.getTematica(), principal.getVision(), key);
+	}
 }
 
 void Coordinator::CompruebaMusica()
@@ -191,6 +209,32 @@ void Coordinator::Puntuaciones()
 	ETSIDI::setTextColor(1, 1, 1);
 	ETSIDI::printxy("JUGADOR 2:", 5, 7);
 	ETSIDI::printxy(cadena2, 8, 7);
+}
+void Coordinator::MenuPromocion()
+{
+	glEnable(GL_TEXTURE_2D);
+
+	glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/Puntuaciones.png").id);
+
+	glDisable(GL_LIGHTING);
+	glBegin(GL_POLYGON);
+	glColor3f(1, 1, 1);
+
+	glTexCoord2d(1, 1);    glVertex3f(0, 0, -0.1);
+	glTexCoord2d(0, 1);    glVertex3f(0, 16, -0.1);
+	glTexCoord2d(0, 0);    glVertex3f(12, 16, -0.1);
+	glTexCoord2d(1, 0);    glVertex3f(12, 0, -0.1);
+	glEnd();
+
+	glEnable(GL_LIGHTING);
+	glDisable(GL_TEXTURE_2D);
+
+	ETSIDI::setTextColor(1, 1, 1);
+	ETSIDI::setFont("resources/fuentes/Bitwise.ttf", 22);
+	ETSIDI::printxy("Elije una pieza para intercambiar por el peon", 5, 9);
+	ETSIDI::setFont("resources/fuentes/Bitwise.ttf", 15);
+	ETSIDI::printxy("Q: Queen, B : Bishop, R : Rook, K : Knight, A : Archbishop, C : Chancellor", 4, 8);
+
 }
 
 void Coordinator::CreaFicheroPuntuaciones()	// Crea el fichero donde se guardan las puntuaciones

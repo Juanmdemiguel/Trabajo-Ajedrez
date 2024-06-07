@@ -22,6 +22,9 @@ class Game
 	long jugador1{}, jugador2{};	//long ints de jugadores
 
 	bool comida = false;  //Para comprobar si funciona el fin. QUITAR CUANDO SE COMPLETE EL JAQUE MATE
+	
+	bool promocionActivada = false;
+	bool promocionRealizada = false;
 
 public:
 	//Métodos
@@ -36,7 +39,7 @@ public:
 	bool& getMov() { return mov; }
 	void setMov(bool _mov) { mov = _mov; }
 
-	bool Promocion(int tipo, piece *pieza, int t, int v);
+	void Promocion(int t, int v, unsigned char key);
 
 	bool comprobEnroqueCorto();
 	bool comprobEnroqueLargo();
@@ -62,6 +65,10 @@ public:
 	long PuntosJ1() { return jugador1; }
 	long PuntosJ2() { return jugador2; }
 
+	void setPromocion(const bool &c) { promocionActivada = c ; };
+	void setPromocionRealiz(const bool& c) { promocionRealizada = c; };
+	bool getPromocion() { return promocionActivada; };
+	bool getPromocionRealiz() { return promocionRealizada; };
 	//Amigos
 
 };
