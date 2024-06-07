@@ -32,6 +32,7 @@ public:
 	void vertical(Menu& principal, unsigned char key);
 	bool Cambiando() { return !estatico; }
 	bool getPuntuaciones() { return vistaPuntuaciones; }
+	void setVistaPuntuaciones(bool c) { vistaPuntuaciones = c; }
 
 	void setfin(const bool& f) { fin = f; }
 	bool getfin() { return fin; }

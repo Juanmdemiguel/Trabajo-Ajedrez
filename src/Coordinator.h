@@ -9,11 +9,14 @@
 #include <string>
 #include <fstream>
 #include <filesystem>
+#include <iostream>
+#include <chrono>
+#include <thread>
 
 class Coordinator
 {
-	enum Estado { MENU, JUEGO, FIN} estado{MENU};
 	bool fichero=true;
+	enum Estado { MENU, JUEGO, FIN, PROMOCION} estado{MENU};
 
 public:
 	Menu principal; 
@@ -34,5 +37,7 @@ public:
 	void CompruebaMusica();
 	void Puntuaciones();
 	void CreaFicheroPuntuaciones();
+	void MenuPromocion();
+
 };
 

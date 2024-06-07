@@ -107,8 +107,10 @@ void Game::selecciona(int t, int v, bool cambio)
 				if (comer(negras, b)) SonidoComer();
 
 				if (b->get_pos().x == 8) {
-					p = b->promocionar(b->get_pos());
-					comp = Promocion(p, b, t, v);
+					b->setPromocion();
+
+					//Se activa la promoción para gestionarlo en el coordinador
+					if(b->getPromocion())promocionActivada = true;
 				}
 
 				mov = aux;
@@ -134,9 +136,7 @@ void Game::selecciona(int t, int v, bool cambio)
 				//Finaliza el juego
 				finJuego = true;
 			}
-
 		}
-
 	}
 
 	if (!turno && !cambio) {
@@ -181,8 +181,10 @@ void Game::selecciona(int t, int v, bool cambio)
 				if (comer(blancas, n)) SonidoComer();
 
 				if (n->get_pos().x == 1) {
-					p = n->promocionar(n->get_pos());
-					comp = Promocion(p, n, t, v);
+					n->setPromocion();
+
+					//Se activa la promoción para gestionarlo en el coordinador
+					if (n->getPromocion())promocionActivada = true;
 				}
 				mov = aux;
 				MueveSonido();
@@ -208,9 +210,7 @@ void Game::selecciona(int t, int v, bool cambio)
 				finJuego = true;
 			}
 		}
-
 	}
-
 	//Comprueba el enroque
 	comprobEnroqueCorto();
 	comprobEnroqueLargo();
@@ -225,97 +225,109 @@ void Game::ClearSelec()
 }
 
 //Realiza la promoción del peón para todo el tipo de piezas
-bool Game::Promocion(int tipo, piece *pieza, int t, int v)
+void Game::Promocion(int t, int v, unsigned char key)
 {
+	for (auto b : blancas) {
+		if (b->get_pos().x == 8 && b->getTipo() == 0) {
+			switch (key)
+			{
+			case 'Q':case 'q':
+				blancas.agregar(new Queen(b->get_pos(), b->getColor(), t, v));
+				blancas.eliminar(b);
+				promocionRealizada = true;
+				promocionActivada = false;
+				cout << "salgo";
+				break;
 
-	switch (tipo)
-	{
-	case 1:
-		if (!pieza->getColor()) 
-		{
-			negras.agregar(new Queen(pieza->get_pos() , pieza->getColor(), t, v));
-			negras.eliminar(pieza);
-		}
-		else
-		{
-			blancas.agregar(new Queen( pieza->get_pos() , pieza->getColor(), t, v));
-			blancas.eliminar(pieza);
-		}
-			return true;
-		break;
+			case 'B':case 'b':
+				blancas.agregar(new Bishop({ b->get_pos() }, b->getColor(), t, v));
+				blancas.eliminar(b);
+				promocionRealizada = true;
+				promocionActivada = false;
+				break;
 
-	case 2:
-		if (!pieza->getColor()) 
-		{
-			negras.agregar(new Bishop({ pieza->get_pos() }, pieza->getColor(), t, v));
-			negras.eliminar(pieza);
-		}
-		else
-		{
-			blancas.agregar(new Bishop({ pieza->get_pos() }, pieza->getColor(), t, v));
-			blancas.eliminar(pieza);
-		}
-			return true;
-		break;
+			case 'R':case 'r':
+				blancas.agregar(new Rook({ b->get_pos() }, b->getColor(), t, v));
+				blancas.eliminar(b);
+				promocionRealizada = true;
+				promocionActivada = false;
+				break;
 
-	case 3:
-		if (!pieza->getColor())
-		{
-			negras.agregar(new Rook({ pieza->get_pos() }, pieza->getColor(), t, v));
-			negras.eliminar(pieza);
-		}
-		else
-		{
-			blancas.agregar(new Rook({ pieza->get_pos() }, pieza->getColor(), t, v));
-			blancas.eliminar(pieza);
-		}
-			return true;
-		break;
+			case 'K':case 'k':
+				blancas.agregar(new Knight({ b->get_pos() }, b->getColor(), t, v));
+				blancas.eliminar(b);
+				promocionRealizada = true;
+				promocionActivada = false;
+				break;
 
-	case 4:
-		if (!pieza->getColor()) 
-		{
-			negras.agregar(new Knight({ pieza->get_pos() }, pieza->getColor(), t, v));
-			negras.eliminar(pieza);
-		}
-		else
-		{
-			blancas.agregar(new Knight({ pieza->get_pos() }, pieza->getColor(), t, v));
-			blancas.eliminar(pieza);
-		}
-			return true;
-		break;
+			case 'A':case 'a':
+				blancas.agregar(new Archbishop({ b->get_pos() }, b->getColor(), t, v));
+				blancas.eliminar(b);
+				promocionRealizada = true;
+				promocionActivada = false;
+				break;
 
-	case 5:
-		if (!pieza->getColor()) 
-		{
-			negras.agregar(new Archbishop({ pieza->get_pos() }, pieza->getColor(), t, v));
-			negras.eliminar(pieza);
+			case 'C':case 'c':
+				blancas.agregar(new Chancellor({ b->get_pos() }, b->getColor(), t, v));
+				blancas.eliminar(b);
+				promocionRealizada = true;
+				promocionActivada = false;
+				break;
+			}
 		}
-		else
-		{
-			blancas.agregar(new Archbishop({ pieza->get_pos() }, pieza->getColor(), t, v));
-			blancas.eliminar(pieza);
-		}
-		return true;
-		break;
-
-	case 6:
-		if (!pieza->getColor())
-		{
-			negras.agregar(new Chancellor({ pieza->get_pos() }, pieza->getColor(), t, v));
-			negras.eliminar(pieza);
-			
-		}
-		else 
-		{
-			blancas.agregar(new Chancellor({ pieza->get_pos() }, pieza->getColor(), t, v));
-			blancas.eliminar(pieza);
-		}
-		return true;
-		break;
+		if (promocionRealizada == true)break;
 	}
-	return false;
+
+	for (auto n : negras) {
+		if (n->get_pos().x == 1 && n->getTipo() == 0) {
+			switch (key)
+			{
+			case 'Q':case 'q':
+				negras.agregar(new Queen(n->get_pos(), n->getColor(), t, v));
+				negras.eliminar(n);
+				promocionRealizada = true;
+				promocionActivada = false;
+				cout << "salgo";
+				break;
+
+			case 'B':case 'b':
+				negras.agregar(new Bishop({ n->get_pos() }, n->getColor(), t, v));
+				negras.eliminar(n);
+				promocionRealizada = true;
+				promocionActivada = false;
+				break;
+
+			case 'R':case 'r':
+				negras.agregar(new Rook({ n->get_pos() }, n->getColor(), t, v));
+				negras.eliminar(n);
+				promocionRealizada = true;
+				promocionActivada = false;
+				break;
+
+			case 'K':case 'k':
+				negras.agregar(new Knight({ n->get_pos() }, n->getColor(), t, v));
+				negras.eliminar(n);
+				promocionRealizada = true;
+				promocionActivada = false;
+				break;
+
+			case 'A':case 'a':
+				negras.agregar(new Archbishop({ n->get_pos() }, n->getColor(), t, v));
+				negras.eliminar(n);
+				promocionRealizada = true;
+				promocionActivada = false;
+				break;
+
+			case 'C':case 'c':
+				negras.agregar(new Chancellor({ n->get_pos() }, n->getColor(), t, v));
+				negras.eliminar(n);
+				promocionRealizada = true;
+				promocionActivada = false;
+				break;
+			}
+		}
+		if (promocionRealizada == true)break;
+	}
 }
 
 bool Game::comprobEnroqueCorto()

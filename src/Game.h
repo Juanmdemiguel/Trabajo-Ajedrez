@@ -24,6 +24,9 @@ class Game
 	bool finJuego = false;  //TRUE CUANDO HAY JAQUE MATE
 	bool QuienGana = false; //0 si ganan negras y 1 si ganan blancas
 
+	bool promocionActivada = false;
+	bool promocionRealizada = false;
+
 public:
 	//Métodos
 	Board& getboard() { return board; };
@@ -37,7 +40,7 @@ public:
 	bool& getMov() { return mov; }
 	void setMov(bool _mov) { mov = _mov; }
 
-	bool Promocion(int tipo, piece *pieza, int t, int v);
+	void Promocion(int t, int v, unsigned char key);
 
 	bool comprobEnroqueCorto();
 	bool comprobEnroqueLargo();
@@ -65,11 +68,18 @@ public:
 	long PuntosJ2() { return jugador2; }
 	void setPuntuacion() { jugador1 = 0, jugador2 = 0; }
 
+
 	bool Ganador() { return QuienGana; };
 
 	void eliminarPiezas();
 
 	void ClearCasillas();
+
+	void setPromocion(const bool &c) { promocionActivada = c ; };
+	void setPromocionRealiz(const bool& c) { promocionRealizada = c; };
+	bool getPromocion() { return promocionActivada; };
+	bool getPromocionRealiz() { return promocionRealizada; };
+
 	//Amigos
 
 };
