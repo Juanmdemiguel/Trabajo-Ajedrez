@@ -22,6 +22,12 @@ void Game::inicializa(int t, int v)
 	double tiempo; //No necesario almacenar el tiempo 0, se crea esta variable auxiliar que se destruye al final de inicializa
 	tiempo = cronometro(0);
 
+	//Se establece el turno inicial para las blancas
+	turno = true;
+
+	//Se resetea la puntuación
+	setPuntuacion();
+
 	//Agrega los peones de los dos colores
 	for (double i = 1; i <= 10; ++i) {
 		blancas.agregar(new Pawn({ i,2 }, 1, t, v));
@@ -52,6 +58,8 @@ void Game::inicializa(int t, int v)
 	negras.agregar(new Queen({ 5,8 }, 0, t, v));
 	negras.agregar(new King({ 6,8 }, 0, t, v));
 
+	//Resetea el final del juego para que solo se active cuando toque
+	finJuego = false;
 }
 
 
@@ -109,7 +117,25 @@ void Game::selecciona(int t, int v, bool cambio)
 			if (comp) break;
 		}
 
-		if (mov)cout << comprobJaqueMate(0);
+		//El juego finaliza cuando hay jaque mate, ganan las blancas
+		if (mov)
+		{
+			comprobJaqueMate(0);
+
+			//Gestión del fin del juego
+			if (comprobJaqueMate(0))
+			{
+				//Ganan blancas
+				QuienGana = true;
+				//Se eliminan las piezas sobrantes
+				eliminarPiezas();
+				//Se limpian las casillas del tablero
+				ClearCasillas();
+				//Finaliza el juego
+				finJuego = true;
+			}
+
+		}
 
 	}
 
@@ -163,7 +189,25 @@ void Game::selecciona(int t, int v, bool cambio)
 			}
 			if (comp) break;
 		}
-		if (mov)cout << comprobJaqueMate(1);
+
+		//El juego finaliza cuando hay jaque mate, ganan las negras
+		if (mov)
+		{
+			comprobJaqueMate(1);
+
+			//Gestión del fin del juego
+			if (comprobJaqueMate(1))
+			{
+				//Ganan negras
+				QuienGana = false;
+				//Elimina las piezas sobrantes
+				eliminarPiezas();
+				//Se limpian las casillas del tablero
+				ClearCasillas();
+				//Finaliza el juego
+				finJuego = true;
+			}
+		}
 
 	}
 
@@ -441,7 +485,6 @@ bool Game::comer(ListaPiezas& p1, piece* p2)	//Comida y la que come
 			else jugador2 = jugador2 + asignaPuntos(n->getTipo(), tiempo);
 
 			p1.eliminar(n);
-			comida = true;
 
 			return 1;
 			break;
@@ -516,11 +559,6 @@ bool Game::MataMaton(Punto2D Maton, bool color) {
 	}
 }
 
-bool Game::finPartida()
-{
-	if (comida) return 1;
-	else return 0;
-}
 
 int Game::asignaPuntos(int pieza_comida, double tiempo)
 {
@@ -682,8 +720,6 @@ vector <Punto2D> Game::RutaMaton(Punto2D maton, bool color)
 							conexion.push_back({ i, maton.x + (i - maton.z) });
 					}
 				}
-
-
 			}
 
 		}
@@ -734,5 +770,31 @@ bool Game::RompeRuta(Punto2D maton, bool color)
 			ClearSelec();
 		}
 		return 0;
+	}
+}
+
+void Game::eliminarPiezas()
+{
+	blancas.destruir_contenido();
+	negras.destruir_contenido();
+}
+
+void Game::ClearCasillas()
+{
+	for (double i = 1; i <= fil; i++) {
+		for (double j = 1; j <= col; j++)
+		{
+			//Se limpian todas las casillas que eran posibles o comestibles
+			board.getTile({ j,i }).setposible(false);
+			board.getTile({ j,i }).setcomestible(false);
+
+			//Se ocupan las casillas por las piezas correspondientes de nuevo
+			if (i == 1 || i == 2)
+				board.getTile({ j,i }).setocupada(1);
+			else if (i == 8 || i == 7)
+				board.getTile({ j,i }).setocupada(0);
+			else
+				board.getTile({ j,i }).setocupada(2);
+		}
 	}
 }

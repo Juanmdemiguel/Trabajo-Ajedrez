@@ -35,7 +35,8 @@ public:
 
 	void setfin(const bool& f) { fin = f; }
 	bool getfin() { return fin; }
-
+	
+	void setRotar(const bool& rot) { rotar = rot; }
 //Amigos
 
 };

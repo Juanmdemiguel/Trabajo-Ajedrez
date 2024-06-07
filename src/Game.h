@@ -21,7 +21,8 @@ class Game
 
 	long jugador1{}, jugador2{};	//long ints de jugadores
 
-	bool comida = false;  //Para comprobar si funciona el fin. QUITAR CUANDO SE COMPLETE EL JAQUE MATE
+	bool finJuego = false;  //TRUE CUANDO HAY JAQUE MATE
+	bool QuienGana = false; //0 si ganan negras y 1 si ganan blancas
 
 public:
 	//Métodos
@@ -50,7 +51,8 @@ public:
 	bool comer(ListaPiezas& negras, piece* blancas);
 
 	//Implementa el final de la partida
-	bool finPartida();
+	bool finPartida() { return finJuego; };
+	void setfinPartida(const bool &f) { finJuego=f; };
 
 	bool comprobJaqueMate(bool c);
 	bool MataMaton(Punto2D Maton, bool color);
@@ -61,7 +63,13 @@ public:
 
 	long PuntosJ1() { return jugador1; }
 	long PuntosJ2() { return jugador2; }
+	void setPuntuacion() { jugador1 = 0, jugador2 = 0; }
 
+	bool Ganador() { return QuienGana; };
+
+	void eliminarPiezas();
+
+	void ClearCasillas();
 	//Amigos
 
 };

@@ -13,6 +13,7 @@
 class Coordinator
 {
 	enum Estado { MENU, JUEGO, FIN} estado{MENU};
+	bool fichero=true;
 
 public:
 	Menu principal; 

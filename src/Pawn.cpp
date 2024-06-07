@@ -125,12 +125,6 @@ int Pawn::promocionar(Punto2D pos)
 				promocion = FALSE;
 				return 6;
 			}
-
-			if (key == 'N' || key == 'n') //Cambia peon por canciller
-			{
-				promocion = FALSE;
-				return 7;
-			}
 		}
 	}
 }

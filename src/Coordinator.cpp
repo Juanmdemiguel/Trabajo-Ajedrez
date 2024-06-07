@@ -19,27 +19,26 @@ void Coordinator::Dibuja()
 
 	case Estado::JUEGO:
 
+		fichero = true;
+
+		//Se dibuja el juego según la temática y visión
 		juego.dibujaJuego(principal.getTematica(), principal.getVision());
+
+		//Se gestiona el paso de turno
 		PasaTurno();
 
+		//Si gira la cámara, se limpian las casillas
 		if (camara.Cambiando()) juego.ClearSelec();
 
+		//Se gestiona las puntuaciones
 		if (camara.getPuntuaciones()) Puntuaciones();
 
-		//La partida finaliza al realizar jaque mate al jugador contrario, que activa el booleano finPartida. Descomentar cuando esté implementado.
-		//if (juego.finPartida()) estado = FIN, camara.setfin(true);
+		//La partida finaliza al realizar jaque mate al jugador contrario, que activa el booleano finPartida.
+		if (juego.finPartida()) estado = FIN, camara.setfin(true);
 		break;
 
 	case Estado::FIN:
-		
-		static bool fichero=true;
-
-		//Gestionar ubicación del comentario Volver a menú
-		Punto2D volverMenu{};
-
-		//CAMBIAR LA POSICIÓN DE LA CÁMARA E IMAGEN
-		camara.set_pos(12.0 + 32 * cos(3.1416), 40.0, 15.0 + 32 * sin(3.1416));
-		
+				
 		glEnable(GL_TEXTURE_2D);
 
 		glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("resources/images/Puntuaciones.png").id);
@@ -61,15 +60,15 @@ void Coordinator::Dibuja()
 		ETSIDI::setFont("resources/fuentes/Bitwise.ttf", 20);
 		ETSIDI::printxy("FIN DEL JUEGO", 6, 9);
 		
-		//(turno) ? ETSIDI::printxy("GANAN LAS BLANCAS", 7, 8) : ETSIDI::printxy("GANAN LAS NEGRAS", 5, 8);
+		(juego.Ganador()) ? ETSIDI::printxy("GANA EL JUGADOR 1", 6, 8) : ETSIDI::printxy("GANA EL JUGADOR 2", 6, 8);
 
 		ETSIDI::printxy("PRESIONE EL ESPACIO PARA VOLVER AL MENU", 4, 7);
 
 		if (fichero) CreaFicheroPuntuaciones(), fichero = false; //Se guardan las puntuaciones de los jugadores en un fichero
 
-		//Para cuando se hace click a "Volver a menú"
-		raton.getClick() == volverMenu ? estado = MENU : estado = FIN;
-
+		//Se gestiona la cámara para que pueda rotar al haber ganado el jugador 2
+		camara.setRotar(true);
+		
 		break;
 
 	}
